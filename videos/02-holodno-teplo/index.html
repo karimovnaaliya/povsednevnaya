@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>My Warm Box — Холодно → тепло</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Caveat:wght@600;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1512; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  #stage { width: 1080px; height: 1920px; display: block; }
+  body.preview #stage { width: auto; height: 96vh; aspect-ratio: 9 / 16; }
+  .serif { font-family: 'Lora', serif; }
+  .hand { font-family: 'Caveat', cursive; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgCold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7F97B0"/>
+      <stop offset="0.6" stop-color="#B9C9D8"/>
+      <stop offset="1" stop-color="#E3EBF1"/>
+    </linearGradient>
+    <linearGradient id="bgWarm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E2B387"/>
+      <stop offset="0.55" stop-color="#EFD5B8"/>
+      <stop offset="1" stop-color="#F7EDE1"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#FFE2A6" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FFE2A6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shadow">
+      <stop offset="0" stop-color="#3E3A46" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#3E3A46" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="knitCream" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#FBF6EE"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#E3D5C1" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="knitLatte" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#E9D8C1"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#D2BB9E" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="ribCream" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#F3EADD"/>
+      <path d="M8 0 V16" stroke="#DCCBB4" stroke-width="5"/>
+    </pattern>
+    <pattern id="ribLatte" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#E0CCB1"/>
+      <path d="M8 0 V16" stroke="#C9B091" stroke-width="5"/>
+    </pattern>
+    <linearGradient id="windowGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+
+    <!-- ===== items (same as video 1) ===== -->
+    <g id="hatBody">
+      <path d="M-118,70 C-122,-50 -70,-118 0,-118 C70,-118 122,-50 118,70 Z" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-136" y="40" width="272" height="80" rx="20" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <circle cx="0" cy="-140" r="48" fill="#FFFDF8" stroke="#E2D4C0" stroke-width="6" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <circle cx="-12" cy="-152" r="14" fill="#FFFFFF" opacity="0.8"/>
+    </g>
+    <g id="scarf">
+      <path d="M-95,-120 C-140,-40 -40,10 -70,110 L-10,120 C10,20 -80,-40 -35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M95,-120 C140,-40 40,10 70,110 L10,120 C-10,20 80,-40 35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M-100,-128 Q0,-160 100,-128 L92,-82 Q0,-112 -92,-82 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-82" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(8 -50 80)"/>
+      <rect x="18" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(-8 50 80)"/>
+      <g stroke="#C9B091" stroke-width="5" stroke-linecap="round">
+        <path d="M-66,118 v32 M-52,120 v34 M-38,121 v30 M-24,122 v33 M-12,122 v28"/>
+        <path d="M66,118 v32 M52,120 v34 M38,121 v30 M24,122 v33 M12,122 v28"/>
+      </g>
+    </g>
+    <g id="glove">
+      <rect x="-58" y="58" width="116" height="62" rx="14" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-24" y="-150" width="28" height="104" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="6" y="-140" width="28" height="96" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-54" y="-136" width="28" height="92" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="34" y="-116" width="26" height="76" rx="13" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-58" y="-60" width="118" height="126" rx="34" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-104" y="-40" width="30" height="88" rx="15" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-38 -60 20)"/>
+    </g>
+    <g id="gloves">
+      <use href="#glove" transform="translate(-62 10) rotate(-12) scale(0.95)"/>
+      <use href="#glove" transform="translate(62 10) rotate(12) scale(-0.95 0.95)"/>
+    </g>
+    <g id="sock">
+      <path d="M-46,-120 L46,-120 L46,30 C46,62 66,74 100,76 C142,80 150,140 104,146 L-8,146 C-56,146 -52,96 -46,56 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-52" y="-150" width="104" height="54" rx="12" fill="url(#ribLatte)" stroke="#C9B091" stroke-width="3"/>
+    </g>
+    <g id="socks">
+      <use href="#sock" transform="translate(-50 0) rotate(-8) scale(0.85)"/>
+      <use href="#sock" transform="translate(40 18) rotate(6) scale(0.85)"/>
+    </g>
+    <g id="card">
+      <g transform="rotate(-6)">
+        <rect x="-110" y="-140" width="220" height="290" rx="10" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="3"/>
+        <rect x="-110" y="-140" width="220" height="16" fill="#A63A32"/>
+        <path d="M0,-28 C-30,-62 -72,-30 -40,6 L0,40 L40,6 C72,-30 30,-62 0,-28 Z" fill="#A63A32"/>
+        <text x="0" y="98" text-anchor="middle" class="hand" font-size="46" fill="#5A3E2B">С любовью</text>
+      </g>
+    </g>
+    <g id="mitten">
+      <rect x="-30" y="-50" width="60" height="20" rx="8" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <ellipse cx="27" cy="-6" rx="13" ry="21" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-20 27 -6)"/>
+      <rect x="-30" y="-34" width="60" height="76" rx="28" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+    </g>
+    <path id="heart" d="M0,-12 C-14,-30 -40,-14 -22,6 L0,26 L22,6 C40,-14 14,-30 0,-12 Z"/>
+    <g id="logoIcon" fill="none" stroke="#5A3E2B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="-62" y="-20" width="124" height="86" rx="4"/>
+      <rect x="-72" y="-46" width="144" height="28" rx="4"/>
+      <path d="M0,-46 V66"/>
+      <path d="M0,-46 C-22,-86 -62,-78 -48,-56 C-40,-46 -16,-46 0,-46 Z"/>
+      <path d="M0,-46 C22,-86 62,-78 48,-56 C40,-46 16,-46 0,-46 Z"/>
+      <path d="M-40,10 L40,10" stroke-width="5" opacity="0.6"/>
+      <path d="M-40,34 L40,34" stroke-width="5" opacity="0.6"/>
+    </g>
+  </defs>
+
+  <!-- background: cold, warm on top with opacity = warmth -->
+  <rect width="1080" height="1920" fill="url(#bgCold)"/>
+  <rect id="bgWarmRect" width="1080" height="1920" fill="url(#bgWarm)" opacity="0"/>
+  <g id="glows" opacity="0"></g>
+  <g id="wind" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round"></g>
+  <g id="snowBack"></g>
+
+  <!-- ground -->
+  <ellipse cx="540" cy="1720" rx="900" ry="260" fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- titles -->
+  <g id="titleCold" text-anchor="middle" fill="#2F3A4A">
+    <text x="540" y="300" class="serif" font-size="108" font-weight="700">На улице −20°C</text>
+    <text x="540" y="400" class="hand" font-size="70" fill="#3E4C60">и хочется только тепла…</text>
+  </g>
+  <text id="brr" x="0" y="0" text-anchor="middle" class="hand" font-size="78" font-weight="700" fill="#3E4C60">бр-р-р!</text>
+  <text id="titleWarm" x="540" y="300" text-anchor="middle" class="serif" font-size="104" font-weight="700" fill="#4A3426">Вот теперь тепло</text>
+  <text id="headline" x="540" y="300" text-anchor="middle" class="serif" font-size="92" font-weight="700" fill="#4A3426">Тёплый бокс 5 в 1</text>
+
+  <!-- the hero -->
+  <g id="hero">
+    <ellipse cx="0" cy="330" rx="190" ry="30" fill="url(#shadow)"/>
+    <rect x="-62" y="120" width="44" height="190" rx="20" fill="#56627A"/>
+    <rect x="18" y="120" width="44" height="190" rx="20" fill="#56627A"/>
+    <g id="boots" fill="#4E3A2E">
+      <ellipse cx="-48" cy="310" rx="54" ry="26"/>
+      <ellipse cx="48" cy="310" rx="54" ry="26"/>
+    </g>
+    <g id="wornSocks" opacity="0">
+      <rect x="-66" y="256" width="44" height="40" rx="8" fill="url(#ribLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="22" y="256" width="44" height="40" rx="8" fill="url(#ribLatte)" stroke="#C9B091" stroke-width="3"/>
+      <ellipse cx="-52" cy="310" rx="54" ry="26" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <ellipse cx="52" cy="310" rx="54" ry="26" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+    </g>
+    <!-- arms -->
+    <rect x="-150" y="-90" width="52" height="190" rx="26" fill="#8E9C8C" transform="rotate(12 -124 -90)"/>
+    <rect x="98" y="-90" width="52" height="190" rx="26" fill="#8E9C8C" transform="rotate(-12 124 -90)"/>
+    <!-- body (sage sweater) -->
+    <rect x="-115" y="-130" width="230" height="275" rx="70" fill="#9AA89A"/>
+    <rect x="-115" y="110" width="230" height="35" rx="16" fill="#8A988A"/>
+    <path d="M-60,-40 Q0,-10 60,-40 M-60,0 Q0,30 60,0 M-60,40 Q0,70 60,40" stroke="#8A988A" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <!-- hands -->
+    <circle cx="-160" cy="82" r="27" fill="#F2D3BC"/>
+    <circle cx="160" cy="82" r="27" fill="#F2D3BC"/>
+    <g id="wornGloves" opacity="0">
+      <use href="#mitten" transform="translate(-160 88)"/>
+      <use href="#mitten" transform="translate(160 88) scale(-1 1)"/>
+    </g>
+    <!-- head -->
+    <rect x="-26" y="-160" width="52" height="45" fill="#E8C3A9"/>
+    <circle cx="0" cy="-240" r="105" fill="#F2D3BC"/>
+    <path d="M-112,-230 C-122,-350 122,-350 112,-230 L112,-160 C100,-150 96,-200 92,-240 C60,-292 -60,-292 -92,-240 C-96,-200 -100,-150 -112,-160 Z" fill="#5A3E2B"/>
+    <circle id="cheekL" cx="-62" cy="-198" r="19" fill="#9FB8D6"/>
+    <circle id="cheekR" cx="62" cy="-198" r="19" fill="#9FB8D6"/>
+    <g id="brows" stroke="#5A3E2B" stroke-width="6" stroke-linecap="round">
+      <path d="M-60,-258 L-22,-270"/><path d="M22,-270 L60,-258"/>
+    </g>
+    <g id="eyesOpen" fill="#2E2420">
+      <ellipse cx="-38" cy="-232" rx="10" ry="13"/>
+      <ellipse cx="38" cy="-232" rx="10" ry="13"/>
+    </g>
+    <g id="eyesHappy" stroke="#2E2420" stroke-width="7" fill="none" stroke-linecap="round" opacity="0">
+      <path d="M-54,-228 Q-38,-248 -22,-228"/><path d="M22,-228 Q38,-248 54,-228"/>
+    </g>
+    <ellipse cx="0" cy="-208" rx="10" ry="8" fill="#E39C86"/>
+    <path id="drip" d="M2,-200 q-8,16 0,22 q8,-6 0,-22 Z" fill="#CBE8F7" stroke="#9CC6DE" stroke-width="2"/>
+    <path id="mouthCold" d="M-28,-172 l9,-8 l9,8 l9,-8 l9,8 l9,-8 l9,8" stroke="#5A3E2B" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    <path id="mouthWarm" d="M-32,-180 Q0,-146 32,-180" stroke="#5A3E2B" stroke-width="6" fill="none" stroke-linecap="round" opacity="0"/>
+    <!-- worn scarf -->
+    <g id="wornScarf" opacity="0">
+      <rect x="40" y="-120" width="56" height="170" rx="16" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3" transform="rotate(-6 68 -120)"/>
+      <rect x="42" y="12" width="56" height="12" fill="#A63A32" opacity="0.85" transform="rotate(-6 68 -120)"/>
+      <g stroke="#C9B091" stroke-width="5" stroke-linecap="round" transform="rotate(-6 68 -120)">
+        <path d="M48,52 v26 M60,52 v28 M72,52 v26 M84,52 v28"/>
+      </g>
+      <rect x="-114" y="-160" width="228" height="60" rx="30" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+    </g>
+    <!-- worn hat -->
+    <use id="wornHat" href="#hatBody" transform="translate(0 -350) scale(0.82)" opacity="0"/>
+  </g>
+
+  <!-- box -->
+  <g id="box">
+    <ellipse cx="0" cy="205" rx="330" ry="34" fill="url(#shadow)"/>
+    <rect x="-300" y="-180" width="600" height="370" rx="16" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+    <rect x="-224" y="-112" width="448" height="230" rx="12" fill="url(#knitCream)" stroke="#E2D6C6" stroke-width="4"/>
+    <path d="M-224,30 C-120,-20 -40,60 60,10 C140,-30 200,20 224,0 L224,118 L-224,118 Z" fill="url(#knitLatte)" opacity="0.9"/>
+    <rect x="-224" y="-112" width="448" height="230" rx="12" fill="url(#windowGlass)"/>
+    <circle cx="232" cy="150" r="42" fill="#F4ECE0" stroke="#5A3E2B" stroke-width="3"/>
+    <text x="232" y="146" text-anchor="middle" class="serif" font-size="17" font-weight="700" fill="#5A3E2B">My Warm</text>
+    <text x="232" y="166" text-anchor="middle" class="serif" font-size="17" font-weight="700" fill="#5A3E2B">Box</text>
+    <g id="lid">
+      <rect x="-316" y="-232" width="632" height="76" rx="14" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+      <g id="lidRibbon">
+        <rect x="-26" y="-232" width="52" height="76" fill="#A63A32"/>
+        <rect x="-26" y="-156" width="52" height="346" fill="#A63A32" opacity="0.92"/>
+      </g>
+      <g id="bow" transform="translate(0 -236)">
+        <path d="M0,0 C-40,-80 -150,-70 -120,-16 C-100,16 -40,8 0,0 Z" fill="#B8463C" stroke="#8E2E28" stroke-width="4"/>
+        <path d="M0,0 C40,-80 150,-70 120,-16 C100,16 40,8 0,0 Z" fill="#B8463C" stroke="#8E2E28" stroke-width="4"/>
+        <path d="M-6,4 L-60,80 L-38,82 L-30,96 L4,10 Z" fill="#A63A32"/>
+        <path d="M6,4 L60,80 L38,82 L30,96 L-4,10 Z" fill="#A63A32"/>
+        <circle cx="0" cy="0" r="22" fill="#A63A32" stroke="#8E2E28" stroke-width="4"/>
+      </g>
+    </g>
+  </g>
+  <text id="parcel" x="830" y="1330" text-anchor="middle" class="hand" font-size="70" font-weight="700" fill="#2F3A4A">Тебе посылка!</text>
+
+  <g id="items"></g>
+  <g id="breath" fill="#FFFFFF"></g>
+  <g id="hearts" fill="#C2473D"></g>
+
+  <g id="price">
+    <circle cx="0" cy="0" r="132" fill="#A63A32"/>
+    <circle cx="0" cy="0" r="116" fill="none" stroke="#F4ECE2" stroke-width="3" stroke-dasharray="6 8"/>
+    <text x="0" y="-44" text-anchor="middle" class="hand" font-size="50" fill="#F8EEE2">всего</text>
+    <text x="0" y="22" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#FFFDF9">1 699</text>
+    <text x="0" y="74" text-anchor="middle" class="serif" font-size="42" font-weight="500" fill="#F8EEE2">сом</text>
+  </g>
+
+  <g id="snowFront"></g>
+
+  <!-- outro -->
+  <rect id="outroBg" width="1080" height="1920" fill="#F4ECE2" opacity="0"/>
+  <g id="outro">
+    <g id="logo" transform="translate(540 760)">
+      <circle r="250" fill="#F7F0E6" stroke="#5A3E2B" stroke-width="5"/>
+      <use href="#logoIcon" transform="translate(0 -92) scale(0.9)"/>
+      <text x="0" y="70" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">My Warm</text>
+      <text x="0" y="160" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">Box</text>
+    </g>
+    <text id="tagline" x="540" y="1150" text-anchor="middle" class="hand" font-size="84" fill="#7A5A44">Подарок, который греет</text>
+    <text id="cities" x="540" y="1265" text-anchor="middle" class="serif" font-size="50" font-weight="500" fill="#4A3426">Бишкек  •  Ош</text>
+    <g id="cta">
+      <rect x="190" y="1340" width="700" height="120" rx="60" fill="#A63A32"/>
+      <text x="540" y="1418" text-anchor="middle" class="serif" font-size="48" font-weight="700" fill="#FFFDF9">Заказ в Direct / WhatsApp</text>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const DURATION = 18;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const easeOutCubic = p => 1 - Math.pow(1 - p, 3);
+  const easeInCubic = p => p * p * p;
+  const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  const easeOutBounce = p => {
+    const n = 7.5625, d = 2.75;
+    if (p < 1 / d) return n * p * p;
+    if (p < 2 / d) return n * (p -= 1.5 / d) * p + .75;
+    if (p < 2.5 / d) return n * (p -= 2.25 / d) * p + .9375;
+    return n * (p -= 2.625 / d) * p + .984375;
+  };
+  const mixColor = (a, b, p) => {
+    const ha = a.match(/\w\w/g).map(h => parseInt(h, 16)), hb = b.match(/\w\w/g).map(h => parseInt(h, 16));
+    return '#' + ha.map((v, i) => Math.round(lerp(v, hb[i], p)).toString(16).padStart(2, '0')).join('');
+  };
+  let seed = 11;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const set = (el, tr, op) => {
+    if (tr !== undefined) el.setAttribute('transform', tr);
+    if (op !== undefined) el.setAttribute('opacity', clamp(op).toFixed(3));
+  };
+
+  // ---------- items: fly from box to the hero ----------
+  const HERO = { x: 540, y: 1150 };
+  const BOX = { x: 830, y: 1560, s: 0.6 };
+  const ITEM_START = 5.0, ITEM_GAP = 1.0, ITEM_FLY = 0.9;
+  const ITEMS = [
+    { id: 'hatBody', label: '+ шапка',    tx: 540, ty: 800,  ts: 0.82, worn: 'wornHat',    lx: 840, ly: 760 },
+    { id: 'scarf',   label: '+ шарф',     tx: 540, ty: 1030, ts: 0.55, worn: 'wornScarf',  lx: 240, ly: 960 },
+    { id: 'gloves',  label: '+ перчатки', tx: 540, ty: 1235, ts: 0.5,  worn: 'wornGloves', lx: 860, ly: 1130 },
+    { id: 'socks',   label: '+ носки',    tx: 540, ty: 1450, ts: 0.45, worn: 'wornSocks',  lx: 250, ly: 1330 },
+    { id: 'card',    label: '+ открытка', tx: 230, ty: 1500, ts: 0.6,  worn: null,         lx: 230, ly: 1330 },
+  ];
+  ITEMS.forEach((it, i) => {
+    it.s0 = ITEM_START + i * ITEM_GAP;
+    it.land = it.s0 + ITEM_FLY;
+    const g = document.createElementNS(NS, 'use');
+    g.setAttribute('href', '#' + it.id);
+    $('items').appendChild(g);
+    const l = document.createElementNS(NS, 'text');
+    l.textContent = it.label;
+    l.setAttribute('class', 'hand'); l.setAttribute('font-size', '66'); l.setAttribute('font-weight', '700');
+    l.setAttribute('fill', '#4A3426'); l.setAttribute('text-anchor', 'middle');
+    $('items').appendChild(l);
+    it.g = g; it.l = l;
+  });
+
+  // warmth 0..1 : +0.2 per item worn
+  const warmth = t => ITEMS.reduce((s, it) => s + 0.2 * easeInOut(seg(t, it.land - 0.1, it.land + 0.6)), 0);
+  // cumulative coldness integral for snow/wind drift
+  const DT = 1 / 120, COLD = [0];
+  for (let k = 1; k <= DURATION / DT + 2; k++) COLD.push(COLD[k - 1] + (1 - warmth(k * DT)) * DT);
+  const coldInt = t => COLD[Math.min(COLD.length - 1, Math.max(0, Math.round(t / DT)))];
+
+  // ---------- snow, wind, glows ----------
+  const flakes = [];
+  const makeFlakes = (parent, n, rMin, rMax, op) => {
+    for (let i = 0; i < n; i++) {
+      const c = document.createElementNS(NS, 'circle');
+      const r = lerp(rMin, rMax, rnd());
+      flakes.push({ el: c, x: rnd() * 1300, y0: rnd() * 1960, r, k: r / rMax + 0.4, ph: rnd() * 6.28 });
+      c.setAttribute('r', r.toFixed(1)); c.setAttribute('fill', '#FFFFFF'); c.setAttribute('opacity', op);
+      parent.appendChild(c);
+    }
+  };
+  makeFlakes($('snowBack'), 110, 3, 8, 0.85);
+  makeFlakes($('snowFront'), 26, 8, 13, 0.9);
+
+  const winds = [];
+  for (let i = 0; i < 7; i++) {
+    const p = document.createElementNS(NS, 'path');
+    const w = { el: p, y: lerp(150, 1500, rnd()), len: lerp(160, 320, rnd()), sp: lerp(900, 1500, rnd()), off: rnd() * 2000 };
+    p.setAttribute('d', `M0,0 q${w.len / 2},-24 ${w.len},0 q${w.len / 4},14 ${w.len / 2},-6`);
+    $('wind').appendChild(p);
+    winds.push(w);
+  }
+  const glows = [];
+  for (let i = 0; i < 9; i++) {
+    const c = document.createElementNS(NS, 'circle');
+    const g = { el: c, ph: rnd() * 6.28 };
+    c.setAttribute('cx', rnd() * 1080); c.setAttribute('cy', lerp(80, 1000, rnd())); c.setAttribute('r', lerp(50, 120, rnd()));
+    c.setAttribute('fill', 'url(#glow)');
+    $('glows').appendChild(c); glows.push(g);
+  }
+  const puffs = [0, 1, 2].map(() => { const c = document.createElementNS(NS, 'circle'); $('breath').appendChild(c); return c; });
+  const HEART_X = [-210, 190, -120, 240, -260, 120, 0];
+  const hearts = HEART_X.map(() => { const u = document.createElementNS(NS, 'use'); u.setAttribute('href', '#heart'); $('hearts').appendChild(u); return u; });
+
+  // ---------- render ----------
+  function render(t) {
+    const w = warmth(t), cold = 1 - w, C = coldInt(t);
+
+    set($('bgWarmRect'), undefined, w);
+    set($('glows'), undefined, w);
+    glows.forEach(g => g.el.setAttribute('opacity', (0.45 + 0.35 * Math.sin(t * 1.6 + g.ph)).toFixed(3)));
+    flakes.forEach(f => {
+      const fall = (60 * t + 260 * C) * f.k;
+      const drift = -520 * C * f.k + Math.sin(t * 0.9 + f.ph) * 25;
+      const y = ((f.y0 + fall) % 2000) - 40;
+      const x = (((f.x + drift) % 1300) + 1300) % 1300 - 110;
+      f.el.setAttribute('cx', x.toFixed(1)); f.el.setAttribute('cy', y.toFixed(1));
+    });
+    $('wind').setAttribute('opacity', (0.55 * cold * cold).toFixed(3));
+    winds.forEach(wd => {
+      const x = 1300 - ((wd.off + wd.sp * t) % 2000);
+      wd.el.setAttribute('transform', `translate(${x.toFixed(1)} ${wd.y})`);
+    });
+
+    // hero shiver
+    const amp = 8 * Math.pow(cold, 1.5);
+    const jx = Math.sin(t * 57) * amp, jy = Math.sin(t * 43) * amp * 0.35;
+    const breathe = Math.sin(t * 2.2) * 4 * w;
+    set($('hero'), `translate(${(HERO.x + jx).toFixed(1)} ${(HERO.y + jy - breathe).toFixed(1)})`);
+    $('cheekL').setAttribute('fill', mixColor('9FB8D6', 'F2A1A1', w));
+    $('cheekR').setAttribute('fill', mixColor('9FB8D6', 'F2A1A1', w));
+    set($('brows'), undefined, 1 - seg(w, 0.5, 0.9));
+    set($('drip'), undefined, 1 - seg(w, 0.2, 0.5));
+    const happy = easeInOut(seg(t, 10.1, 10.4));
+    set($('mouthCold'), undefined, 1 - seg(w, 0.55, 0.8));
+    set($('mouthWarm'), undefined, seg(w, 0.55, 0.8));
+    const look = 10 * easeInOut(seg(t, 3.3, 3.7)) * (1 - easeInOut(seg(t, 9.8, 10.1)));
+    set($('eyesOpen'), `translate(${look.toFixed(1)} 0)`, 1 - happy);
+    set($('eyesHappy'), undefined, happy);
+
+    // breath puffs (cold only)
+    puffs.forEach((c, k) => {
+      const ph = ((t * 0.8 + k / 3) % 1);
+      c.setAttribute('cx', (HERO.x + jx + 40 + ph * 70).toFixed(1));
+      c.setAttribute('cy', (HERO.y - 175 - ph * 110).toFixed(1));
+      c.setAttribute('r', (8 + ph * 26).toFixed(1));
+      c.setAttribute('opacity', ((1 - ph) * 0.75 * cold * cold).toFixed(3));
+    });
+
+    // titles
+    const ci = easeOutCubic(seg(t, 0.2, 0.9)), co = seg(t, 2.8, 3.2);
+    set($('titleCold'), `translate(0 ${lerp(50, 0, ci) - 60 * easeInCubic(co)})`, ci * (1 - co));
+    const bi = seg(t, 0.9, 1.2), bo = seg(t, 2.6, 2.9);
+    set($('brr'), `translate(${(830 + Math.sin(t * 40) * 6).toFixed(1)} 760) rotate(${8 + Math.sin(t * 31) * 4})`, bi * (1 - bo));
+
+    // box flies in 3.2–4.0
+    const fp = seg(t, 3.2, 4.0);
+    const bx = lerp(1350, BOX.x, easeOutCubic(fp));
+    const by = lerp(-300, BOX.y, easeOutBounce(fp));
+    set($('box'), `translate(${bx.toFixed(1)} ${by.toFixed(1)}) rotate(${lerp(-35, 0, easeOutCubic(fp)).toFixed(2)}) scale(${BOX.s})`, t < 3.2 ? 0 : 1);
+    const pi = easeOutBack(seg(t, 3.9, 4.25)), po = seg(t, 4.8, 5.1);
+    set($('parcel'), `translate(830 1330) scale(${(0.001 + pi).toFixed(3)}) translate(-830 -1330)`, (t > 3.9 ? 1 : 0) * (1 - po));
+    // open: bow 4.3–4.6, lid 4.55–5.0
+    const pull = easeInCubic(seg(t, 4.3, 4.6));
+    set($('bow'), `translate(0 ${-236 - 60 * pull}) scale(${1 - pull})`, 1 - pull);
+    set($('lidRibbon'), undefined, 1 - seg(t, 4.4, 4.7));
+    const lo = easeInCubic(seg(t, 4.55, 5.0));
+    set($('lid'), `translate(${400 * lo} ${-900 * lo}) rotate(${40 * lo})`, 1 - seg(t, 4.85, 5.0));
+
+    // items
+    const boxTop = BOX.y - 180 * BOX.s;
+    ITEMS.forEach((it, i) => {
+      const p = seg(t, it.s0, it.land), pe = easeOutCubic(p);
+      const x = lerp(BOX.x, it.tx, pe);
+      const y = lerp(boxTop, it.ty, pe) - 260 * Math.sin(Math.PI * p);
+      const sc = lerp(0.12, it.ts, easeOutBack(p));
+      const rot = lerp(i % 2 ? 30 : -30, 0, pe);
+      const swap = it.worn ? seg(t, it.land - 0.05, it.land + 0.2) : 0;
+      let op = p > 0 ? clamp(p * 5) * (1 - swap) : 0;
+      let tx = x, ty = y;
+      if (!it.worn && p >= 1) ty += Math.sin((t - it.land) * 2.4) * 6;
+      set(it.g, `translate(${tx.toFixed(1)} ${ty.toFixed(1)}) rotate(${rot.toFixed(2)}) scale(${sc.toFixed(3)})`, op);
+      if (it.worn) set($(it.worn), undefined, swap);
+      const lp = easeOutCubic(seg(t, it.land - 0.1, it.land + 0.3)), lout = seg(t, it.land + 1.1, it.land + 1.4);
+      const keep = it.worn ? 1 - lout : (1 - seg(t, 11.4, 11.7));
+      it.l.setAttribute('x', it.lx);
+      it.l.setAttribute('y', (it.ly + lerp(25, 0, lp)).toFixed(1));
+      it.l.setAttribute('opacity', (lp * keep).toFixed(3));
+    });
+
+    // warm finale
+    const wi = easeOutCubic(seg(t, 10.2, 10.8)), wo = seg(t, 11.3, 11.6);
+    set($('titleWarm'), `translate(0 ${lerp(40, 0, wi)})`, wi * (1 - wo));
+    hearts.forEach((h, k) => {
+      const s0 = 10.2 + k * 0.32, p = seg(t, s0, s0 + 2.2);
+      const x = HERO.x + HEART_X[k] + Math.sin(p * 6 + k) * 18;
+      const y = HERO.y - 120 - 380 * easeOutCubic(p);
+      set(h, `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(0.6 + 0.8 * easeOutBack(clamp(p * 3))).toFixed(3)})`, p > 0 && p < 1 ? Math.sin(Math.PI * p) : 0);
+    });
+    const hp = easeOutCubic(seg(t, 11.7, 12.3));
+    set($('headline'), `translate(0 ${lerp(-40, 0, hp)})`, hp);
+    const pp = seg(t, 12.3, 12.9);
+    const pulse = t > 12.9 ? 1 + 0.04 * Math.sin((t - 12.9) * 6) : 1;
+    set($('price'), `translate(880 1180) rotate(${lerp(-40, -10, easeOutCubic(pp))}) scale(${(0.9 * easeOutBack(pp) * pulse).toFixed(3)})`, pp > 0 ? 1 : 0);
+
+    // outro 14.2+
+    set($('outroBg'), undefined, easeInOut(seg(t, 14.2, 14.8)));
+    const lg = seg(t, 14.6, 15.4);
+    set($('logo'), `translate(540 760) scale(${(0.001 + easeOutBack(lg)).toFixed(3)})`, lg > 0 ? 1 : 0);
+    const tg = easeOutCubic(seg(t, 15.2, 15.8));
+    set($('tagline'), `translate(0 ${lerp(30, 0, tg)})`, tg);
+    const ct = easeOutCubic(seg(t, 15.6, 16.2));
+    set($('cities'), `translate(0 ${lerp(30, 0, ct)})`, ct);
+    const cta = seg(t, 16.0, 16.6);
+    const ctaPulse = t > 16.6 ? 1 + 0.03 * Math.sin((t - 16.6) * 5) : 1;
+    set($('cta'), `translate(540 1400) scale(${(0.001 + easeOutBack(cta) * ctaPulse).toFixed(3)}) translate(-540 -1400)`, cta > 0 ? 1 : 0);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = render;
+  const params = new URLSearchParams(location.search);
+  if (params.has('render')) return;
+  document.body.classList.add('preview');
+  if (params.has('t')) { document.fonts.ready.then(() => render(parseFloat(params.get('t')))); return; }
+  let start = null;
+  document.fonts.ready.then(() => {
+    const loop = ts => { if (start === null) start = ts; render(((ts - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+</body>
+</html>
