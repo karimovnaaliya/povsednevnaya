@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>My Warm Box — Тайный Санта</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Caveat:wght@600;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1512; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  #stage { width: 1080px; height: 1920px; display: block; }
+  body.preview #stage { width: auto; height: 96vh; aspect-ratio: 9 / 16; }
+  .serif { font-family: 'Lora', serif; }
+  .hand { font-family: 'Caveat', cursive; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C2540"/>
+      <stop offset="1" stop-color="#34405F"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7A5640"/>
+      <stop offset="1" stop-color="#5E412F"/>
+    </linearGradient>
+    <radialGradient id="warmGlow">
+      <stop offset="0" stop-color="#FFC977" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFC977" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shadow">
+      <stop offset="0" stop-color="#1A1210" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#1A1210" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="knitCream" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#FBF6EE"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#E3D5C1" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="knitLatte" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#E9D8C1"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#D2BB9E" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="ribCream" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#F3EADD"/>
+      <path d="M8 0 V16" stroke="#DCCBB4" stroke-width="5"/>
+    </pattern>
+    <pattern id="ribLatte" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#E0CCB1"/>
+      <path d="M8 0 V16" stroke="#C9B091" stroke-width="5"/>
+    </pattern>
+    <linearGradient id="windowGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+    <!-- ===== items (same as video 1) ===== -->
+    <g id="hatBody">
+      <path d="M-118,70 C-122,-50 -70,-118 0,-118 C70,-118 122,-50 118,70 Z" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-136" y="40" width="272" height="80" rx="20" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <circle cx="0" cy="-140" r="48" fill="#FFFDF8" stroke="#E2D4C0" stroke-width="6" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <circle cx="-12" cy="-152" r="14" fill="#FFFFFF" opacity="0.8"/>
+    </g>
+    <g id="scarf">
+      <path d="M-95,-120 C-140,-40 -40,10 -70,110 L-10,120 C10,20 -80,-40 -35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M95,-120 C140,-40 40,10 70,110 L10,120 C-10,20 80,-40 35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M-100,-128 Q0,-160 100,-128 L92,-82 Q0,-112 -92,-82 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-82" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(8 -50 80)"/>
+      <rect x="18" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(-8 50 80)"/>
+      <g stroke="#C9B091" stroke-width="5" stroke-linecap="round">
+        <path d="M-66,118 v32 M-52,120 v34 M-38,121 v30 M-24,122 v33 M-12,122 v28"/>
+        <path d="M66,118 v32 M52,120 v34 M38,121 v30 M24,122 v33 M12,122 v28"/>
+      </g>
+    </g>
+    <g id="glove">
+      <rect x="-58" y="58" width="116" height="62" rx="14" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-24" y="-150" width="28" height="104" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="6" y="-140" width="28" height="96" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-54" y="-136" width="28" height="92" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="34" y="-116" width="26" height="76" rx="13" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-58" y="-60" width="118" height="126" rx="34" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-104" y="-40" width="30" height="88" rx="15" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-38 -60 20)"/>
+    </g>
+    <g id="gloves">
+      <use href="#glove" transform="translate(-62 10) rotate(-12) scale(0.95)"/>
+      <use href="#glove" transform="translate(62 10) rotate(12) scale(-0.95 0.95)"/>
+    </g>
+    <g id="sock">
+      <path d="M-46,-120 L46,-120 L46,30 C46,62 66,74 100,76 C142,80 150,140 104,146 L-8,146 C-56,146 -52,96 -46,56 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-52" y="-150" width="104" height="54" rx="12" fill="url(#ribLatte)" stroke="#C9B091" stroke-width="3"/>
+    </g>
+    <g id="socks">
+      <use href="#sock" transform="translate(-50 0) rotate(-8) scale(0.85)"/>
+      <use href="#sock" transform="translate(40 18) rotate(6) scale(0.85)"/>
+    </g>
+    <g id="card">
+      <g transform="rotate(-6)">
+        <rect x="-110" y="-140" width="220" height="290" rx="10" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="3"/>
+        <rect x="-110" y="-140" width="220" height="16" fill="#A63A32"/>
+        <path d="M0,-28 C-30,-62 -72,-30 -40,6 L0,40 L40,6 C72,-30 30,-62 0,-28 Z" fill="#A63A32"/>
+        <text x="0" y="98" text-anchor="middle" class="hand" font-size="46" fill="#5A3E2B">С любовью</text>
+      </g>
+    </g>
+    <g id="mitten">
+      <rect x="-30" y="-50" width="60" height="20" rx="8" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <ellipse cx="27" cy="-6" rx="13" ry="21" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-20 27 -6)"/>
+      <rect x="-30" y="-34" width="60" height="76" rx="28" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+    </g>
+    <path id="heart" d="M0,-12 C-14,-30 -40,-14 -22,6 L0,26 L22,6 C40,-14 14,-30 0,-12 Z"/>
+    <g id="logoIcon" fill="none" stroke="#5A3E2B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="-62" y="-20" width="124" height="86" rx="4"/>
+      <rect x="-72" y="-46" width="144" height="28" rx="4"/>
+      <path d="M0,-46 V66"/>
+      <path d="M0,-46 C-22,-86 -62,-78 -48,-56 C-40,-46 -16,-46 0,-46 Z"/>
+      <path d="M0,-46 C22,-86 62,-78 48,-56 C40,-46 16,-46 0,-46 Z"/>
+      <path d="M-40,10 L40,10" stroke-width="5" opacity="0.6"/>
+      <path d="M-40,34 L40,34" stroke-width="5" opacity="0.6"/>
+    </g>
+  
+  </defs>
+
+  <!-- ===== room ===== -->
+  <rect width="1080" height="1920" fill="url(#wall)"/>
+  <g id="wallDots" fill="#FFFFFF" opacity="0.07"></g>
+  <circle cx="300" cy="1150" r="520" fill="url(#warmGlow)" id="treeGlow"/>
+  <rect y="1490" width="1080" height="430" fill="url(#floor)"/>
+  <g stroke="#56392A" stroke-width="4" opacity="0.7">
+    <path d="M0,1590 H1080 M0,1700 H1080 M0,1820 H1080"/>
+    <path d="M260,1510 V1590 M720,1510 V1590 M120,1590 V1700 M560,1590 V1700 M940,1590 V1700 M380,1700 V1820 M820,1700 V1820"/>
+  </g>
+  <rect y="1478" width="1080" height="24" fill="#4C3426"/>
+  <g id="garland">
+    <path d="M-20,140 Q270,270 540,140 Q810,270 1100,140" stroke="#23402F" stroke-width="8" fill="none"/>
+  </g>
+
+  <!-- tree -->
+  <g id="tree" transform="translate(300 0)">
+    <ellipse cx="0" cy="1560" rx="260" ry="30" fill="url(#shadow)"/>
+    <rect x="-34" y="1440" width="68" height="100" fill="#6B4A35"/>
+    <path d="M0,1020 L230,1460 L-230,1460 Z" fill="#244B3A"/>
+    <path d="M0,880 L190,1220 L-190,1220 Z" fill="#2D5C47"/>
+    <path d="M0,760 L150,1010 L-150,1010 Z" fill="#356B52"/>
+    <path d="M-150,1010 Q0,1060 150,1010 M-190,1220 Q0,1280 190,1220" stroke="#E9C46A" stroke-width="5" fill="none" opacity="0.7"/>
+    <g id="ornaments">
+      <circle cx="-60" cy="960" r="20" fill="#A63A32"/><circle cx="70" cy="930" r="17" fill="#F3E9D2"/>
+      <circle cx="-110" cy="1170" r="22" fill="#F3E9D2"/><circle cx="40" cy="1140" r="22" fill="#A63A32"/>
+      <circle cx="120" cy="1180" r="17" fill="#E9C46A"/><circle cx="-150" cy="1400" r="24" fill="#A63A32"/>
+      <circle cx="-20" cy="1360" r="22" fill="#E9C46A"/><circle cx="140" cy="1390" r="24" fill="#F3E9D2"/>
+    </g>
+    <g id="treeLights"></g>
+    <path id="star" d="M0,-46 L13,-14 L46,-14 L20,6 L30,40 L0,20 L-30,40 L-20,6 L-46,-14 L-13,-14 Z" fill="#F2C14E" transform="translate(0 750)"/>
+  </g>
+
+  <!-- box (placed under the tree by Santa) -->
+  <g id="box">
+    <ellipse cx="0" cy="205" rx="330" ry="34" fill="url(#shadow)"/>
+    <rect x="-300" y="-180" width="600" height="370" rx="16" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+    <rect x="-224" y="-112" width="448" height="230" rx="12" fill="url(#knitCream)" stroke="#E2D6C6" stroke-width="4"/>
+    <path d="M-224,30 C-120,-20 -40,60 60,10 C140,-30 200,20 224,0 L224,118 L-224,118 Z" fill="url(#knitLatte)" opacity="0.9"/>
+    <rect x="-224" y="-112" width="448" height="230" rx="12" fill="url(#windowGlass)"/>
+    <g id="lid">
+      <rect x="-316" y="-232" width="632" height="76" rx="14" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+      <g id="lidRibbon">
+        <rect x="-26" y="-232" width="52" height="76" fill="#A63A32"/>
+        <rect x="-26" y="-156" width="52" height="346" fill="#A63A32" opacity="0.92"/>
+      </g>
+      <g id="bow" transform="translate(0 -236)">
+        <path d="M0,0 C-40,-80 -150,-70 -120,-16 C-100,16 -40,8 0,0 Z" fill="#B8463C" stroke="#8E2E28" stroke-width="4"/>
+        <path d="M0,0 C40,-80 150,-70 120,-16 C100,16 40,8 0,0 Z" fill="#B8463C" stroke="#8E2E28" stroke-width="4"/>
+        <circle cx="0" cy="0" r="22" fill="#A63A32" stroke="#8E2E28" stroke-width="4"/>
+      </g>
+    </g>
+  </g>
+  <g id="tag">
+    <path d="M0,-80 L0,-10" stroke="#E9C46A" stroke-width="3"/>
+    <path d="M-80,-10 L80,-10 L80,60 L-80,60 L-104,25 Z" fill="#F7EEDF" stroke="#C9B091" stroke-width="3"/>
+    <circle cx="-80" cy="25" r="7" fill="#C9B091"/>
+    <text x="5" y="40" text-anchor="middle" class="hand" font-size="46" font-weight="700" fill="#A63A32">для Айгуль</text>
+  </g>
+
+  <!-- Santa -->
+  <g id="santa">
+    <ellipse cx="0" cy="240" rx="150" ry="22" fill="url(#shadow)"/>
+    <g id="legL"><rect x="-58" y="100" width="42" height="115" rx="12" fill="#2A2220"/><ellipse cx="-44" cy="220" rx="42" ry="20" fill="#1E1A19"/></g>
+    <g id="legR"><rect x="16" y="100" width="42" height="115" rx="12" fill="#2A2220"/><ellipse cx="44" cy="220" rx="42" ry="20" fill="#1E1A19"/></g>
+    <rect x="-160" y="-100" width="52" height="150" rx="26" fill="#952F29" transform="rotate(-30 -134 -100)"/>
+    <ellipse cx="0" cy="0" rx="132" ry="150" fill="#A63A32"/>
+    <rect x="-16" y="-148" width="32" height="270" rx="12" fill="#FFF7EE"/>
+    <rect x="-128" y="28" width="256" height="34" fill="#2A2220"/>
+    <rect x="-26" y="22" width="52" height="46" rx="6" fill="none" stroke="#E9C46A" stroke-width="7"/>
+    <rect x="-118" y="118" width="236" height="36" rx="18" fill="#FFF7EE"/>
+    <circle cx="0" cy="-200" r="82" fill="#F2D3BC"/>
+    <g fill="#FFFDF8">
+      <circle cx="-58" cy="-160" r="40"/><circle cx="58" cy="-160" r="40"/><circle cx="0" cy="-130" r="52"/>
+      <circle cx="-32" cy="-112" r="36"/><circle cx="32" cy="-112" r="36"/><circle cx="0" cy="-92" r="30"/>
+    </g>
+    <ellipse cx="-24" cy="-174" rx="28" ry="14" fill="#FFFDF8" stroke="#E6DCCD" stroke-width="2"/>
+    <ellipse cx="24" cy="-174" rx="28" ry="14" fill="#FFFDF8" stroke="#E6DCCD" stroke-width="2"/>
+    <circle cx="0" cy="-192" r="13" fill="#E39C86"/>
+    <path d="M-80,-232 Q0,-252 80,-232 Q86,-200 52,-196 Q22,-194 9,-210 Q0,-217 -9,-210 Q-22,-194 -52,-196 Q-86,-200 -80,-232 Z" fill="#1E1A19"/>
+    <ellipse cx="-38" cy="-218" rx="15" ry="9" fill="#FFFFFF"/>
+    <ellipse cx="38" cy="-218" rx="15" ry="9" fill="#FFFFFF"/>
+    <g id="pupils" fill="#1E1A19"><circle cx="-38" cy="-218" r="6"/><circle cx="38" cy="-218" r="6"/></g>
+    <path d="M-88,-246 Q-60,-338 20,-346 Q96,-338 120,-282 L86,-246 Z" fill="#A63A32"/>
+    <circle cx="124" cy="-280" r="25" fill="#FFF7EE"/>
+    <rect x="-98" y="-268" width="196" height="40" rx="20" fill="#FFF7EE"/>
+    <!-- arm holding / raised -->
+    <g id="armR"><rect x="96" y="-100" width="52" height="150" rx="26" fill="#952F29"/><circle cx="122" cy="50" r="26" fill="#FFF7EE"/></g>
+  </g>
+  <g id="shh">
+    <path d="M0,0 h300 a30,30 0 0 1 30,30 v70 a30,30 0 0 1 -30,30 h-230 l-40,40 l5,-40 h-35 a30,30 0 0 1 -30,-30 v-70 a30,30 0 0 1 30,-30 z" fill="#FFFDF9"/>
+    <text x="150" y="88" text-anchor="middle" class="hand" font-size="62" font-weight="700" fill="#4A3426">Тсс… секрет!</text>
+  </g>
+  <g id="poof" fill="#FFFDF9"></g>
+
+  <!-- checklist card -->
+  <g id="list">
+    <rect x="560" y="500" width="470" height="840" rx="34" fill="#FBF6EE" stroke="#E2D6C6" stroke-width="4"/>
+    <text x="795" y="600" text-anchor="middle" class="serif" font-size="52" font-weight="700" fill="#4A3426">Внутри бокса:</text>
+    <path d="M610,630 H980" stroke="#E2D6C6" stroke-width="4"/>
+    <g id="rows"></g>
+  </g>
+  <g id="items"></g>
+
+  <g id="headline" text-anchor="middle">
+    <text x="540" y="330" class="serif" font-size="88" font-weight="700" fill="#F7EBDD">Подойдёт любому</text>
+    <text x="540" y="420" class="hand" font-size="64" fill="#F2C9A0">даже если вы почти не знакомы</text>
+  </g>
+  <g id="price">
+    <circle cx="0" cy="0" r="132" fill="#A63A32" stroke="#F7EBDD" stroke-width="4"/>
+    <circle cx="0" cy="0" r="116" fill="none" stroke="#F4ECE2" stroke-width="3" stroke-dasharray="6 8"/>
+    <text x="0" y="-44" text-anchor="middle" class="hand" font-size="50" fill="#F8EEE2">всего</text>
+    <text x="0" y="22" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#FFFDF9">1 699</text>
+    <text x="0" y="74" text-anchor="middle" class="serif" font-size="42" font-weight="500" fill="#F8EEE2">сом</text>
+  </g>
+  <text id="budget" x="800" y="1720" text-anchor="middle" class="hand" font-size="60" font-weight="700" fill="#F7EBDD">вписывается в бюджет!</text>
+
+  <!-- phone chat (intro) -->
+  <rect id="scrim" width="1080" height="1920" fill="#0E1222" opacity="0.55"/>
+  <g id="phone">
+    <rect x="110" y="380" width="860" height="1080" rx="56" fill="#EFE8DE"/>
+    <path d="M110,436 a56,56 0 0 1 56,-56 h748 a56,56 0 0 1 56,56 v84 h-860 z" fill="#FFFDF9"/>
+    <circle cx="200" cy="452" r="44" fill="#A63A32"/>
+    <use href="#logoIcon" transform="translate(200 456) scale(0.38)" style="stroke:#FFFDF9"/>
+    <text x="268" y="446" class="serif" font-size="42" font-weight="700" fill="#2E2420">Тайный Санта • офис</text>
+    <text x="268" y="490" class="serif" font-size="30" fill="#8A7A6C">12 участников</text>
+    <g id="bubbles"></g>
+  </g>
+  <g id="qmarks" class="serif" font-weight="700" text-anchor="middle"></g>
+
+  <!-- outro -->
+  <rect id="outroBg" width="1080" height="1920" fill="#F4ECE2" opacity="0"/>
+  <g id="outro">
+    <g id="logo" transform="translate(540 760)">
+      <circle r="250" fill="#F7F0E6" stroke="#5A3E2B" stroke-width="5"/>
+      <use href="#logoIcon" transform="translate(0 -92) scale(0.9)"/>
+      <text x="0" y="70" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">My Warm</text>
+      <text x="0" y="160" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">Box</text>
+    </g>
+    <text id="tagline" x="540" y="1150" text-anchor="middle" class="hand" font-size="84" fill="#7A5A44">Подарок, который греет</text>
+    <text id="cities" x="540" y="1265" text-anchor="middle" class="serif" font-size="50" font-weight="500" fill="#4A3426">Бишкек  •  Ош</text>
+    <g id="cta">
+      <rect x="190" y="1340" width="700" height="120" rx="60" fill="#A63A32"/>
+      <text x="540" y="1418" text-anchor="middle" class="serif" font-size="48" font-weight="700" fill="#FFFDF9">Заказ в Direct / WhatsApp</text>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const DURATION = 18;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const easeOutCubic = p => 1 - Math.pow(1 - p, 3);
+  const easeInCubic = p => p * p * p;
+  const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  let seed = 5;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const set = (el, tr, op) => {
+    if (tr !== undefined) el.setAttribute('transform', tr);
+    if (op !== undefined) el.setAttribute('opacity', clamp(op).toFixed(3));
+  };
+  const mk = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e); return e;
+  };
+
+  // ---------- decor ----------
+  for (let i = 0; i < 60; i++) mk('circle', { cx: rnd() * 1080, cy: 260 + rnd() * 1200, r: 2 + rnd() * 3 }, $('wallDots'));
+  const BULB_COLORS = ['#F5C04A', '#E0574A', '#8FCB9B', '#F3E9D2'];
+  const bulbs = [];
+  const qpt = (p0, p1, p2, u) => (1 - u) * (1 - u) * p0 + 2 * (1 - u) * u * p1 + u * u * p2;
+  for (let k = 0; k < 18; k++) {
+    const half = k < 9 ? 0 : 1, u = ((k % 9) + 0.5) / 9;
+    const x0 = half ? 540 : -20, x2 = half ? 1100 : 540, x1 = half ? 810 : 270;
+    const x = qpt(x0, x1, x2, u), y = qpt(140, 270, 140, u);
+    bulbs.push({ el: mk('ellipse', { cx: x, cy: y + 18, rx: 11, ry: 16, fill: BULB_COLORS[k % 4] }, $('garland')), ph: k * 1.3 });
+  }
+  const TL = [[-80, 900], [60, 990], [-120, 1080], [100, 1060], [-40, 1190], [150, 1270], [-170, 1290], [10, 1300], [-90, 1430], [80, 1440], [190, 1430], [-30, 1010]];
+  TL.forEach(([x, y], k) => bulbs.push({ el: mk('circle', { cx: x, cy: y, r: 9, fill: BULB_COLORS[(k + 1) % 4] }, $('treeLights')), ph: k * 2.1 }));
+
+  // ---------- chat bubbles ----------
+  const MSGS = [
+    { side: 'L', text: 'Жеребьёвка прошла!', t: 0.3, y: 590 },
+    { side: 'L', text: 'Тебе выпала Айгуль из бухгалтерии', t: 0.9, y: 740 },
+    { side: 'R', text: 'Мы даже не знакомы…', t: 1.6, y: 930 },
+    { side: 'R', text: 'Что дарить?! Бюджет 2000 сом', t: 2.2, y: 1080 },
+  ];
+  MSGS.forEach(m => {
+    const g = mk('g', {}, $('bubbles'));
+    const r = mk('rect', { rx: 34, fill: m.side === 'L' ? '#FFFFFF' : '#A63A32' }, g);
+    const tx = mk('text', { class: 'serif', 'font-size': 40, fill: m.side === 'L' ? '#2E2420' : '#FFFDF9' }, g);
+    tx.textContent = m.text;
+    m.g = g; m.r = r; m.tx = tx;
+  });
+  const layoutBubbles = () => MSGS.forEach(m => {
+    const w = m.tx.getComputedTextLength() + 64;
+    const x = m.side === 'L' ? 150 : 930 - w;
+    m.r.setAttribute('x', x); m.r.setAttribute('y', m.y); m.r.setAttribute('width', w); m.r.setAttribute('height', 108);
+    m.tx.setAttribute('x', x + 32); m.tx.setAttribute('y', m.y + 69);
+    m.ox = m.side === 'L' ? x : x + w; m.oy = m.y + 108;
+  });
+  const QM = [[190, 330, '#F7EBDD', -14], [900, 300, '#F2C14E', 12], [140, 1560, '#F2C14E', 10], [930, 1540, '#F7EBDD', -10], [540, 250, '#E0574A', 0], [980, 900, '#E0574A', 16]];
+  const qms = QM.map(([x, y, c, r], k) => { const e = mk('text', { 'font-size': 150, fill: c }, $('qmarks')); e.textContent = '?'; return { e, x, y, r, s0: 2.6 + k * 0.12 }; });
+
+  // ---------- poof particles ----------
+  const puffs = [...Array(10)].map((_, k) => ({ el: mk('circle', {}, $('poof')), a: k / 10 * Math.PI * 2, d: 120 + rnd() * 80, r: 30 + rnd() * 25 }));
+
+  // ---------- checklist rows + flying items ----------
+  const ITEMS = [
+    { id: 'hatBody', label: 'шапка',    s: 0.26 },
+    { id: 'scarf',   label: 'шарф',     s: 0.27 },
+    { id: 'gloves',  label: 'перчатки', s: 0.24 },
+    { id: 'socks',   label: 'носки',    s: 0.27 },
+    { id: 'card',    label: 'открытка', s: 0.24 },
+  ];
+  const BOXP = { x: 330, y: 1610, s: 0.45 };
+  ITEMS.forEach((it, i) => {
+    it.y = 720 + i * 130; it.x = 640;
+    it.s0 = 8.7 + i * 0.7; it.land = it.s0 + 0.6;
+    it.lbl = mk('text', { x: 715, y: it.y + 20, class: 'hand', 'font-size': 62, 'font-weight': 700, fill: '#4A3426' }, $('rows'));
+    it.lbl.textContent = it.label;
+    it.chk = mk('path', { d: `M950,${it.y} l16,18 l32,-38`, stroke: '#A63A32', 'stroke-width': 10, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-dasharray': 80 }, $('rows'));
+    it.g = mk('use', { href: '#' + it.id }, $('items'));
+  });
+
+  // ---------- render ----------
+  function render(t) {
+    bulbs.forEach(b => b.el.setAttribute('opacity', (0.55 + 0.45 * Math.sin(t * 3 + b.ph)).toFixed(3)));
+    set($('star'), `translate(0 750) scale(${(1 + 0.06 * Math.sin(t * 4)).toFixed(3)}) rotate(${(Math.sin(t * 1.5) * 4).toFixed(2)})`);
+    set($('treeGlow'), undefined, 0.8 + 0.2 * Math.sin(t * 2));
+
+    // --- intro chat 0–3.9 ---
+    const out = easeInCubic(seg(t, 3.4, 3.9));
+    set($('scrim'), undefined, 0.6 * (1 - out));
+    set($('phone'), `translate(0 ${1700 * out})`, 1 - seg(t, 3.75, 3.9));
+    MSGS.forEach(m => {
+      const p = seg(t, m.t, m.t + 0.35);
+      const s = easeOutBack(p);
+      set(m.g, `translate(${m.ox} ${m.oy}) scale(${(0.001 + s).toFixed(3)}) translate(${-m.ox} ${-m.oy})`, p > 0 ? 1 : 0);
+    });
+    qms.forEach((q, k) => {
+      const p = seg(t, q.s0, q.s0 + 0.35), o = seg(t, 3.3, 3.6);
+      const wob = Math.sin(t * 9 + k) * 6;
+      set(q.e, `translate(${q.x} ${q.y}) rotate(${q.r + wob}) scale(${(0.001 + easeOutBack(p)).toFixed(3)})`, p > 0 ? 1 - o : 0);
+    });
+
+    // --- Santa sneaks in 3.9–5.8, places box 5.8–6.25, shh 6.25–6.95, poof 6.95–7.25 ---
+    const walk = seg(t, 3.9, 5.8);
+    const sx = lerp(1300, 700, walk);
+    const stepPh = (t - 3.9) / 0.32;
+    const walking = t > 3.9 && t < 5.8;
+    const bob = walking ? -Math.abs(Math.sin(Math.PI * stepPh)) * 34 : 0;
+    const lean = walking ? Math.sin(Math.PI * stepPh) * 4 : 0;
+    const legA = walking ? Math.sin(Math.PI * stepPh) * 18 : 0;
+    set($('legL'), `rotate(${legA} -37 100)`);
+    set($('legR'), `rotate(${-legA} 37 100)`);
+    const sy = 1415 + bob;
+    const shhP = easeInOut(seg(t, 6.2, 6.45));
+    set($('armR'), `rotate(${lerp(0, -150, shhP)} 122 -90)`);
+    $('pupils').setAttribute('transform', `translate(${(walking ? Math.sin(t * 3) * 6 : lerp(-6, 0, shhP)).toFixed(1)} 0)`);
+    const poofP = seg(t, 6.95, 7.25);
+    const sScale = 1 - easeInCubic(poofP);
+    set($('santa'), `translate(${sx.toFixed(1)} ${sy.toFixed(1)}) rotate(${lean - 30 * poofP}) scale(${(0.001 + sScale).toFixed(3)})`, t < 3.9 || t > 7.25 ? 0 : 1);
+    set($('shh'), `translate(${sx - 380} ${1415 - 470}) scale(${(0.001 + easeOutBack(seg(t, 6.3, 6.55))).toFixed(3)})`, t > 6.3 && t < 6.95 ? 1 : 0);
+    puffs.forEach(pf => {
+      const p = easeOutCubic(poofP);
+      pf.el.setAttribute('cx', (sx + Math.cos(pf.a) * pf.d * p).toFixed(1));
+      pf.el.setAttribute('cy', (1300 + Math.sin(pf.a) * pf.d * p).toFixed(1));
+      pf.el.setAttribute('r', (pf.r * (0.4 + p)).toFixed(1));
+      pf.el.setAttribute('opacity', poofP > 0 ? (1 - seg(t, 7.15, 7.6)).toFixed(3) : 0);
+    });
+
+    // box: carried by Santa, then placed under the tree
+    const place = easeInOut(seg(t, 5.8, 6.2));
+    const carriedX = sx - 40, carriedY = sy + 40;
+    const bx = lerp(carriedX, BOXP.x, place), by = lerp(carriedY, BOXP.y, place) - 120 * Math.sin(Math.PI * place);
+    const bs = lerp(0.36, BOXP.s, place);
+    set($('box'), `translate(${bx.toFixed(1)} ${by.toFixed(1)}) scale(${bs.toFixed(3)})`, t < 3.9 ? 0 : 1);
+    // tag swing 7.3+
+    const tp = seg(t, 7.3, 7.6), tagOut = seg(t, 8.0, 8.3);
+    set($('tag'), `translate(500 1520) rotate(${(Math.sin((t - 7.3) * 7) * 14 * Math.exp(-(t - 7.3) * 2)).toFixed(2)} 0 -80) scale(${(0.001 + easeOutBack(tp)).toFixed(3)})`, tp > 0 ? 1 - tagOut : 0);
+    // open
+    const pull = easeInCubic(seg(t, 7.9, 8.15));
+    set($('bow'), `translate(0 ${-236 - 60 * pull}) scale(${1 - pull})`, 1 - pull);
+    set($('lidRibbon'), undefined, 1 - seg(t, 7.95, 8.2));
+    const lo = easeInCubic(seg(t, 8.1, 8.55));
+    set($('lid'), `translate(${-300 * lo} ${-900 * lo}) rotate(${-40 * lo})`, 1 - seg(t, 8.4, 8.55));
+
+    // checklist
+    const lp = seg(t, 8.2, 8.6);
+    set($('list'), `translate(795 920) rotate(2) scale(${(0.001 + easeOutBack(lp)).toFixed(3)}) translate(-795 -920)`, lp > 0 ? 1 : 0);
+    const boxTop = BOXP.y - 180 * BOXP.s;
+    ITEMS.forEach((it, i) => {
+      const p = seg(t, it.s0, it.land), pe = easeOutCubic(p);
+      const x = lerp(BOXP.x, it.x, pe), y = lerp(boxTop, it.y, pe) - 280 * Math.sin(Math.PI * p);
+      const sc = lerp(0.1, it.s, easeOutBack(p));
+      set(it.g, `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${lerp(-40, 0, pe).toFixed(1)}) scale(${sc.toFixed(3)})`, p > 0 ? 1 : 0);
+      const la = easeOutCubic(seg(t, it.land - 0.1, it.land + 0.25));
+      set(it.lbl, `translate(${lerp(-20, 0, la)} 0)`, la);
+      it.chk.setAttribute('stroke-dashoffset', (80 * (1 - easeOutCubic(seg(t, it.land + 0.05, it.land + 0.35)))).toFixed(1));
+    });
+
+    // headline + price
+    const hp = easeOutCubic(seg(t, 12.0, 12.6));
+    set($('headline'), `translate(0 ${lerp(-40, 0, hp)})`, hp);
+    const pp = seg(t, 12.7, 13.3);
+    const pulse = t > 13.3 ? 1 + 0.04 * Math.sin((t - 13.3) * 6) : 1;
+    set($('price'), `translate(800 1520) rotate(${lerp(-40, -8, easeOutCubic(pp))}) scale(${(0.95 * easeOutBack(pp) * pulse).toFixed(3)})`, pp > 0 ? 1 : 0);
+    const bg = easeOutCubic(seg(t, 13.1, 13.6));
+    set($('budget'), `translate(0 ${lerp(25, 0, bg)})`, bg);
+
+    // outro 14.4+
+    set($('outroBg'), undefined, easeInOut(seg(t, 14.4, 15.0)));
+    const lg = seg(t, 14.8, 15.6);
+    set($('logo'), `translate(540 760) scale(${(0.001 + easeOutBack(lg)).toFixed(3)})`, lg > 0 ? 1 : 0);
+    const tg = easeOutCubic(seg(t, 15.4, 16.0));
+    set($('tagline'), `translate(0 ${lerp(30, 0, tg)})`, tg);
+    const ct = easeOutCubic(seg(t, 15.8, 16.4));
+    set($('cities'), `translate(0 ${lerp(30, 0, ct)})`, ct);
+    const cta = seg(t, 16.2, 16.8);
+    const ctaPulse = t > 16.8 ? 1 + 0.03 * Math.sin((t - 16.8) * 5) : 1;
+    set($('cta'), `translate(540 1400) scale(${(0.001 + easeOutBack(cta) * ctaPulse).toFixed(3)}) translate(-540 -1400)`, cta > 0 ? 1 : 0);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = t => { if (!window.__laid) { layoutBubbles(); window.__laid = 1; } render(t); };
+  const params = new URLSearchParams(location.search);
+  if (params.has('render')) return;
+  document.body.classList.add('preview');
+  document.fonts.ready.then(() => {
+    if (params.has('t')) { window.renderAt(parseFloat(params.get('t'))); return; }
+    let start = null;
+    const loop = ts => { if (start === null) start = ts; window.renderAt(((ts - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+</body>
+</html>

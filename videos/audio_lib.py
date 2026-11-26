@@ -147,3 +147,16 @@ def conv(x, h):
 def note(name):
     names = {'C': -9, 'D': -7, 'E': -5, 'F': -4, 'G': -2, 'A': 0, 'B': 2}
     return 440 * 2 ** ((names[name[0]] + (int(name[-1]) - 4) * 12) / 12)
+
+
+def pluck(f, d=0.6, bright=0.5, decay=0.996, seed=0):
+    """Karplus-Strong plucked string (pizzicato)."""
+    rng = np.random.default_rng(seed)
+    n, p = int(d * SR), max(2, int(SR / f))
+    buf = rng.uniform(-1, 1, p)
+    out = np.zeros(n)
+    for i in range(n):
+        out[i] = buf[i % p]
+        nxt = buf[(i + 1) % p]
+        buf[i % p] = decay * (bright * buf[i % p] + (1 - bright) * nxt)
+    return out * np.minimum(1, np.arange(n) / 40)
