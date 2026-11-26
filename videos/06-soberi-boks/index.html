@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>My Warm Box — Собираем бокс</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Caveat:wght@600;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1512; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  #stage { width: 1080px; height: 1920px; display: block; }
+  body.preview #stage { width: auto; height: 96vh; aspect-ratio: 9 / 16; }
+  .serif { font-family: 'Lora', serif; }
+  .hand { font-family: 'Caveat', cursive; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EADBC7"/>
+      <stop offset="1" stop-color="#F6EEE4"/>
+    </linearGradient>
+    <pattern id="dots" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="24" cy="24" r="3" fill="#D9C7AF"/>
+    </pattern>
+    <linearGradient id="meterFill" gradientUnits="userSpaceOnUse" x1="150" y1="0" x2="930" y2="0">
+      <stop offset="0" stop-color="#8FB0D3"/>
+      <stop offset="0.5" stop-color="#F2B65A"/>
+      <stop offset="1" stop-color="#C2473D"/>
+    </linearGradient>
+    <radialGradient id="shadow">
+      <stop offset="0" stop-color="#5A3E2B" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5A3E2B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#5A3E2B" flood-opacity="0.18"/>
+    </filter>
+    <pattern id="knitCream" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#FBF6EE"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#E3D5C1" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="knitLatte" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#E9D8C1"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#D2BB9E" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="ribCream" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#F3EADD"/>
+      <path d="M8 0 V16" stroke="#DCCBB4" stroke-width="5"/>
+    </pattern>
+    <pattern id="ribLatte" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#E0CCB1"/>
+      <path d="M8 0 V16" stroke="#C9B091" stroke-width="5"/>
+    </pattern>
+    <linearGradient id="windowGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+    <clipPath id="winClip"><rect x="-224" y="-112" width="448" height="230" rx="12"/></clipPath>
+    <g id="pointer" stroke="#4A3426" stroke-width="5" stroke-linejoin="round">
+      <rect x="-44" y="150" width="96" height="34" rx="10" fill="#A63A32"/>
+      <rect x="-40" y="62" width="88" height="96" rx="30" fill="#FFFDF9"/>
+      <rect x="-15" y="0" width="30" height="100" rx="15" fill="#FFFDF9"/>
+      <rect x="14" y="52" width="26" height="50" rx="13" fill="#FFFDF9"/>
+      <rect x="38" y="64" width="24" height="44" rx="12" fill="#FFFDF9"/>
+      <ellipse cx="-44" cy="104" rx="16" ry="28" fill="#FFFDF9" transform="rotate(-30 -44 104)"/>
+    </g>
+    <!-- ===== items (same as video 1) ===== -->
+    <g id="hatBody">
+      <path d="M-118,70 C-122,-50 -70,-118 0,-118 C70,-118 122,-50 118,70 Z" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-136" y="40" width="272" height="80" rx="20" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <circle cx="0" cy="-140" r="48" fill="#FFFDF8" stroke="#E2D4C0" stroke-width="6" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <circle cx="-12" cy="-152" r="14" fill="#FFFFFF" opacity="0.8"/>
+    </g>
+    <g id="scarf">
+      <path d="M-95,-120 C-140,-40 -40,10 -70,110 L-10,120 C10,20 -80,-40 -35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M95,-120 C140,-40 40,10 70,110 L10,120 C-10,20 80,-40 35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M-100,-128 Q0,-160 100,-128 L92,-82 Q0,-112 -92,-82 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-82" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(8 -50 80)"/>
+      <rect x="18" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(-8 50 80)"/>
+      <g stroke="#C9B091" stroke-width="5" stroke-linecap="round">
+        <path d="M-66,118 v32 M-52,120 v34 M-38,121 v30 M-24,122 v33 M-12,122 v28"/>
+        <path d="M66,118 v32 M52,120 v34 M38,121 v30 M24,122 v33 M12,122 v28"/>
+      </g>
+    </g>
+    <g id="glove">
+      <rect x="-58" y="58" width="116" height="62" rx="14" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-24" y="-150" width="28" height="104" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="6" y="-140" width="28" height="96" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-54" y="-136" width="28" height="92" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="34" y="-116" width="26" height="76" rx="13" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-58" y="-60" width="118" height="126" rx="34" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-104" y="-40" width="30" height="88" rx="15" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-38 -60 20)"/>
+    </g>
+    <g id="gloves">
+      <use href="#glove" transform="translate(-62 10) rotate(-12) scale(0.95)"/>
+      <use href="#glove" transform="translate(62 10) rotate(12) scale(-0.95 0.95)"/>
+    </g>
+    <g id="sock">
+      <path d="M-46,-120 L46,-120 L46,30 C46,62 66,74 100,76 C142,80 150,140 104,146 L-8,146 C-56,146 -52,96 -46,56 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-52" y="-150" width="104" height="54" rx="12" fill="url(#ribLatte)" stroke="#C9B091" stroke-width="3"/>
+    </g>
+    <g id="socks">
+      <use href="#sock" transform="translate(-50 0) rotate(-8) scale(0.85)"/>
+      <use href="#sock" transform="translate(40 18) rotate(6) scale(0.85)"/>
+    </g>
+    <g id="card">
+      <g transform="rotate(-6)">
+        <rect x="-110" y="-140" width="220" height="290" rx="10" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="3"/>
+        <rect x="-110" y="-140" width="220" height="16" fill="#A63A32"/>
+        <path d="M0,-28 C-30,-62 -72,-30 -40,6 L0,40 L40,6 C72,-30 30,-62 0,-28 Z" fill="#A63A32"/>
+        <text x="0" y="98" text-anchor="middle" class="hand" font-size="46" fill="#5A3E2B">С любовью</text>
+      </g>
+    </g>
+    <g id="mitten">
+      <rect x="-30" y="-50" width="60" height="20" rx="8" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <ellipse cx="27" cy="-6" rx="13" ry="21" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-20 27 -6)"/>
+      <rect x="-30" y="-34" width="60" height="76" rx="28" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+    </g>
+    <path id="heart" d="M0,-12 C-14,-30 -40,-14 -22,6 L0,26 L22,6 C40,-14 14,-30 0,-12 Z"/>
+    <g id="logoIcon" fill="none" stroke="#5A3E2B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="-62" y="-20" width="124" height="86" rx="4"/>
+      <rect x="-72" y="-46" width="144" height="28" rx="4"/>
+      <path d="M0,-46 V66"/>
+      <path d="M0,-46 C-22,-86 -62,-78 -48,-56 C-40,-46 -16,-46 0,-46 Z"/>
+      <path d="M0,-46 C22,-86 62,-78 48,-56 C40,-46 16,-46 0,-46 Z"/>
+      <path d="M-40,10 L40,10" stroke-width="5" opacity="0.6"/>
+      <path d="M-40,34 L40,34" stroke-width="5" opacity="0.6"/>
+    </g>
+  
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <rect width="1080" height="1920" fill="url(#dots)" opacity="0.6"/>
+
+  <!-- HUD -->
+  <g id="hud">
+    <rect x="190" y="140" width="700" height="100" rx="50" fill="#4A3426"/>
+    <text x="540" y="207" text-anchor="middle" class="serif" font-size="52" font-weight="700" fill="#FBF6EE">Собираем тёплый бокс</text>
+    <text id="meterText" x="540" y="318" text-anchor="middle" class="hand" font-size="58" font-weight="700" fill="#4A3426">Тепло: 0%</text>
+    <rect x="150" y="340" width="780" height="54" rx="27" fill="#E2D3BF" stroke="#4A3426" stroke-width="4"/>
+    <rect id="meterBar" x="154" y="344" width="0" height="46" rx="23" fill="url(#meterFill)"/>
+    <g stroke="#6F8FB3" stroke-width="5" stroke-linecap="round" transform="translate(112 367)">
+      <path d="M0,-24 V24 M-21,-12 L21,12 M-21,12 L21,-12"/>
+    </g>
+    <use href="#heart" transform="translate(970 367) scale(1.1)" fill="#C2473D"/>
+  </g>
+  <text id="plus" x="0" y="0" text-anchor="middle" class="hand" font-size="56" font-weight="700" fill="#C2473D">+20% тепла</text>
+
+  <!-- cards -->
+  <g id="cards"></g>
+
+  <!-- box: back (flap, inner rim) / flying items / front -->
+  <g id="boxBack">
+    <ellipse cx="0" cy="205" rx="330" ry="34" fill="url(#shadow)"/>
+    <path id="flap" d="M-300,-180 L-330,-300 L330,-300 L300,-180 Z" fill="#F4ECE0" stroke="#E2D6C6" stroke-width="4"/>
+    <rect x="-300" y="-196" width="600" height="40" rx="8" fill="#E6DACA"/>
+  </g>
+  <g id="flying"></g>
+  <g id="boxFront">
+    <rect x="-300" y="-180" width="600" height="370" rx="16" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+    <rect x="-224" y="-112" width="448" height="230" rx="12" fill="#F1E8DC" stroke="#E2D6C6" stroke-width="4"/>
+    <g clip-path="url(#winClip)"><g id="stack"></g></g>
+    <rect x="-224" y="-112" width="448" height="230" rx="12" fill="url(#windowGlass)"/>
+    <circle cx="232" cy="150" r="42" fill="#F4ECE0" stroke="#5A3E2B" stroke-width="3"/>
+    <text x="232" y="146" text-anchor="middle" class="serif" font-size="17" font-weight="700" fill="#5A3E2B">My Warm</text>
+    <text x="232" y="166" text-anchor="middle" class="serif" font-size="17" font-weight="700" fill="#5A3E2B">Box</text>
+    <g id="lid">
+      <rect x="-26" y="-156" width="52" height="346" fill="#A63A32" opacity="0.92"/>
+      <rect x="-316" y="-232" width="632" height="76" rx="14" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+      <rect x="-26" y="-232" width="52" height="76" fill="#A63A32"/>
+    </g>
+    <g id="bow">
+      <path d="M0,0 C-40,-80 -150,-70 -120,-16 C-100,16 -40,8 0,0 Z" fill="#B8463C" stroke="#8E2E28" stroke-width="4"/>
+      <path d="M0,0 C40,-80 150,-70 120,-16 C100,16 40,8 0,0 Z" fill="#B8463C" stroke="#8E2E28" stroke-width="4"/>
+      <path d="M-6,4 L-60,80 L-38,82 L-30,96 L4,10 Z" fill="#A63A32"/>
+      <path d="M6,4 L60,80 L38,82 L30,96 L-4,10 Z" fill="#A63A32"/>
+      <circle cx="0" cy="0" r="22" fill="#A63A32" stroke="#8E2E28" stroke-width="4"/>
+    </g>
+  </g>
+
+  <g id="ripple" fill="none" stroke="#C2473D" stroke-width="6"><circle r="40"/></g>
+  <use id="hand" href="#pointer"/>
+
+  <g id="done" text-anchor="middle">
+    <text x="540" y="640" class="serif" font-size="120" font-weight="700" fill="#4A3426">Бокс собран!</text>
+    <text x="540" y="740" class="hand" font-size="70" font-weight="700" fill="#C2473D">тепло 100%</text>
+  </g>
+  <g id="headline" text-anchor="middle">
+    <text x="540" y="560" class="serif" font-size="92" font-weight="700" fill="#4A3426">Тёплый бокс 5 в 1</text>
+    <text x="540" y="650" class="hand" font-size="68" fill="#7A5A44">мы уже собрали его за вас</text>
+  </g>
+  <g id="price">
+    <circle cx="0" cy="0" r="132" fill="#A63A32"/>
+    <circle cx="0" cy="0" r="116" fill="none" stroke="#F4ECE2" stroke-width="3" stroke-dasharray="6 8"/>
+    <text x="0" y="-44" text-anchor="middle" class="hand" font-size="50" fill="#F8EEE2">всего</text>
+    <text x="0" y="22" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#FFFDF9">1 699</text>
+    <text x="0" y="74" text-anchor="middle" class="serif" font-size="42" font-weight="500" fill="#F8EEE2">сом</text>
+  </g>
+  <g id="confetti"></g>
+
+  <!-- outro -->
+  <rect id="outroBg" width="1080" height="1920" fill="#F4ECE2" opacity="0"/>
+  <g id="outro">
+    <g id="logo" transform="translate(540 760)">
+      <circle r="250" fill="#F7F0E6" stroke="#5A3E2B" stroke-width="5"/>
+      <use href="#logoIcon" transform="translate(0 -92) scale(0.9)"/>
+      <text x="0" y="70" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">My Warm</text>
+      <text x="0" y="160" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">Box</text>
+    </g>
+    <text id="tagline" x="540" y="1150" text-anchor="middle" class="hand" font-size="84" fill="#7A5A44">Подарок, который греет</text>
+    <text id="cities" x="540" y="1265" text-anchor="middle" class="serif" font-size="50" font-weight="500" fill="#4A3426">Бишкек  •  Ош</text>
+    <g id="cta">
+      <rect x="190" y="1340" width="700" height="120" rx="60" fill="#A63A32"/>
+      <text x="540" y="1418" text-anchor="middle" class="serif" font-size="48" font-weight="700" fill="#FFFDF9">Заказ в Direct / WhatsApp</text>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const DURATION = 18;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const easeOutCubic = p => 1 - Math.pow(1 - p, 3);
+  const easeInCubic = p => p * p * p;
+  const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  const easeOutBounce = p => {
+    const n = 7.5625, d = 2.75;
+    if (p < 1 / d) return n * p * p;
+    if (p < 2 / d) return n * (p -= 1.5 / d) * p + .75;
+    if (p < 2.5 / d) return n * (p -= 2.25 / d) * p + .9375;
+    return n * (p -= 2.625 / d) * p + .984375;
+  };
+  let seed = 9;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const set = (el, tr, op) => {
+    if (tr !== undefined) el.setAttribute('transform', tr);
+    if (op !== undefined) el.setAttribute('opacity', clamp(op).toFixed(3));
+  };
+  const mk = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e); return e;
+  };
+
+  const BOX0 = { x: 540, y: 1490, s: 0.95 }, BOX1 = { x: 540, y: 1250, s: 1.05 };
+  const ITEMS = [
+    { id: 'hatBody', label: 'шапка',    x: 210, y: 620, s: 0.62, mx: -175, ms: 0.33 },
+    { id: 'scarf',   label: 'шарф',     x: 540, y: 620, s: 0.6,  mx: -88,  ms: 0.32 },
+    { id: 'gloves',  label: 'перчатки', x: 870, y: 620, s: 0.55, mx: 0,    ms: 0.3 },
+    { id: 'socks',   label: 'носки',    x: 375, y: 950, s: 0.6,  mx: 90,   ms: 0.32 },
+    { id: 'card',    label: 'открытка', x: 705, y: 950, s: 0.55, mx: 178,  ms: 0.3 },
+  ];
+  ITEMS.forEach((it, i) => {
+    it.T = 2.4 + i * 1.45;
+    it.card = mk('g', {}, $('cards'));
+    it.cardBg = mk('rect', { x: -140, y: -140, width: 280, height: 290, rx: 34, fill: '#FFFDF9', stroke: '#E2D6C6', 'stroke-width': 4, filter: 'url(#cardShadow)' }, it.card);
+    it.icon = mk('use', { href: '#' + it.id }, it.card);
+    const l = mk('text', { y: 125, 'text-anchor': 'middle', class: 'hand', 'font-size': 50, 'font-weight': 700, fill: '#4A3426' }, it.card);
+    l.textContent = it.label;
+    it.badge = mk('g', {}, it.card);
+    mk('circle', { cx: 0, cy: 0, r: 34, fill: '#C2473D' }, it.badge);
+    mk('path', { d: 'M-15,1 L-4,13 L16,-11', stroke: '#FFFDF9', 'stroke-width': 8, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, it.badge);
+    it.fly = mk('use', { href: '#' + it.id }, $('flying'));
+    it.mini = mk('use', { href: '#' + it.id }, $('stack'));
+  });
+  const COLORS = ['#C2473D', '#F2B65A', '#9AA89A', '#FBF6EE', '#8FB0D3', '#A63A32'];
+  const conf = [...Array(70)].map((_, k) => ({
+    el: mk('rect', { width: 16 + rnd() * 10, height: 9 + rnd() * 6, fill: COLORS[k % COLORS.length] }, $('confetti')),
+    vx: lerp(-650, 650, rnd()), vy: lerp(-1700, -800, rnd()), rs: lerp(-720, 720, rnd()), d: rnd() * 0.25,
+  }));
+
+  const pointerPos = t => {
+    let x = 1050, y = 1900;
+    const enter = easeInOut(seg(t, 1.6, ITEMS[0].T - 0.05));
+    const OY = -85;
+    x = lerp(1050, ITEMS[0].x, enter); y = lerp(1900, ITEMS[0].y + OY, enter);
+    for (let i = 1; i < ITEMS.length; i++) {
+      const p = easeInOut(seg(t, ITEMS[i].T - 0.6, ITEMS[i].T - 0.05));
+      if (p > 0) { x = lerp(ITEMS[i - 1].x, ITEMS[i].x, p); y = lerp(ITEMS[i - 1].y, ITEMS[i].y, p) + OY; }
+    }
+    const ex = easeInCubic(seg(t, 9.2, 9.8));
+    return [lerp(x, 1150, ex), lerp(y, 1700, ex)];
+  };
+
+  function render(t) {
+    // HUD
+    const hd = easeOutBack(seg(t, 0.0, 0.6));
+    set($('hud'), `translate(0 ${lerp(-300, 0, hd)})`, 1);
+    let warm = 0;
+    ITEMS.forEach(it => { warm += 0.2 * easeOutCubic(seg(t, it.T + 0.8, it.T + 1.2)); });
+    $('meterBar').setAttribute('width', (772 * warm).toFixed(1));
+    $('meterText').textContent = 'Тепло: ' + Math.round(warm * 100) + '%';
+    const full = seg(t, 9.35, 9.6);
+    $('meterText').setAttribute('transform', `translate(540 300) scale(${(1 + 0.25 * Math.sin(Math.PI * full)).toFixed(3)}) translate(-540 -300)`);
+
+    // "+20%" floating label
+    let plusOp = 0, plusY = 0, plusX = 540;
+    ITEMS.forEach((it, i) => {
+      const p = seg(t, it.T + 0.8, it.T + 1.5);
+      if (p > 0 && p < 1) { plusOp = Math.sin(Math.PI * p); plusY = 450 - 50 * p; plusX = 154 + 772 * 0.2 * (i + 1) - 30; }
+    });
+    plusX = Math.min(plusX, 860);
+    set($('plus'), `translate(${plusX.toFixed(1)} ${plusY.toFixed(1)})`, plusOp);
+
+    // cards
+    const cardsOut = seg(t, 9.4, 9.8);
+    ITEMS.forEach((it, i) => {
+      const ap = seg(t, 0.5 + i * 0.12, 0.85 + i * 0.12);
+      const tap = seg(t, it.T - 0.05, it.T + 0.25);
+      const press = 1 - 0.08 * Math.sin(Math.PI * tap);
+      const picked = seg(t, it.T + 0.05, it.T + 0.3);
+      set(it.card, `translate(${it.x} ${it.y}) scale(${(0.001 + easeOutBack(ap) * press * (1 - 0.3 * easeInCubic(cardsOut))).toFixed(3)})`, ap > 0 ? (1 - 0.45 * picked) * (1 - cardsOut) : 0);
+      it.cardBg.setAttribute('stroke', tap > 0 && tap < 1 ? '#C2473D' : '#E2D6C6');
+      set(it.icon, `translate(0 -20) scale(${it.s})`, 1 - picked);
+      set(it.badge, `translate(110 -110) scale(${(0.001 + easeOutBack(seg(t, it.T + 0.8, it.T + 1.1))).toFixed(3)})`, t > it.T + 0.8 ? 1 : 0);
+    });
+
+    // box position
+    const bm = easeInOut(seg(t, 10.6, 11.4));
+    const rise = easeOutCubic(seg(t, 0.6, 1.3));
+    const bx = lerp(BOX0.x, BOX1.x, bm), by = lerp(BOX0.y, BOX1.y, bm) + 700 * (1 - rise), bs = lerp(BOX0.s, BOX1.s, bm);
+    const btr = `translate(${bx} ${by.toFixed(1)}) scale(${bs.toFixed(3)})`;
+    set($('boxBack'), btr); set($('boxFront'), btr);
+    set($('flying'), btr);
+
+    // flying items in box coordinates (card -> opening -> drop)
+    ITEMS.forEach(it => {
+      const p = seg(t, it.T + 0.1, it.T + 0.7);
+      const cx = (it.x - bx) / bs, cy = (it.y - 20 - by) / bs;
+      const pe = easeInOut(p);
+      const x = lerp(cx, 0, pe), y = lerp(cy, -230, pe) - 200 * Math.sin(Math.PI * p);
+      const drop = seg(t, it.T + 0.7, it.T + 0.85);
+      const sc = lerp(it.s / bs, it.ms * 1.3, pe);
+      set(it.fly, `translate(${x.toFixed(1)} ${(y + 140 * drop).toFixed(1)}) rotate(${(Math.sin(p * Math.PI) * 20).toFixed(1)}) scale(${sc.toFixed(3)})`, p > 0 && drop < 1 ? 1 : 0);
+      const md = seg(t, it.T + 0.78, it.T + 1.15);
+      set(it.mini, `translate(${it.mx} ${lerp(-200, 25, easeOutBounce(md)).toFixed(1)}) scale(${it.ms})`, md > 0 ? 1 : 0);
+    });
+
+    // close lid + bow
+    const lc = seg(t, 9.6, 9.95);
+    set($('flap'), undefined, 1 - seg(t, 9.6, 9.75));
+    set($('lid'), `translate(0 ${lerp(-260, 0, easeOutBounce(lc)).toFixed(1)})`, lc > 0 ? 1 : 0);
+    const bw = seg(t, 10.0, 10.35);
+    set($('bow'), `translate(0 -236) scale(${(0.001 + easeOutBack(bw)).toFixed(3)})`, bw > 0 ? 1 : 0);
+
+    // pointer + ripple
+    const [px, py] = pointerPos(t);
+    let tapS = 1, rip = -1;
+    ITEMS.forEach(it => { const p = seg(t, it.T - 0.05, it.T + 0.15); if (p > 0 && p < 1) tapS = 1 - 0.15 * Math.sin(Math.PI * p); const r = seg(t, it.T, it.T + 0.45); if (r > 0 && r < 1) rip = r; });
+    set($('hand'), `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(-14) scale(${tapS.toFixed(3)})`, t > 1.6 && t < 9.8 ? 1 : 0);
+    set($('ripple'), `translate(${px.toFixed(1)} ${py.toFixed(1)}) scale(${(0.4 + 1.4 * rip).toFixed(3)})`, rip >= 0 ? 1 - rip : 0);
+
+    // done + confetti
+    const dn = seg(t, 9.5, 9.9), dnOut = seg(t, 11.0, 11.3);
+    set($('done'), `translate(540 680) scale(${(0.001 + easeOutBack(dn)).toFixed(3)}) translate(-540 -680)`, dn > 0 ? 1 - dnOut : 0);
+    const ct = t - 9.4;
+    conf.forEach(c => {
+      const tt = ct - c.d;
+      if (tt <= 0 || tt > 3) { c.el.setAttribute('opacity', 0); return; }
+      const x = 540 + c.vx * tt, y = 1300 + c.vy * tt + 0.5 * 1900 * tt * tt;
+      c.el.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(c.rs * tt).toFixed(1)})`);
+      c.el.setAttribute('opacity', (1 - seg(tt, 2.2, 3)).toFixed(3));
+    });
+
+    // headline + price
+    const hp = easeOutCubic(seg(t, 11.3, 11.9));
+    set($('headline'), `translate(0 ${lerp(-40, 0, hp)})`, hp);
+    const pp = seg(t, 12.0, 12.6);
+    const pulse = t > 12.6 ? 1 + 0.04 * Math.sin((t - 12.6) * 6) : 1;
+    set($('price'), `translate(870 940) rotate(${lerp(-40, -10, easeOutCubic(pp))}) scale(${(0.95 * easeOutBack(pp) * pulse).toFixed(3)})`, pp > 0 ? 1 : 0);
+
+    // outro 14.0+
+    set($('outroBg'), undefined, easeInOut(seg(t, 14.0, 14.6)));
+    const lg = seg(t, 14.4, 15.2);
+    set($('logo'), `translate(540 760) scale(${(0.001 + easeOutBack(lg)).toFixed(3)})`, lg > 0 ? 1 : 0);
+    const tg = easeOutCubic(seg(t, 15.0, 15.6));
+    set($('tagline'), `translate(0 ${lerp(30, 0, tg)})`, tg);
+    const cy2 = easeOutCubic(seg(t, 15.4, 16.0));
+    set($('cities'), `translate(0 ${lerp(30, 0, cy2)})`, cy2);
+    const cta = seg(t, 15.8, 16.4);
+    const ctaPulse = t > 16.4 ? 1 + 0.03 * Math.sin((t - 16.4) * 5) : 1;
+    set($('cta'), `translate(540 1400) scale(${(0.001 + easeOutBack(cta) * ctaPulse).toFixed(3)}) translate(-540 -1400)`, cta > 0 ? 1 : 0);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = render;
+  const params = new URLSearchParams(location.search);
+  if (params.has('render')) return;
+  document.body.classList.add('preview');
+  document.fonts.ready.then(() => {
+    if (params.has('t')) { render(parseFloat(params.get('t'))); return; }
+    let start = null;
+    const loop = ts => { if (start === null) start = ts; render(((ts - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+</body>
+</html>
