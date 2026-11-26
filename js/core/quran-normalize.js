@@ -44,7 +44,7 @@ export function splitTajweedWords(segs) {
     const parts = s.t.split(' ');
     parts.forEach((p, idx) => {
       if (idx > 0) words.push([]);
-      if (p) words[words.length - 1].push(s.r ? { t: p, r: s.r } : { t: p });
+      if (p) words[words.length - 1].push({ ...s, t: p });
     });
   }
   const clean = words.filter(w => w.length);
