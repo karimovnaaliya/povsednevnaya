@@ -1,0 +1,145 @@
+# Схема контента «Путь к Корану»
+
+Все разделы приложения хранят контент в JSON-файлах внутри `data/`. Каждый файл обязан
+следовать этой схеме: интерфейс рисует уроки, тесты и дуа только из неё.
+Проверка: `node tools/validate.mjs` (должна проходить без ошибок).
+
+## 0. Общие правила
+
+- Язык всего текста: **русский**. Арабский пишется арабской графикой; рядом всегда `tr`
+  (латинская транслитерация) и `ru` (перевод).
+- **Аяты Корана никогда не набираются вручную.** Используйте блоки `ayah`, `ayahs`,
+  `quran-words` и аудио-ссылки `{kind:"ayah"}` и `{kind:"word"}`: текст и звук подставляются
+  из данных, загруженных через API (alquran.cloud и quran.com).
+- Тексты дуа и хадисов набираются по источнику (sunnah.com, Hisn al-Muslim и т.п.) и
+  сверяются минимум с двумя источниками. Что проверить нельзя, то не пишем.
+- Фикх: **ханафитский мазхаб**, акида: **матуридитская**. Мнения других мазхабов можно дать только
+  короткой нейтральной пометкой (`callout` с `tone:"note"`).
+- У каждой темы и урока есть непустой список `sources` с рабочими ссылками.
+- Идентификаторы (`id`) уникальны во всём приложении, пишутся латиницей в kebab-case и начинаются
+  с префикса раздела: `cur-`, `hifz-`, `nam-`, `dua-`, `isl-`, `name-`, `q-`.
+- Нельзя оставлять заглушки: TODO, «скоро», lorem ipsum.
+
+## 1. Мини-разметка текста (`md`)
+
+Поле `md` поддерживает: абзацы (пустая строка), `**жирный**`, `*курсив*`, списки `- пункт` и
+`1. пункт`, ссылки `[текст](https://...)`. Арабские слова внутри русского текста
+распознаются автоматически и выводятся арабским шрифтом. HTML внутри `md` запрещён.
+
+## 2. Ссылка на аудио (`audio`)
+
+```json
+{"kind":"ayah","key":"112:1"}                  // аят целиком (основной и резервный источник)
+{"kind":"ayahs","from":"113:1","to":"113:5"}   // несколько аятов подряд
+{"kind":"word","key":"112:1:3"}                // одно слово аята (сура:аят:номер слова, с 1)
+{"kind":"url","src":"https://...mp3","fallback":"https://...mp3"} // только проверенный URL
+```
+
+## 3. Урок или тема (`Lesson`)
+
+```json
+{
+  "id": "cur-2-fatha",
+  "title": "Фатха",
+  "subtitle": "Короткий звук «а»",
+  "minutes": 7,
+  "blocks": [ Block, ... ],
+  "keyPoints": ["Короткий итог 1", "Итог 2"],
+  "quiz": [ Question, ... ],
+  "sources": [ {"title":"Quran.com", "url":"https://quran.com"} ]
+}
+```
+
+### Блоки (`Block`)
+
+| type | Поля | Что выводит |
+|---|---|---|
+| `heading` | `text` | подзаголовок |
+| `text` | `md` | абзацы текста |
+| `callout` | `tone` (`info`, `tip`, `warn`, `hanafi`, `note`), `title?`, `md` | выделенная плашка |
+| `arabic` | `ar`, `tr`, `ru`, `note?`, `audio?`, `size?` (`m`, `l`, `xl`) | крупный арабский текст (НЕ для Корана) |
+| `ayah` | `key` (`"2:255"`), `note?`, `highlight?` (массив кодов таджвида) | аят из данных: таджвид, транслит, перевод, аудио |
+| `ayahs` | `from`, `to`, `note?` | несколько аятов подряд |
+| `quran-words` | `key` (`"113:2"`), `words` ([номера слов с 1]), `note?`, `rule?` | фрагмент аята по словам со звуком каждого слова |
+| `letters` | `items`: [`{ar, name, tr, forms?:{isolated,initial,medial,final}, makhraj?, note?, audio?}`] | сетка букв; нажатие открывает карточку |
+| `table` | `head`: [..], `rows`: [[..]] (ячейки: строка, арабские слова распознаются) | таблица |
+| `keypoints` | `items` | список «Главное» |
+| `steps` | `items`: [`{title, md?, ar?, tr?, ru?, why?, figure?, audio?}`] | пошаговая инструкция (wudu, намаз) |
+| `figure` | `src` (`assets/figures/....svg`), `caption`, `alt` | иллюстрация SVG |
+| `flashcards` | `cards`: [`{front, back, frontAr?:true}`] | переворачиваемые карточки |
+| `reveal` | `prompt`, `answer` | «нажми, чтобы увидеть ответ» |
+| `practice` | `questions`: [Question] | упражнения прямо внутри урока |
+| `makhraj` | `point` (`throat-deep`, `throat-mid`, `throat-top`, `tongue-back`, `tongue-mid`, `tongue-edge`, `tongue-tip`, `teeth`, `lips`, `nose`, `jawf`), `letters`, `md` | схема места произношения |
+
+## 4. Вопрос (`Question`)
+
+Общие поля: `id`, `type`, `prompt` (рус.), `promptAr?` (арабский показ), `audio?`, `explain`
+(объяснение, обязательно: показывается при ошибке), `tags?`.
+
+| type | Поля |
+|---|---|
+| `mcq` | `options`: [строки], `answer`: индекс |
+| `truefalse` | `answer`: true/false |
+| `listen` | `audio` (обязательно), `options`, `answer` |
+| `fill` | `promptAr` или `prompt` с `___` на месте пропуска, `options`, `answer` |
+| `match` | `pairs`: [[левое, правое], ...] (3–6 пар; нажать левое, потом правое) |
+| `connect` | `pairs`: [[арабское, перевод], ...] (3–5 пар; провести линии) |
+| `order` | `items`: [в ПРАВИЛЬНОМ порядке] (приложение перемешает; перетаскивание) |
+| `sort` | `buckets`: [названия], `items`: [`{text, bucket}`] (перетащить в группы) |
+| `tajweed` | `key` (аят) или `tj` (разметка), `segment` (номер окрашенного фрагмента с 0), `options`, `answer` |
+
+Арабский текст в `options` или `pairs` распознаётся автоматически.
+
+## 5. Файлы разделов
+
+| Файл | Структура |
+|---|---|
+| `data/curriculum/level-N.json` (N = 1..6) | `{level, id, title, description, icon, lessons:[Lesson], test:[Question]}` |
+| `data/hifz/surahs.json` | `{surahs:[HifzSurah], sources:[..]}` |
+| `data/quran/wbw-ru/sNNN.json` | `{"surah":N, "words":{"N:1":["слово1","слово2",...]}}` (по одному русскому значению на каждое слово API quran.com, порядок и количество совпадают) |
+| `data/namaz/*.json` | `{id, title, description, topics:[Lesson]}` |
+| `data/duas/duas.json` | `{categories:[{id,title,icon,description}], duas:[Dua], sources:[..]}` |
+| `data/duas/adhkar.json` | `{routines:[{id,title,time,description,items:[{dua, count, note?}]}]}` |
+| `data/islam/*.json` | `{id, title, description, icon, topics:[Lesson]}` |
+| `data/misc/names99.json` | `{names:[{n, ar, tr, ru, explain, ref?}], sources:[..]}` |
+| `data/misc/islamic-days.json` | `{days:[{id, hijriMonth, hijriDay, title, md, kind}], weekly:[..], sources:[..]}` |
+| `data/misc/habits.json` | `{habits:[{id, title, md, source, url}]}` |
+| `data/misc/ayah-of-day.json` | `{keys:["2:286", ...]}` (ключи аятов; текст берётся из API) |
+
+### `HifzSurah`
+
+```json
+{
+  "surah": 112, "order": 2, "id": "hifz-112",
+  "nameRu": "Аль-Ихлас", "meaningRu": "Искренность", "nameAr": "الإخلاص",
+  "ayahs": 4, "range": null,
+  "revelation": "mecca", "difficulty": 1,
+  "about": "md: смысл суры коротко",
+  "context": "md: когда и почему ниспослана (только достоверное)",
+  "virtues": [{"md":"...", "source":"Бухари 5013", "url":"https://sunnah.com/bukhari:5013"}],
+  "sources": [ {"title":"", "url":""} ]
+}
+```
+`range` задаёт часть суры, например `{"from":255,"to":255}` для Аят аль-Курси.
+
+### `Dua`
+
+```json
+{
+  "id": "dua-before-eating", "category": "food",
+  "title": "Перед едой",
+  "ar": "بِسْمِ اللَّهِ", "tr": "Bismillah", "ru": "С именем Аллаха",
+  "when": "Перед тем как начать есть",
+  "count": 1,
+  "virtue": "md (необязательно)",
+  "source": "Абу Дауд 3767, Тирмизи 1858",
+  "url": "https://sunnah.com/abudawud:3767",
+  "grade": "sahih",
+  "gradeNote": "Тирмизи: хасан сахих",
+  "quran": null,
+  "audio": null
+}
+```
+`grade`: `quran`, `sahih`, `hasan`, `daif` (слабый: брать только если это допустимо для дуа, с пометкой).
+Для коранических дуа: `"quran":"2:201"`. Тогда текст и аудио берутся из данных Корана, но поле `ar` всё равно
+заполнено (оно проверяется валидатором против API).
