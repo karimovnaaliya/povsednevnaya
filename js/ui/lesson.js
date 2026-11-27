@@ -46,13 +46,25 @@ const MAKHRAJ_NAME = {
   'tongue-edge': 'Боковой край языка', 'tongue-tip': 'Кончик языка', teeth: 'Зубы и кончик языка', lips: 'Губы', nose: 'Носовая полость (гунна)', jawf: 'Полость рта и горла (буквы мадда)',
 };
 
+const LETTER_FILES = new Set(['0623', '0628', '062A', '062B', '062C', '062D', '062E', '062F', '0630', '0631', '0632', '0633', '0634', '0635', '0636', '0637', '0638', '0639', '063A', '0641', '0642', '0643', '0644', '0645', '0646', '0647', '0648', '064A']);
+/** Recorded letter (GCompris, GPL) for a single base letter, if available. */
+function letterAudio(ar) {
+  const ch = String(ar || '').replace(/[\u064B-\u0652\u0670\u0640\s]/g, '');
+  if ([...ch].length !== 1) return null;
+  let code = ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+  if (code === '0627') code = '0623';
+  return LETTER_FILES.has(code) ? { kind: 'url', src: `assets/audio/letters/u${code}.mp3` } : null;
+}
+
 function letterSheet(it) {
+  const own = letterAudio(it.ar);
   sheet(it.name, h('div.stack',
     h('div.arblock', h('div.arblock__ar.arblock__ar--xl', { lang: 'ar' }, it.ar), it.tr ? h('div.arblock__tr', it.tr) : null),
     it.forms ? h('div.forms', ['isolated', 'initial', 'medial', 'final'].map(f => h('div', h('span.ar-inline', { lang: 'ar' }, it.forms[f] || '—'), h('small', { isolated: 'отдельно', initial: 'в начале', medial: 'в середине', final: 'в конце' }[f])))) : null,
     it.makhraj ? h('p', h('strong', 'Место произношения: '), it.makhraj) : null,
     it.note ? md(it.note) : null,
-    it.audio ? h('div.row', audioButton(it.audio, { label: `Послушать: ${it.name}`, title: it.name }), h('span.small.muted', 'Пример звучания')) : null));
+    own ? h('div.row', audioButton(own, { label: `Буква ${it.name}`, title: it.name }), h('span.small.muted', 'Произношение буквы')) : null,
+    it.audio ? h('div.row', audioButton(it.audio, { label: `Послушать: ${it.name}`, title: it.name }), h('span.small.muted', 'Пример в слове из Корана')) : null));
 }
 
 function flashcards(cards) {
