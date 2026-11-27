@@ -7,8 +7,8 @@ const DIRS = ['С', 'СВ', 'В', 'ЮВ', 'Ю', 'ЮЗ', 'З', 'СЗ'];
 export default async function qibla() {
   const c = await config();
   const bearing = qiblaBearing(c.lat, c.lon);
-  const dial = h('div.compass__dial', ['С', 'В', 'Ю', 'З'].map((t, i) => h('span', { style: { transform: `rotate(${i * 90}deg)` } }, t)));
-  const needle = h('div.compass__needle', { style: { transform: `rotate(${bearing + 180}deg)` } });
+  const pos = [{ top: '6px', left: '50%' }, { top: '50%', right: '8px' }, { bottom: '6px', left: '50%' }, { top: '50%', left: '8px' }];
+  const dial = h('div.compass__dial', ['С', 'В', 'Ю', 'З'].map((t, i) => h('span', { style: { ...pos[i], transform: i % 2 ? 'translateY(-50%)' : 'translateX(-50%)' } }, t)));
   const kaaba = h('div.compass__kaaba', { 'aria-hidden': 'true' });
   const pointer = h('div', { style: { position: 'absolute', inset: 0, transform: `rotate(${bearing}deg)`, transition: 'transform .25s linear' } }, kaaba);
   const compass = h('div.compass', { role: 'img', 'aria-label': `Кибла: ${Math.round(bearing)} градусов от севера` }, dial, pointer, h('div.compass__center'));

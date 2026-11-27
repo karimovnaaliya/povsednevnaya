@@ -19,6 +19,7 @@
 .topbar__btn svg { width: 24px; height: 24px; }
 
 .page {
+  overflow-x: clip;
   max-width: var(--maxw);
   margin: 0 auto;
   padding: var(--s4) var(--s4) calc(var(--nav-h) + env(safe-area-inset-bottom) + var(--s8));
@@ -559,8 +560,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); bac
 /* qibla */
 .compass { position: relative; width: min(78vw, 300px); aspect-ratio: 1; margin: var(--s4) auto; }
 .compass__dial { position: absolute; inset: 0; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); box-shadow: var(--shadow-1); transition: transform .25s linear; }
-.compass__dial span { position: absolute; left: 50%; top: 8px; transform-origin: 50% calc(min(78vw, 300px) / 2 - 8px); font-weight: 800; font-size: var(--fs-sm); color: var(--text-3); margin-left: -6px; }
-.compass__needle { position: absolute; left: 50%; top: 50%; width: 6px; height: 46%; margin-left: -3px; transform-origin: 50% 0; border-radius: 3px; background: linear-gradient(var(--gold), var(--gold)); }
+.compass__dial span { position: absolute; font-weight: 800; font-size: var(--fs-sm); color: var(--text-3); }
 .compass__kaaba { position: absolute; left: 50%; top: 4%; width: 34px; height: 34px; margin-left: -17px; border-radius: 6px; background: #1b1b1b; border-top: 6px solid var(--gold); }
 .compass__center { position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--primary); }
 
