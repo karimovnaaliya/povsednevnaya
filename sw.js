@@ -1,5 +1,5 @@
 /* Service worker: offline app shell + content, cached API responses, offline audio (see AUDIO.md §6). */
-const VERSION = 'e11153f4e1';
+const VERSION = '70b0d966c8';
 const SHELL = `shell-${VERSION}`;
 const DATA = `data-${VERSION}`;
 const RUNTIME = 'runtime-v1';

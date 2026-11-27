@@ -2,8 +2,12 @@ import { h, icon } from '../core/dom.js';
 import { state, update } from '../core/store.js';
 import { todayKey } from '../core/time.js';
 import { page, tile, callout, sectionTitle, sourcesBlock } from '../ui/components.js';
+import { tryJSON } from '../core/content.js';
 
-export default function special() {
+export default async function special() {
+  const women = await tryJSON('data/namaz/women.json', { topics: [] });
+  const seen = new Set();
+  const srcs = women.topics.flatMap(t => t.sources || []).filter(x => !seen.has(x.url) && seen.add(x.url)).slice(0, 8);
   const on = !!(state.days[todayKey()] || {}).special;
   const btn = h('button.btn.btn--lg.btn--block', {
     style: on ? null : { background: 'var(--special)', color: '#fff' },
@@ -37,10 +41,7 @@ export default function special() {
       tile({ href: '#/duas', iconName: 'hands', title: 'Дуа', sub: 'Мольбы на каждый день' }),
       tile({ href: '#/names', iconName: 'star', title: '99 имён Аллаха', sub: 'Карточки и игра' }),
       tile({ href: '#/islam', iconName: 'layers', title: 'Основы ислама', sub: 'Акида, история, сунна' }),
-      tile({ href: '#/namaz', iconName: 'drop', title: 'Подробно о хайде и нифасе', sub: 'Раздел «Намаз» → «Женские вопросы»' })),
+      tile({ href: '#/lesson/nam-wom-hayd', iconName: 'drop', title: 'Подробно о хайде и нифасе', sub: 'Ханафитские правила: сроки, что запрещено и что можно' })),
     callout('note', null, 'Если у вас есть личный вопрос о хайде или истихаде, обратитесь к знающей устазе или имаму.'),
-    sourcesBlock([
-      { title: 'Нур аль-Идах (аш-Шурунбуляли), глава о хайде и нифасе', url: 'https://archive.org/details/NurAlIdahArabicEnglish' },
-      { title: 'SeekersGuidance: что можно делать женщине во время менструации (ханафитский мазхаб)', url: 'https://seekersguidance.org/answers/hanafi-fiqh/' },
-    ])));
+    sourcesBlock(srcs)));
 }

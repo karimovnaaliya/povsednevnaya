@@ -56,10 +56,23 @@ export async function month(y, m) {
   }
 }
 
+export function adjust(times) {
+  const adj = state.settings.prayerAdjust || {};
+  if (!times) return times;
+  const out = { ...times };
+  for (const [id, m] of Object.entries(adj)) {
+    if (!m || !out[id]) continue;
+    const [a, b] = out[id].split(':').map(Number);
+    const t = ((a * 60 + b + m) % 1440 + 1440) % 1440;
+    out[id] = `${pad(Math.floor(t / 60))}:${pad(t % 60)}`;
+  }
+  return out;
+}
+
 export async function today(date = new Date()) {
   const k = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
   const mth = await month(date.getFullYear(), date.getMonth() + 1);
-  return { times: mth.days[k], source: mth.source, config: mth.config };
+  return { times: adjust(mth.days[k]), source: mth.source, config: mth.config };
 }
 
 const toMin = t => { const [a, b] = t.split(':').map(Number); return a * 60 + b; };
@@ -116,13 +129,16 @@ export function compute(date, c) {
     return hourAngle(a);
   };
   const fmt = hrs => { let m = Math.round(hrs * 60); m = ((m % 1440) + 1440) % 1440; return `${pad(Math.floor(m / 60))}:${pad(m % 60)}`; };
+  // Aladhan tune order: Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Sunset,Isha,Midnight
+  const t = String(c.tune || '').split(',').map(x => parseFloat(x) || 0);
+  const tn = i => (t[i] || 0) / 60;
   return {
-    fajr: fmt(noon - hourAngle(c.fajrAngle || 15)),
-    sunrise: fmt(noon - hourAngle(0.833)),
-    dhuhr: fmt(noon + 1 / 60),
-    asr: fmt(noon + asrAngle()),
-    maghrib: fmt(noon + hourAngle(0.833)),
-    isha: fmt(noon + hourAngle(c.ishaAngle || 15)),
+    fajr: fmt(noon - hourAngle(c.fajrAngle || 15) + tn(1)),
+    sunrise: fmt(noon - hourAngle(0.833) + tn(2)),
+    dhuhr: fmt(noon + 1 / 60 + tn(3)),
+    asr: fmt(noon + asrAngle() + tn(4)),
+    maghrib: fmt(noon + hourAngle(0.833) + tn(5)),
+    isha: fmt(noon + hourAngle(c.ishaAngle || 15) + tn(7)),
   };
 }
 

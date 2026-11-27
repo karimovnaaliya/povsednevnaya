@@ -1,7 +1,7 @@
 import { h, icon, clear } from '../core/dom.js';
 import { state, update } from '../core/store.js';
 import { todayKey, dayKey, addDays, formatDate, parseKey } from '../core/time.js';
-import { PRAYERS, today, nextPrayer, config, month } from '../core/prayer.js';
+import { PRAYERS, today, nextPrayer, config, month, adjust } from '../core/prayer.js';
 import { tryJSON } from '../core/content.js';
 import { page, errorBox, sheet, toast, sectionTitle } from '../ui/components.js';
 
@@ -25,6 +25,14 @@ function citySheet() {
         close(); location.reload();
       }, () => toast('Не удалось определить местоположение', { error: true }), { timeout: 10000 });
     } }, icon('compass'), 'Определить моё местоположение') : null));
+}
+
+function adjustSheet() {
+  const adj = { ...(state.settings.prayerAdjust || {}) };
+  sheet('Поправка времени', close => h('div.stack',
+    h('p.small.muted', 'Если ваша мечеть публикует время на несколько минут иначе, добавьте поправку (в минутах).'),
+    ...PRAYERS.map(p => h('label.row.row--between', h('span', p.name), h('input.input', { type: 'number', min: -30, max: 30, step: 1, value: adj[p.id] || 0, style: { width: '96px' }, onchange: e => { adj[p.id] = Math.max(-30, Math.min(30, parseInt(e.target.value, 10) || 0)); } }))),
+    h('button.btn.btn--primary.btn--block', { onclick: () => { update(s => { s.settings.prayerAdjust = adj; }, 'settings'); close(); location.reload(); } }, 'Сохранить')));
 }
 
 export default async function prayerTimes() {
@@ -51,7 +59,7 @@ export default async function prayerTimes() {
     for (let i = 1; i <= 7; i++) {
       const d = addDays(now, i);
       const mth = await month(d.getFullYear(), d.getMonth() + 1);
-      const t = mth.days[dayKey(d)];
+      const t = adjust(mth.days[dayKey(d)]);
       if (t) tb.append(h('tr', h('td', formatDate(d)), ...PRAYERS.filter(p => !p.noPrayer).map(p => h('td', t[p.id]))));
     }
     host.append(sectionTitle('На неделю вперёд'), week);
@@ -59,7 +67,7 @@ export default async function prayerTimes() {
     host.append(errorBox('Не удалось получить время намаза. Проверьте интернет.', () => location.reload()));
   }
   return page('Время намаза', h('div',
-    h('div.row.row--between', { style: { marginBottom: 'var(--s3)' } }, h('strong', icon('compass'), ` ${cfg.city}`), h('button.btn.btn--sm.btn--ghost', { onclick: citySheet }, 'Сменить город')),
+    h('div.row.row--between', { style: { marginBottom: 'var(--s3)' } }, h('strong', icon('compass'), ` ${cfg.city}`), h('div.row', { style: { gap: '6px' } }, h('button.btn.btn--sm.btn--ghost', { onclick: adjustSheet }, '± мин'), h('button.btn.btn--sm.btn--ghost', { onclick: citySheet }, 'Сменить город'))),
     host,
     h('p.small.muted', { style: { marginTop: 'var(--s4)' } }, `Аср по ханафитскому мазхабу (тень в два раза длиннее предмета). ${note.note || ''} Расписание за месяц сохраняется на телефоне и доступно без интернета.`),
     h('p.small.muted', 'Источник: ', h('a', { href: 'https://aladhan.com/prayer-times-api', target: '_blank', rel: 'noopener' }, 'Aladhan API'), '. Если ваша мечеть публикует другое время, ориентируйтесь на неё.')));
