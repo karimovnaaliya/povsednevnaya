@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>My Warm Box — Чёрная пятница</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Caveat:wght@600;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1512; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  #stage { width: 1080px; height: 1920px; display: block; }
+  body.preview #stage { width: auto; height: 96vh; aspect-ratio: 9 / 16; }
+  .serif { font-family: 'Lora', serif; }
+  .hand { font-family: 'Caveat', cursive; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.8">
+      <stop offset="0" stop-color="#2A211D"/>
+      <stop offset="1" stop-color="#0E0B0A"/>
+    </radialGradient>
+    <radialGradient id="spot" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E9B949" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#E9B949" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shadow">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="neon" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b2"/>
+      <feMerge><feMergeNode in="b1"/><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="knitCream" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#FBF6EE"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#E3D5C1" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="knitLatte" width="26" height="22" patternUnits="userSpaceOnUse">
+      <rect width="26" height="22" fill="#E9D8C1"/>
+      <path d="M3 2 Q7 15 13 20 M23 2 Q19 15 13 20" stroke="#D2BB9E" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="ribCream" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#F3EADD"/>
+      <path d="M8 0 V16" stroke="#DCCBB4" stroke-width="5"/>
+    </pattern>
+    <pattern id="ribLatte" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#E0CCB1"/>
+      <path d="M8 0 V16" stroke="#C9B091" stroke-width="5"/>
+    </pattern>
+    <!-- ===== items (same as video 1) ===== -->
+    <g id="hatBody">
+      <path d="M-118,70 C-122,-50 -70,-118 0,-118 C70,-118 122,-50 118,70 Z" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-136" y="40" width="272" height="80" rx="20" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <circle cx="0" cy="-140" r="48" fill="#FFFDF8" stroke="#E2D4C0" stroke-width="6" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <circle cx="-12" cy="-152" r="14" fill="#FFFFFF" opacity="0.8"/>
+    </g>
+    <g id="scarf">
+      <path d="M-95,-120 C-140,-40 -40,10 -70,110 L-10,120 C10,20 -80,-40 -35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M95,-120 C140,-40 40,10 70,110 L10,120 C-10,20 80,-40 35,-128 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <path d="M-100,-128 Q0,-160 100,-128 L92,-82 Q0,-112 -92,-82 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-82" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(8 -50 80)"/>
+      <rect x="18" y="72" width="64" height="14" fill="#A63A32" opacity="0.85" transform="rotate(-8 50 80)"/>
+      <g stroke="#C9B091" stroke-width="5" stroke-linecap="round">
+        <path d="M-66,118 v32 M-52,120 v34 M-38,121 v30 M-24,122 v33 M-12,122 v28"/>
+        <path d="M66,118 v32 M52,120 v34 M38,121 v30 M24,122 v33 M12,122 v28"/>
+      </g>
+    </g>
+    <g id="glove">
+      <rect x="-58" y="58" width="116" height="62" rx="14" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-24" y="-150" width="28" height="104" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="6" y="-140" width="28" height="96" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-54" y="-136" width="28" height="92" rx="14" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="34" y="-116" width="26" height="76" rx="13" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-58" y="-60" width="118" height="126" rx="34" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <rect x="-104" y="-40" width="30" height="88" rx="15" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-38 -60 20)"/>
+    </g>
+    <g id="gloves">
+      <use href="#glove" transform="translate(-62 10) rotate(-12) scale(0.95)"/>
+      <use href="#glove" transform="translate(62 10) rotate(12) scale(-0.95 0.95)"/>
+    </g>
+    <g id="sock">
+      <path d="M-46,-120 L46,-120 L46,30 C46,62 66,74 100,76 C142,80 150,140 104,146 L-8,146 C-56,146 -52,96 -46,56 Z" fill="url(#knitLatte)" stroke="#C9B091" stroke-width="3"/>
+      <rect x="-52" y="-150" width="104" height="54" rx="12" fill="url(#ribLatte)" stroke="#C9B091" stroke-width="3"/>
+    </g>
+    <g id="socks">
+      <use href="#sock" transform="translate(-50 0) rotate(-8) scale(0.85)"/>
+      <use href="#sock" transform="translate(40 18) rotate(6) scale(0.85)"/>
+    </g>
+    <g id="card">
+      <g transform="rotate(-6)">
+        <rect x="-110" y="-140" width="220" height="290" rx="10" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="3"/>
+        <rect x="-110" y="-140" width="220" height="16" fill="#A63A32"/>
+        <path d="M0,-28 C-30,-62 -72,-30 -40,6 L0,40 L40,6 C72,-30 30,-62 0,-28 Z" fill="#A63A32"/>
+        <text x="0" y="98" text-anchor="middle" class="hand" font-size="46" fill="#5A3E2B">С любовью</text>
+      </g>
+    </g>
+    <g id="mitten">
+      <rect x="-30" y="-50" width="60" height="20" rx="8" fill="url(#ribCream)" stroke="#D8C8B2" stroke-width="3"/>
+      <ellipse cx="27" cy="-6" rx="13" ry="21" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3" transform="rotate(-20 27 -6)"/>
+      <rect x="-30" y="-34" width="60" height="76" rx="28" fill="url(#knitCream)" stroke="#D8C8B2" stroke-width="3"/>
+    </g>
+    <path id="heart" d="M0,-12 C-14,-30 -40,-14 -22,6 L0,26 L22,6 C40,-14 14,-30 0,-12 Z"/>
+    <g id="logoIcon" fill="none" stroke="#5A3E2B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="-62" y="-20" width="124" height="86" rx="4"/>
+      <rect x="-72" y="-46" width="144" height="28" rx="4"/>
+      <path d="M0,-46 V66"/>
+      <path d="M0,-46 C-22,-86 -62,-78 -48,-56 C-40,-46 -16,-46 0,-46 Z"/>
+      <path d="M0,-46 C22,-86 62,-78 48,-56 C40,-46 16,-46 0,-46 Z"/>
+      <path d="M-40,10 L40,10" stroke-width="5" opacity="0.6"/>
+      <path d="M-40,34 L40,34" stroke-width="5" opacity="0.6"/>
+    </g>
+  
+    <g id="clock">
+      <g stroke="#B8463C" stroke-width="10" stroke-linecap="round"><path d="M-60,110 L-80,150 M60,110 L80,150"/></g>
+      <circle cx="-70" cy="-110" r="42" fill="#E9B949" stroke="#8E6A1E" stroke-width="5"/>
+      <circle cx="70" cy="-110" r="42" fill="#E9B949" stroke="#8E6A1E" stroke-width="5"/>
+      <rect x="-6" y="-140" width="12" height="30" fill="#8E6A1E"/>
+      <circle r="125" fill="#C2473D" stroke="#8E2E28" stroke-width="6"/>
+      <circle r="100" fill="#FFFDF9"/>
+      <g stroke="#4A3426" stroke-width="5" stroke-linecap="round">
+        <path d="M0,-88 v14 M0,88 v-14 M-88,0 h14 M88,0 h-14"/>
+      </g>
+      <g id="clockHands" stroke="#2E2420" stroke-width="9" stroke-linecap="round"><path d="M0,0 V-62"/><path d="M0,0 L42,24"/></g>
+      <circle r="9" fill="#2E2420"/>
+    </g>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <ellipse cx="540" cy="1250" rx="620" ry="620" fill="url(#spot)"/>
+  <g id="pct" class="serif" font-weight="700" text-anchor="middle"></g>
+
+  <!-- neon sign -->
+  <g id="neonSign" text-anchor="middle" class="serif" font-weight="700" filter="url(#neon)">
+    <text x="540" y="400" font-size="132" fill="#FFE7B0" stroke="#E9B949" stroke-width="2">ЧЁРНАЯ</text>
+    <text x="540" y="550" font-size="132" fill="#FFE7B0" stroke="#E9B949" stroke-width="2">ПЯТНИЦА</text>
+  </g>
+  <text id="skidki" x="540" y="650" text-anchor="middle" class="hand" font-size="84" font-weight="700" fill="#F2A08F" filter="url(#neon)">скидки!</text>
+
+  <!-- price tag -->
+  <g id="tag">
+    <path d="M0,-190 V-90" stroke="#E9B949" stroke-width="4"/>
+    <path d="M-190,-90 L190,-90 L190,110 L-190,110 Z" fill="#C2473D" stroke="#FFE7B0" stroke-width="5"/>
+    <circle cx="0" cy="-60" r="12" fill="#2A211D" stroke="#FFE7B0" stroke-width="4"/>
+    <text x="0" y="-5" text-anchor="middle" class="hand" font-size="56" font-weight="700" fill="#FFE7B0">всего</text>
+    <text x="0" y="85" text-anchor="middle" class="serif" font-size="96" font-weight="700" fill="#FFFDF9">1 699 с</text>
+  </g>
+
+  <g id="speed" stroke="#FFE7B0" stroke-width="8" stroke-linecap="round" opacity="0"></g>
+  <g id="dust" fill="#6B5A4E"></g>
+  <g id="orbit"></g>
+
+  <!-- clock -->
+  <g id="clockWrap"><use href="#clock"/><g id="ring" stroke="#FFE7B0" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M-150,-120 q-25,-20 -30,-50 M150,-120 q25,-20 30,-50 M-170,-40 q-30,0 -45,-15 M170,-40 q30,0 45,-15"/></g></g>
+
+  <!-- mascot -->
+  <g id="mascot">
+    <ellipse cx="0" cy="290" rx="330" ry="30" fill="url(#shadow)"/>
+    <g id="legL"><rect x="-112" y="150" width="28" height="122" rx="14" fill="#D9C2A5"/><ellipse cx="-104" cy="278" rx="46" ry="22" fill="#C2473D"/></g>
+    <g id="legR"><rect x="84" y="150" width="28" height="122" rx="14" fill="#D9C2A5"/><ellipse cx="104" cy="278" rx="46" ry="22" fill="#C2473D"/></g>
+    <g id="armL"><path d="M-296,10 L-392,80" stroke="#D9C2A5" stroke-width="18" stroke-linecap="round"/><circle cx="-398" cy="86" r="30" fill="#FFFDF9" stroke="#4A3426" stroke-width="5"/></g>
+    <g id="armR"><path d="M296,10 L392,80" stroke="#D9C2A5" stroke-width="18" stroke-linecap="round"/><circle cx="398" cy="86" r="30" fill="#FFFDF9" stroke="#4A3426" stroke-width="5"/></g>
+    <rect x="-300" y="-180" width="600" height="370" rx="24" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="5"/>
+    <rect x="-300" y="130" width="600" height="60" rx="0" fill="url(#knitLatte)" opacity="0.8"/>
+    <ellipse cx="-215" cy="70" rx="40" ry="24" fill="#F0A2A0" opacity="0.8"/>
+    <ellipse cx="215" cy="70" rx="40" ry="24" fill="#F0A2A0" opacity="0.8"/>
+    <ellipse cx="-120" cy="-30" rx="64" ry="72" fill="#FFFFFF" stroke="#4A3426" stroke-width="5"/>
+    <g id="eyeR"><ellipse cx="120" cy="-30" rx="64" ry="72" fill="#FFFFFF" stroke="#4A3426" stroke-width="5"/></g>
+    <g id="pupils" fill="#2E2420">
+      <circle cx="-110" cy="-20" r="32"/><circle id="pupilR" cx="130" cy="-20" r="32"/>
+      <circle cx="-98" cy="-34" r="10" fill="#FFFFFF"/><circle id="hlR" cx="142" cy="-34" r="10" fill="#FFFFFF"/>
+    </g>
+    <path id="wink" d="M60,-24 Q120,-70 180,-24" stroke="#2E2420" stroke-width="12" fill="none" stroke-linecap="round" opacity="0"/>
+    <path id="smile" d="M-80,72 Q0,150 80,72" stroke="#2E2420" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path id="mouthOpen" d="M-80,66 Q0,190 80,66 Z" fill="#7A2E2A" stroke="#2E2420" stroke-width="8" stroke-linejoin="round" opacity="0"/>
+    <path id="sweat" d="M330,-190 q-26,44 0,56 q26,-12 0,-56 Z" fill="#9FD0F0" stroke="#5E9CC4" stroke-width="3" opacity="0"/>
+    <g id="mLid">
+      <rect x="-26" y="-180" width="52" height="40" fill="#C2473D"/>
+      <rect x="-316" y="-232" width="632" height="76" rx="14" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="5"/>
+      <rect x="-26" y="-232" width="52" height="76" fill="#C2473D"/>
+      <g transform="translate(0 -236)">
+        <path d="M0,0 C-40,-80 -150,-70 -120,-16 C-100,16 -40,8 0,0 Z" fill="#C9483D" stroke="#8E2E28" stroke-width="4"/>
+        <path d="M0,0 C40,-80 150,-70 120,-16 C100,16 40,8 0,0 Z" fill="#C9483D" stroke="#8E2E28" stroke-width="4"/>
+        <circle cx="0" cy="0" r="22" fill="#C2473D" stroke="#8E2E28" stroke-width="4"/>
+      </g>
+    </g>
+  </g>
+
+  <g id="badge5">
+    <circle r="105" fill="#E9B949" stroke="#FFE7B0" stroke-width="5"/>
+    <text y="18" text-anchor="middle" class="serif" font-size="66" font-weight="700" fill="#2A211D">5 в 1</text>
+  </g>
+
+  <g id="hurry" text-anchor="middle">
+    <text x="540" y="1640" class="serif" font-size="150" font-weight="700" fill="#C2473D" stroke="#FFE7B0" stroke-width="5" paint-order="stroke">УСПЕЙТЕ!</text>
+  </g>
+
+  <!-- outro -->
+  <rect id="outroBg" width="1080" height="1920" fill="#F4ECE2" opacity="0"/>
+  <g id="outro">
+    <g id="logo" transform="translate(540 700)">
+      <circle r="250" fill="#F7F0E6" stroke="#5A3E2B" stroke-width="5"/>
+      <use href="#logoIcon" transform="translate(0 -92) scale(0.9)"/>
+      <text x="0" y="70" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">My Warm</text>
+      <text x="0" y="160" text-anchor="middle" class="serif" font-size="88" font-weight="700" fill="#5A3E2B">Box</text>
+    </g>
+    <g id="bfLine">
+      <rect x="170" y="1010" width="740" height="110" rx="55" fill="#1E1A19"/>
+      <text x="540" y="1084" text-anchor="middle" class="serif" font-size="50" font-weight="700" fill="#FFE7B0">Чёрная пятница • 1 699 с</text>
+    </g>
+    <text id="cities" x="540" y="1220" text-anchor="middle" class="serif" font-size="50" font-weight="500" fill="#4A3426">Бишкек  •  Ош</text>
+    <g id="cta">
+      <rect x="190" y="1300" width="700" height="120" rx="60" fill="#A63A32"/>
+      <text x="540" y="1378" text-anchor="middle" class="serif" font-size="48" font-weight="700" fill="#FFFDF9">Заказ в Direct / WhatsApp</text>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const DURATION = 16;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const easeOutCubic = p => 1 - Math.pow(1 - p, 3);
+  const easeInCubic = p => p * p * p;
+  const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  const easeOutBounce = p => {
+    const n = 7.5625, d = 2.75;
+    if (p < 1 / d) return n * p * p;
+    if (p < 2 / d) return n * (p -= 1.5 / d) * p + .75;
+    if (p < 2.5 / d) return n * (p -= 2.25 / d) * p + .9375;
+    return n * (p -= 2.625 / d) * p + .984375;
+  };
+  let seed = 23;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const set = (el, tr, op) => {
+    if (tr !== undefined) el.setAttribute('transform', tr);
+    if (op !== undefined) el.setAttribute('opacity', clamp(op).toFixed(3));
+  };
+  const mk = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e); return e;
+  };
+
+  const M = { x: 540, y: 1250, s: 0.72 };
+  // falling % signs
+  const pcts = [...Array(16)].map(() => {
+    const e = mk('text', { 'font-size': 60 + rnd() * 70, fill: rnd() < 0.5 ? '#E9B949' : '#C2473D' }, $('pct'));
+    e.textContent = '%';
+    return { e, x: rnd() * 1080, y0: rnd() * 2000, sp: 160 + rnd() * 220, rs: (rnd() - 0.5) * 120, op: 0.25 + rnd() * 0.35 };
+  });
+  const speeds = [...Array(6)].map((_, k) => mk('path', { d: `M0,${-150 + k * 60} h${120 + (k % 3) * 70}` }, $('speed')));
+  const dusts = [...Array(7)].map((_, k) => ({ el: mk('circle', {}, $('dust')), a: Math.PI * (0.9 + k * 0.05), d: 80 + k * 22 }));
+  const ORB = ['hatBody', 'scarf', 'gloves', 'socks', 'card'].map((id, k) => ({ el: mk('use', { href: '#' + id }, $('orbit')), k }));
+
+  // neon flicker pattern (on/off)
+  const flick = t => {
+    if (t < 0.3) return 0;
+    const pat = [[0.3, 1], [0.38, 0], [0.5, 1], [0.55, 0.2], [0.7, 1], [0.76, 0], [0.86, 1]];
+    let v = 0; pat.forEach(([tt, val]) => { if (t >= tt) v = val; });
+    return t > 0.86 ? 0.9 + 0.1 * Math.sin(t * 40) : v;
+  };
+
+  function render(t) {
+    // global shake on "УСПЕЙТЕ"
+    const hs = seg(t, 7.9, 8.4);
+    const shake = hs > 0 && hs < 1 ? 14 * (1 - hs) : 0;
+    $('stage').querySelectorAll(':scope > g:not(#outro)').forEach(() => {});
+    const SH = `translate(${(Math.sin(t * 80) * shake).toFixed(1)} ${(Math.cos(t * 63) * shake).toFixed(1)})`;
+
+    pcts.forEach(p => {
+      const y = ((p.y0 + p.sp * t) % 2100) - 100;
+      set(p.e, `translate(${p.x.toFixed(0)} ${y.toFixed(1)}) rotate(${(p.rs * t).toFixed(1)})`, p.op * seg(t, 3.6, 4.2) * (1 - seg(t, 11.4, 11.8)));
+    });
+
+    const nf = flick(t);
+    set($('neonSign'), SH, nf);
+    set($('skidki'), `${SH} translate(540 640) rotate(-4) scale(${(0.001 + easeOutBack(seg(t, 1.2, 1.5))).toFixed(3)}) translate(-540 -640)`, t > 1.2 ? 0.9 + 0.1 * Math.sin(t * 33) : 0);
+
+    // mascot run-in 1.8–2.8, skid, wink 3.0
+    const run = seg(t, 1.8, 2.8);
+    const mx = lerp(1500, M.x, easeOutCubic(run));
+    const skid = seg(t, 2.6, 3.0);
+    let lean = t < 2.6 ? -10 : lerp(-10, 0, easeOutBack(skid));
+    if (t > 2.6 && t < 2.8) lean = 12 * Math.sin(Math.PI * seg(t, 2.6, 2.8));
+    const hurry = t > 8.0 && t < 11.4;
+    const running = (t > 1.8 && t < 2.7) || hurry;
+    const legA = running ? Math.sin(t * (hurry ? 34 : 26)) * 28 : 0;
+    // jump when excited 4.4–7.4
+    const jumping = t > 4.6 && t < 7.4;
+    const jump = jumping ? Math.abs(Math.sin(Math.PI * (t - 4.6) / 0.5)) * 70 : 0;
+    const bob = running ? Math.abs(Math.sin(t * (hurry ? 34 : 26))) * 18 : 0;
+    set($('mascot'), `${SH} translate(${mx.toFixed(1)} ${(M.y - jump - bob).toFixed(1)}) rotate(${lean.toFixed(2)}) scale(${M.s})`, t > 1.8 ? 1 : 0);
+    set($('legL'), `rotate(${legA.toFixed(1)} -98 150)`);
+    set($('legR'), `rotate(${(-legA).toFixed(1)} 98 150)`);
+    const armSwing = running ? Math.sin(t * (hurry ? 34 : 26)) * 25 : (jumping ? -55 + Math.sin(t * 12) * 10 : 0);
+    set($('armL'), `rotate(${(-armSwing).toFixed(1)} -296 10)`);
+    set($('armR'), `rotate(${armSwing.toFixed(1)} 296 10)`);
+    const winkOn = t > 3.0 && t < 3.45;
+    set($('eyeR'), undefined, winkOn ? 0 : 1);
+    set($('pupilR'), undefined, winkOn ? 0 : 1); set($('hlR'), undefined, winkOn ? 0 : 1);
+    set($('wink'), undefined, winkOn ? 1 : 0);
+    const excited = (t > 4.4 && t < 7.5) || hurry;
+    set($('smile'), undefined, excited ? 0 : 1);
+    set($('mouthOpen'), undefined, excited ? 1 : 0);
+    const look = hurry ? -18 : 0;
+    $('pupils').setAttribute('transform', `translate(${look} ${hurry ? -6 : 0})`);
+    set($('sweat'), `translate(0 ${hurry ? ((t * 2) % 1) * 30 : 0})`, hurry ? 1 : 0);
+    // lid pops 4.4
+    const lp = seg(t, 4.4, 4.9);
+    set($('mLid'), `translate(0 ${(-220 * Math.sin(Math.PI * lp)).toFixed(1)}) rotate(${(-14 * Math.sin(Math.PI * lp)).toFixed(1)})`);
+
+    // speed lines + dust
+    set($('speed'), `translate(${(mx + 260).toFixed(1)} ${M.y})`, t > 1.8 && t < 2.7 ? 0.8 : 0);
+    const dp = seg(t, 2.6, 3.3);
+    dusts.forEach((d, k) => {
+      d.el.setAttribute('cx', (M.x + 180 + Math.cos(d.a) * -d.d * dp + k * 18).toFixed(1));
+      d.el.setAttribute('cy', (M.y + 200 - Math.sin(d.a) * 40 * dp - k * 4).toFixed(1));
+      d.el.setAttribute('r', (18 + 26 * dp).toFixed(1));
+      d.el.setAttribute('opacity', (dp > 0 && dp < 1 ? 0.7 * (1 - dp) : 0).toFixed(3));
+    });
+
+    // tag drops 3.4, swings
+    const td = seg(t, 3.4, 3.75), tOut = seg(t, 11.3, 11.6);
+    const swing = t > 3.75 ? Math.sin((t - 3.75) * 6) * 16 * Math.exp(-(t - 3.75) * 1.2) : 0;
+    set($('tag'), `${SH} translate(540 ${lerp(-300, 860, easeOutCubic(td)).toFixed(1)}) rotate(${swing.toFixed(2)} 0 -190)`, td > 0 ? 1 - tOut : 0);
+
+    // items orbit 4.5–7.5
+    const SLOTS = [[165, 1050], [165, 1340], [915, 1050], [915, 1340], [540, 1600]];
+    ORB.forEach(o => {
+      const p = seg(t, 4.5 + o.k * 0.14, 5.1 + o.k * 0.14), out = seg(t, 7.4, 7.8);
+      const [sx, sy] = SLOTS[o.k];
+      const pe = easeOutCubic(p);
+      const x = lerp(M.x, sx, pe), y = lerp(M.y - 170, sy, pe) - 260 * Math.sin(Math.PI * p) + (p >= 1 ? Math.sin(t * 4 + o.k) * 10 : 0);
+      set(o.el, `translate(${x.toFixed(1)} ${(y - 400 * easeInCubic(out)).toFixed(1)}) rotate(${(Math.sin(t * 3 + o.k) * 12).toFixed(1)}) scale(${(0.42 * easeOutBack(p)).toFixed(3)})`, p > 0 ? 1 - out : 0);
+    });
+    const b5 = seg(t, 6.6, 6.95), b5o = seg(t, 7.6, 7.9);
+    set($('badge5'), `translate(860 1620) rotate(12) scale(${(0.001 + easeOutBack(b5)).toFixed(3)})`, b5 > 0 ? 1 - b5o : 0);
+
+    // clock 7.6–11.4
+    const cl = seg(t, 7.6, 7.95), clo = seg(t, 11.2, 11.5);
+    const ringing = t > 7.95 && t < 11.3;
+    const rot = ringing ? Math.sin(t * 50) * 9 : 0;
+    set($('clockWrap'), `${SH} translate(${lerp(-200, 200, easeOutBack(cl)).toFixed(1)} 820) rotate(${rot.toFixed(1)}) scale(0.95)`, cl > 0 ? 1 - clo : 0);
+    set($('ring'), undefined, ringing && Math.sin(t * 25) > 0 ? 1 : 0);
+    $('clockHands').setAttribute('transform', `rotate(${(t * 140) % 360})`);
+    const hu = seg(t, 7.9, 8.15), huo = seg(t, 11.2, 11.5);
+    set($('hurry'), `${SH} translate(540 1590) scale(${lerp(2.4, 1, easeOutCubic(hu)).toFixed(3)}) translate(-540 -1590)`, hu > 0 ? (1 - huo) * (0.85 + 0.15 * Math.sin(t * 14)) : 0);
+
+    // outro 11.4+
+    set($('outroBg'), undefined, easeInOut(seg(t, 11.4, 11.9)));
+    const lg = seg(t, 11.8, 12.6);
+    set($('logo'), `translate(540 700) scale(${(0.001 + easeOutBack(lg)).toFixed(3)})`, lg > 0 ? 1 : 0);
+    const bl = easeOutBack(seg(t, 12.4, 12.9));
+    set($('bfLine'), `translate(540 1065) scale(${(0.001 + bl).toFixed(3)}) translate(-540 -1065)`, t > 12.4 ? 1 : 0);
+    const ct = easeOutCubic(seg(t, 12.8, 13.3));
+    set($('cities'), `translate(0 ${lerp(30, 0, ct)})`, ct);
+    const cta = seg(t, 13.2, 13.7);
+    const ctaPulse = t > 13.7 ? 1 + 0.03 * Math.sin((t - 13.7) * 5) : 1;
+    set($('cta'), `translate(540 1360) scale(${(0.001 + easeOutBack(cta) * ctaPulse).toFixed(3)}) translate(-540 -1360)`, cta > 0 ? 1 : 0);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = render;
+  const params = new URLSearchParams(location.search);
+  if (params.has('render')) return;
+  document.body.classList.add('preview');
+  document.fonts.ready.then(() => {
+    if (params.has('t')) { render(parseFloat(params.get('t'))); return; }
+    let start = null;
+    const loop = ts => { if (start === null) start = ts; render(((ts - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+</body>
+</html>
