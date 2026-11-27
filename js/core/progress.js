@@ -82,7 +82,13 @@ export function checkBadges() {
 export async function ayahOfDay(date = new Date()) {
   const j = await tryJSON('data/misc/ayah-of-day.json', { keys: ['2:286'] });
   const n = Math.floor(new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() / 86400000);
-  return j.keys[n % j.keys.length];
+  const key = j.keys[n % j.keys.length];
+  // offline and that surah is not saved yet: pick a key from a bundled surah instead
+  const { BUNDLED, getAyah } = await import('./quran.js');
+  try { await getAyah(key); return key; } catch {
+    const local = j.keys.filter(k => BUNDLED.has(+k.split(':')[0]));
+    return local.length ? local[n % local.length] : '1:2';
+  }
 }
 export async function duaOfDay(date = new Date()) {
   const j = await tryJSON('data/duas/duas.json', null);

@@ -1,0 +1,69 @@
+{
+ "routines": [
+  {
+   "id": "adhkar-morning",
+   "title": "Утренние азкары",
+   "time": "После утреннего намаза (фаджр) до восхода солнца",
+   "description": "Поминания утра по «Крепости мусульманина» (гл. 27). Читайте спокойно, по порядку; счётчик подскажет, сколько раз повторить.",
+   "items": [
+    {"dua": "dua-ayat-al-kursi", "count": 1, "note": "Перед аятом скажите: «А‘узу билляхи мина-ш-шайтани-р-раджим»."},
+    {"dua": "dua-surah-ikhlas", "count": 3},
+    {"dua": "dua-surah-falaq", "count": 3},
+    {"dua": "dua-surah-nas", "count": 3},
+    {"dua": "dua-asbahna-wa-asbahal-mulk", "count": 1},
+    {"dua": "dua-allahumma-bika-asbahna", "count": 1},
+    {"dua": "dua-afini-fi-badani", "count": 3},
+    {"dua": "dua-afw-wal-afiya", "count": 1},
+    {"dua": "dua-alimal-ghayb", "count": 1},
+    {"dua": "dua-bismillahilladhi-la-yadurru", "count": 3},
+    {"dua": "dua-radhitu-billahi-rabba", "count": 3, "note": "Об оценке этого хадиса учёные расходятся, см. карточку мольбы."},
+    {"dua": "dua-subhanallahi-adada-khalqihi", "count": 3},
+    {"dua": "dua-ilman-nafian", "count": 1},
+    {"dua": "dua-hasbiyallah", "count": 7, "note": "Это аят Корана (9:129). Число «семь раз» известно только из слов сподвижника, поэтому этот пункт необязательный."}
+   ]
+  },
+  {
+   "id": "adhkar-evening",
+   "title": "Вечерние азкары",
+   "time": "После послеполуденного намаза (аср) до заката (магриб)",
+   "description": "Вечерние поминания по «Крепости мусульманина» (гл. 27). В мольбах со словом «асбахна» вечером говорят «амсайна».",
+   "items": [
+    {"dua": "dua-ayat-al-kursi", "count": 1, "note": "Перед аятом скажите: «А‘узу билляхи мина-ш-шайтани-р-раджим»."},
+    {"dua": "dua-surah-ikhlas", "count": 3},
+    {"dua": "dua-surah-falaq", "count": 3},
+    {"dua": "dua-surah-nas", "count": 3},
+    {"dua": "dua-asbahna-wa-asbahal-mulk", "count": 1, "note": "Вечером: «Амсайна ва амса-ль-мульку лиллях…» и «…хайра ма фи хазихи-ль-ляйля ва хайра ма ба‘даха…»."},
+    {"dua": "dua-allahumma-bika-asbahna", "count": 1, "note": "Вечером: «Аллахумма бика амсайна, ва бика асбахна, ва бика нахйа, ва бика намуту ва иляйка-ль-масир»."},
+    {"dua": "dua-afini-fi-badani", "count": 3},
+    {"dua": "dua-afw-wal-afiya", "count": 1},
+    {"dua": "dua-alimal-ghayb", "count": 1},
+    {"dua": "dua-bismillahilladhi-la-yadurru", "count": 3},
+    {"dua": "dua-radhitu-billahi-rabba", "count": 3, "note": "Об оценке этого хадиса учёные расходятся, см. карточку мольбы."},
+    {"dua": "dua-kalimatillahit-tammat", "count": 3},
+    {"dua": "dua-hasbiyallah", "count": 7, "note": "Это аят Корана (9:129). Число «семь раз» известно только из слов сподвижника, поэтому этот пункт необязательный."}
+   ]
+  },
+  {
+   "id": "adhkar-sleep",
+   "title": "Перед сном",
+   "time": "Ложась спать",
+   "description": "Поминания перед сном (гл. 28 «Крепости мусульманина»). Желательно лечь в состоянии омовения, на правый бок, положив правую руку под щёку.",
+   "items": [
+    {"dua": "dua-surah-ikhlas", "count": 3, "note": "Сложите ладони, подуйте в них, прочитайте аль-Ихлас, аль-Фаляк и ан-Нас и оботрите ладонями всё тело, начиная с головы и лица. Так три раза (аль-Бухари 5017)."},
+    {"dua": "dua-surah-falaq", "count": 3},
+    {"dua": "dua-surah-nas", "count": 3},
+    {"dua": "dua-ayat-al-kursi", "count": 1},
+    {"dua": "dua-sleep-baqara-end", "count": 1},
+    {"dua": "dua-sleep-bismika-rabbi", "count": 1, "note": "Перед тем как лечь, трижды отряхните постель."},
+    {"dua": "dua-sleep-khalaqta-nafsi", "count": 1},
+    {"dua": "dua-sleep-qini-adhabak", "count": 3},
+    {"dua": "dua-sleep-bismika-amutu", "count": 1},
+    {"dua": "dua-sleep-atamana-wa-saqana", "count": 1},
+    {"dua": "dua-alimal-ghayb", "count": 1},
+    {"dua": "dua-sleep-rabbas-samawat", "count": 1},
+    {"dua": "dua-tasbih-fatima", "count": 100, "note": "33 раза «Субхана-Ллах», 33 раза «Аль-хамду ли-Ллях», 34 раза «Аллаху акбар»."},
+    {"dua": "dua-sleep-aslamtu-nafsi", "count": 1, "note": "Пусть это будут последние слова перед сном."}
+   ]
+  }
+ ]
+}
