@@ -19,7 +19,7 @@
 - [ ] PWA: manifest, иконки, service worker (офлайн для текста и прослушанного аудио)
 
 ## Фаза 2: контент (агенты)
-- [ ] AUDIO.md: исследование аудиоисточников
+- [~] AUDIO.md: исследование аудиоисточников
 - [ ] 3.4 Коран: уровни 1–3 (`data/curriculum/level-1..3.json`)
 - [ ] 3.4 Коран: уровни 4–6 (`data/curriculum/level-4..6.json`)
 - [ ] 3.5 Хифз: `data/hifz/surahs.json`, `data/misc/ayah-of-day.json`
