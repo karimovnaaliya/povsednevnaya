@@ -9,43 +9,34 @@
 
 ## Фаза 1: фундамент (ведущий)
 - [x] Структура проекта, сетевой доступ к API (окружение `povsednevnaya`)
-- [x] Схема контента `CONTENT_SCHEMA.md` + валидатор `tools/validate.mjs`
-- [x] Загрузка данных Корана (`tools/fetch-quran.mjs`, `js/core/quran-normalize.js`): 45 сур, таджвид выровнен по словам
-- [ ] `DESIGN.md` + CSS-токены (светлая, тёмная, сепия), компоненты
-- [ ] Ядро: роутер, хранилище прогресса (try/catch), экспорт и импорт, таймер учёбы
-- [ ] Аудиоплеер с резервным источником, повтором, скоростью и ошибкой с кнопкой «Повторить»
-- [ ] Рендер арабского текста: таджвид-цвета, легенда, пословный режим
-- [ ] Движок уроков (все типы блоков) и движок тестов (все 9 типов, касание и перетаскивание)
-- [ ] PWA: manifest, иконки, service worker (офлайн для текста и прослушанного аудио)
+- [x] Схема контента `CONTENT_SCHEMA.md` + валидатор `tools/validate.mjs` + поиск примеров `tools/find-tajweed.mjs`
+- [x] Данные Корана: 45 сур в `data/quran/`, метаданные 114 сур `data/quran/surahs.json`
+- [x] CSS-токены и компоненты (`css/`), темы светлая, тёмная и сепия. [ ] Ещё нужно: `DESIGN.md`
+- [x] Ядро: `js/core/` (store, time, content, audio, quran, srs, session, prayer, progress), `js/main.js` (роутер)
+- [x] UI: `js/ui/` (components, arabic, quiz (9 типов), dnd, lesson, icons)
+- [x] PWA: `index.html`, `manifest.webmanifest`, `sw.js`, иконки. [ ] Ещё нужно: `tools/build-precache.mjs` → `precache.json` + версия в sw.js
+- [x] Звуки букв: `assets/audio/letters/` (GCompris, GPL; указать в «О приложении»)
 
-## Фаза 2: контент (агенты)
-- [~] AUDIO.md: исследование аудиоисточников
-- [ ] 3.4 Коран: уровни 1–3 (`data/curriculum/level-1..3.json`)
-- [ ] 3.4 Коран: уровни 4–6 (`data/curriculum/level-4..6.json`)
-- [ ] 3.5 Хифз: `data/hifz/surahs.json`, `data/misc/ayah-of-day.json`
-- [ ] 3.5 Пословный перевод: `data/quran/wbw-ru/*.json`
-- [ ] 3.6 Намаз: `data/namaz/*.json` + SVG `assets/figures/namaz/`
-- [ ] 3.7 Дуа: `data/duas/duas.json`, `adhkar.json`, `data/misc/habits.json`
-- [ ] 3.8 Акида + 99 имён: `data/islam/aqida.json`, `data/misc/names99.json`
-- [ ] 3.8 История: `data/islam/history.json`
-- [ ] 3.8 Сунна, пост, закят, хадж, ахляк, календарь: `data/islam/*.json`, `data/misc/islamic-days.json`, `docs/PRAYER_TIMES.md`
+## Фаза 2: контент (агенты; при перерыве продолжить через SendMessage или новым агентом)
+- [x] AUDIO.md + `data/misc/reciters.json`
+- [x] Уровни 1–3 (`data/curriculum/level-1..3.json`): 26 уроков, 266 вопросов
+- [~] Уровни 4–6: файлы есть, агент остановился по лимиту. Проверить полноту (по 7–12 уроков, тест 15–25)
+- [x] Хифз: `data/hifz/surahs.json` (45 сур), `data/misc/ayah-of-day.json` (175 ключей)
+- [x] Пословный перевод: `data/quran/wbw-ru/` (1, 36, 55, 56, 67, 78–114, 2:255 и 284–286, 18:1–10)
+- [~] Намаз: есть why, taharat, women, prayers и 18 SVG. Не хватает: `how-to-pray.json`, `rulings.json`
+- [~] Дуа: `duas.json` (62 дуа, цель 90–130). Не хватает: `adhkar.json`, `data/misc/habits.json`
+- [x] Акида (14 тем, 104 вопроса) + `data/misc/names99.json`
+- [x] История (21 тема, 146 вопросов)
+- [~] Сунна, столпы, ахляк: есть sunnah, pillars, akhlaq, islamic-days, prayer-config. Не хватает: `data/islam/calendar.json`, проверить `docs/PRAYER_TIMES.md`
 
-## Фаза 2b: страницы приложения (ведущий)
-- [ ] 3.1 Главная (цель, серия, кольцо, следующий урок, дуа дня, аят дня, ближайший намаз)
-- [ ] 3.2 Сессия-фокус (10/20/30/45, пауза при уходе, мягкий звук)
-- [ ] 3.3 Календарь и трекер (цвета дней, статистика, графики, особые дни, намазы, када)
-- [ ] 3.4 Коран: уровни, уроки, тест уровня, разблокировка, пропуск
-- [ ] 3.5 Хифз: список, сура, инструменты заучивания, статусы, интервальное повторение
-- [ ] 3.6 Намаз: темы, шаги, интерактив
-- [ ] 3.7 Дуа: категории, карточка, «Выучено», практика
-- [ ] 3.8 Основы ислама
-- [ ] 3.9 Повторение и тесты (интервальное повторение, генерация вопросов по таджвиду)
-- [ ] 3.10 Мои цели и награды
-- [ ] 3.11 Настройки
-- [ ] 8: время намаза (Ош), кибла, тасбих, 99 имён, дневник, хиджра, Рамадан, азкары, привычки, чтение Корана
+## Фаза 2b: страницы (`js/pages/`)
+Готовы: home, focus, calendar, special, prayer-tracker, journal, quran, level, level-test, lesson, legend, not-found.
+Осталось написать: hifz, hifz-surah, reader-list, reader, namaz, prayer-times, qibla, duas, dua-category, dua,
+adhkar-list, adhkar, tasbih, names, islam, islam-section, revision, goals, settings, more, habits, ramadan, about.
+Позже: special.js должен брать источники из `data/namaz/women.json` (сейчас ссылки не проверены).
 
 ## Фаза 3: проверка
-- [ ] Ревизия контента агентов (точность, ханафитский фикх, язык)
-- [ ] Тесты Playwright: 375px, 414px и десктоп, все кнопки, аудио, все типы тестов, касания, календарь, бэкап, офлайн
+- [ ] Ревизия контента агентов (точность, ханафитский фикх, язык). Многие русские сайты были недоступны: хадисы сверены по зеркалу fawazahmed0/hadith-api
+- [ ] Playwright: 375px, 414px и десктоп, все кнопки, аудио, все типы тестов, касания, календарь, бэкап, офлайн (`tests/shot.cjs` для скриншотов; сервер `python3 -m http.server 8765`)
 - [ ] Нет ошибок в консоли, нет битых ссылок, нет английского текста в интерфейсе
-- [ ] Инструкция по публикации (русский): `DEPLOY.md`
+- [ ] `DEPLOY.md`: инструкция по публикации на русском

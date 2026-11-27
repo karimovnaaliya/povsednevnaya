@@ -9,9 +9,10 @@ export function topbar(title, { back = true, actions = [] } = {}) {
     ...actions,
   );
 }
-export function goBack() {
-  if (history.length > 1 && document.referrer !== 'about:blank' && sessionStorage.getItem('nav-depth') > '0') history.back();
-  else location.hash = '#/home';
+let navs = 0;
+addEventListener('hashchange', () => { navs++; });
+export function goBack(fallback = '#/home') {
+  if (navs > 0) { navs -= 2; history.back(); } else location.hash = fallback;
 }
 
 export function tile({ href, onclick, iconName, iconText, gold, title, sub, end, disabled }) {
@@ -193,4 +194,17 @@ export function sourcesBlock(sources) {
 
 export function callout(tone, title, text) {
   return h(`div.callout.callout--${tone}`, title ? h('div.callout__title', title) : null, md(text));
+}
+
+/** Standard page: topbar + <main class="page">. */
+export function page(title, children, { back = true, actions = [], bare = false } = {}) {
+  return h('div',
+    title != null ? topbar(title, { back, actions }) : null,
+    h(`main.page${bare ? '.page--bare' : ''}`, { id: 'main' }, children));
+}
+
+/** Grade badge for duas/hadith. */
+export function gradeBadge(g) {
+  const m = { quran: ['Коран', 'badge--gold'], sahih: ['Достоверный (сахих)', 'badge--ok'], hasan: ['Хороший (хасан)', 'badge--ok'], daif: ['Слабый (даиф)', 'badge--warn'] }[g];
+  return m ? h(`span.badge.${m[1]}`, m[0]) : null;
 }

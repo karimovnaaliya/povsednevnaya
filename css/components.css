@@ -586,3 +586,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); bac
   :root { --maxw: 820px; }
   .page { padding-top: var(--s6); }
 }
+
+/* inline icons inside text */
+p svg, span.badge svg, .callout__title svg, .card__eyebrow svg { vertical-align: -0.18em; flex: none; }
+.tile__title, .tile__sub { display: block; }
