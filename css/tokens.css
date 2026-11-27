@@ -1,0 +1,140 @@
+/* Design tokens — see DESIGN.md. Light is the default; dark and sepia override. */
+:root {
+  color-scheme: light;
+  /* palette */
+  --bg: #f6f1e7;
+  --bg-2: #efe7d8;
+  --surface: #fffdf8;
+  --surface-2: #f8f2e6;
+  --surface-3: #f1e8d6;
+  --border: #e3d8c3;
+  --text: #1d2a27;
+  --text-2: #4c5a55;
+  --text-3: #6f7a74;
+  --primary: #1f5c4a;
+  --primary-2: #2c7a62;
+  --primary-soft: #dcebe3;
+  --on-primary: #ffffff;
+  --gold: #a87a2e;
+  --gold-soft: #f3e4c4;
+  --night: #1d2b45;
+  --success: #2f7d4f;
+  --success-soft: #d8eedd;
+  --partial: #b98a14;
+  --partial-soft: #f6e9bf;
+  --danger: #b04545;
+  --danger-soft: #f6dcdc;
+  --special: #9a6a9c;
+  --special-soft: #efdff0;
+  --focus-ring: #2c7a62;
+  --shadow-1: 0 1px 2px rgba(40, 32, 18, .06), 0 2px 8px rgba(40, 32, 18, .06);
+  --shadow-2: 0 4px 18px rgba(40, 32, 18, .12);
+  --pattern-opacity: .05;
+
+  /* tajweed (Dar al-Maarifah inspired, tuned for contrast on light bg) */
+  --tj-gray: #8a8f8c;
+  --tj-madd2: #2f6fe0;
+  --tj-madd-perm: #3b45d6;
+  --tj-madd-obl: #1c3fa8;
+  --tj-madd-nec: #0a1f9a;
+  --tj-qalqala: #c8102e;
+  --tj-ghunna: #e06a00;
+  --tj-ikhfa: #8b1fa3;
+  --tj-ikhfa-shaf: #c2189e;
+  --tj-iqlab: #0d8fc9;
+  --tj-idgham-gh: #12825f;
+  --tj-idgham-no: #3f7d0f;
+  --tj-idgham-shaf: #5a9e0f;
+
+  /* type */
+  --font-ui: "Manrope", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ar: "Amiri Quran", "Amiri", "Scheherazade New", "Noto Naskh Arabic", "Geeza Pro", serif;
+  --font-ar-text: "Amiri", "Noto Naskh Arabic", "Geeza Pro", serif;
+  --fs-xs: .78rem;
+  --fs-sm: .875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.15rem;
+  --fs-xl: 1.4rem;
+  --fs-2xl: 1.75rem;
+  --ar-scale: 1;
+  --fs-ar: calc(1.9rem * var(--ar-scale));
+  --fs-ar-l: calc(2.3rem * var(--ar-scale));
+  --fs-ar-xl: calc(3rem * var(--ar-scale));
+  --lh-ar: 2.15;
+
+  /* space & shape */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px;
+  --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
+  --tap: 48px;
+  --nav-h: 64px;
+  --maxw: 760px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: 220ms;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e171c;
+  --bg-2: #132027;
+  --surface: #16242b;
+  --surface-2: #1b2c34;
+  --surface-3: #22363f;
+  --border: #2b4049;
+  --text: #ece5d6;
+  --text-2: #c3bcae;
+  --text-3: #9a9588;
+  --primary: #72c4a4;
+  --primary-2: #8fd3b8;
+  --primary-soft: #1f3b35;
+  --on-primary: #0b1a15;
+  --gold: #dcb56c;
+  --gold-soft: #3a3020;
+  --night: #b7c6e6;
+  --success: #6cc48d;
+  --success-soft: #1d3a29;
+  --partial: #e2bd4f;
+  --partial-soft: #3b3215;
+  --danger: #ec8a8a;
+  --danger-soft: #432425;
+  --special: #d2a6d4;
+  --special-soft: #3a2a3d;
+  --focus-ring: #8fd3b8;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, .3);
+  --shadow-2: 0 6px 22px rgba(0, 0, 0, .45);
+  --pattern-opacity: .06;
+
+  --tj-gray: #9aa3a0;
+  --tj-madd2: #79a8ff;
+  --tj-madd-perm: #8c94ff;
+  --tj-madd-obl: #a3b4ff;
+  --tj-madd-nec: #c0c8ff;
+  --tj-qalqala: #ff6f7d;
+  --tj-ghunna: #ffa24d;
+  --tj-ikhfa: #d58cf0;
+  --tj-ikhfa-shaf: #f27fd6;
+  --tj-iqlab: #5cc8f5;
+  --tj-idgham-gh: #4fd1a5;
+  --tj-idgham-no: #94d65a;
+  --tj-idgham-shaf: #b8e36b;
+}
+
+:root[data-theme="sepia"] {
+  --bg: #efe3c8;
+  --bg-2: #e7d8b8;
+  --surface: #f7eedb;
+  --surface-2: #f1e5cb;
+  --surface-3: #e9dbbc;
+  --border: #d9c6a0;
+  --text: #3a2c1a;
+  --text-2: #5c4a32;
+  --text-3: #7a6749;
+  --primary: #4f5f2c;
+  --primary-2: #66783a;
+  --primary-soft: #e3e2c2;
+  --gold: #94661f;
+  --pattern-opacity: .07;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 0ms; }
+}

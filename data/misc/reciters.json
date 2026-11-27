@@ -1,0 +1,92 @@
+{
+  "_comment": "Проверено 2026-11-26 (curl: 200/206 audio/mpeg, Range работает) на аятах 1:1, 2:255, 114:6 (+36:1). Плейсхолдеры: {sss} сура 3 цифры, {aaa} аят 3 цифры, {www} позиция слова 3 цифры, {global} сквозной номер аята 1..6236. main/backup отдают Access-Control-Allow-Origin:* (можно кешировать в SW через fetch mode:'cors'), кроме cdn.islamic.network (backup2) — там ACAO нет, только прямое воспроизведение в <audio> без кеша SW. См. AUDIO.md.",
+  "default": "alafasy",
+  "reciters": [
+    {
+      "id": "alafasy",
+      "name": "Мишари Аль-Афаси",
+      "note": "Чистое, мелодичное чтение (муратталь), средний темп. Хороший выбор по умолчанию.",
+      "level": "all",
+      "ayah": {
+        "main": "https://everyayah.com/data/Alafasy_128kbps/{sss}{aaa}.mp3",
+        "backup": "https://verses.quran.com/Alafasy/mp3/{sss}{aaa}.mp3",
+        "backup2": "https://cdn.islamic.network/quran/audio/128/ar.alafasy/{global}.mp3"
+      }
+    },
+    {
+      "id": "husary",
+      "name": "Махмуд Халиль аль-Хусари",
+      "note": "Медленное, очень чёткое чтение — эталон для начинающих.",
+      "level": "beginner",
+      "ayah": {
+        "main": "https://everyayah.com/data/Husary_128kbps/{sss}{aaa}.mp3",
+        "backup": "https://everyayah.com/data/Husary_64kbps/{sss}{aaa}.mp3",
+        "backup2": "https://cdn.islamic.network/quran/audio/128/ar.husary/{global}.mp3"
+      }
+    },
+    {
+      "id": "husary_muallim",
+      "name": "Аль-Хусари — обучающее (муаллим)",
+      "note": "Учебное чтение: аят читается и повторяется для заучивания (файлы примерно в 2 раза длиннее обычных). Отдельного зеркала нет — при сбое плеер переключается на обычного Хусари.",
+      "level": "beginner",
+      "fallbackReciter": "husary",
+      "ayah": {
+        "main": "https://everyayah.com/data/Husary_Muallim_128kbps/{sss}{aaa}.mp3",
+        "backup": null
+      }
+    },
+    {
+      "id": "abdulbasit",
+      "name": "Абдуль-Басит Абдус-Самад (муратталь)",
+      "note": "Классическое египетское чтение, размеренный темп. Файлы 192 kbps — тяжелее остальных.",
+      "level": "all",
+      "ayah": {
+        "main": "https://everyayah.com/data/Abdul_Basit_Murattal_192kbps/{sss}{aaa}.mp3",
+        "backup": "https://verses.quran.com/AbdulBaset/Murattal/mp3/{sss}{aaa}.mp3",
+        "backup2": "https://cdn.islamic.network/quran/audio/64/ar.abdulbasitmurattal/{global}.mp3"
+      }
+    },
+    {
+      "id": "minshawi",
+      "name": "Мухаммад Сиддик аль-Миншави (муратталь)",
+      "note": "Спокойное, чёткое чтение с ясной артикуляцией.",
+      "level": "all",
+      "ayah": {
+        "main": "https://everyayah.com/data/Minshawy_Murattal_128kbps/{sss}{aaa}.mp3",
+        "backup": "https://verses.quran.com/Minshawi/Murattal/mp3/{sss}{aaa}.mp3",
+        "backup2": "https://cdn.islamic.network/quran/audio/128/ar.minshawi/{global}.mp3"
+      }
+    },
+    {
+      "id": "minshawi_teacher",
+      "name": "Аль-Миншави — обучающее (с детьми)",
+      "note": "Учебная запись: чтец читает, ученики повторяют. Папка everyayah Minshawy_Teacher_128kbps (нет в списке recitations.js, но файлы отдаются). Нужно прослушать перед релизом. Резервного зеркала нет — при сбое переключаться на обычного Миншави.",
+      "level": "beginner",
+      "fallbackReciter": "minshawi",
+      "ayah": {
+        "main": "https://everyayah.com/data/Minshawy_Teacher_128kbps/{sss}{aaa}.mp3",
+        "backup": null
+      }
+    },
+    {
+      "id": "ayman_suwayd",
+      "name": "Айман Сувейд",
+      "note": "Известный преподаватель таджвида; размеренное учебное чтение. Только 64 kbps.",
+      "level": "beginner",
+      "ayah": {
+        "main": "https://everyayah.com/data/Ayman_Sowaid_64kbps/{sss}{aaa}.mp3",
+        "backup": "https://cdn.islamic.network/quran/audio/64/ar.aymanswoaid/{global}.mp3"
+      }
+    }
+  ],
+  "word": {
+    "main": "https://audio.qurancdn.com/wbw/{sss}_{aaa}_{www}.mp3",
+    "backup": "https://verses.quran.com/wbw/{sss}_{aaa}_{www}.mp3",
+    "note": "{www} = позиция слова в аяте (1..N, только слова, без знака конца аята). НЕ использовать поле audio_url из api.quran.com — оно ошибочно в аятах со знаками паузы (напр. 2:255 слово 50 -> 058, файл 404). Оба хоста — CDN Quran.com (BunnyCDN), т.е. backup не полностью независим. Голос — Аль-Афаси."
+  },
+  "letters": {
+    "main": "https://raw.githubusercontent.com/KDE/gcompris-data/master/voices/ar/alphabet/U{code}.ogg",
+    "note": "GCompris (KDE), автор записей Makni Bassem, лицензия GPL. {code} = код Unicode буквы в верхнем регистре hex (0628 = ب). Алиф = U0623 (U0627 нет). Формат Ogg Vorbis — на iPhone не надёжно: рекомендуется перекодировать в MP3 (ffmpeg) и положить в репозиторий (assets/audio/letters/). Запасной вариант — пословное аудио Корана.",
+    "codes": ["0623","0628","062A","062B","062C","062D","062E","062F","0630","0631","0632","0633","0634","0635","0636","0637","0638","0639","063A","0641","0642","0643","0644","0645","0646","0647","0648","064A"]
+  }
+}

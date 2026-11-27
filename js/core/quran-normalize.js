@@ -44,7 +44,7 @@ export function splitTajweedWords(segs) {
     const parts = s.t.split(' ');
     parts.forEach((p, idx) => {
       if (idx > 0) words.push([]);
-      if (p) words[words.length - 1].push(s.r ? { t: p, r: s.r } : { t: p });
+      if (p) words[words.length - 1].push({ ...s, t: p });
     });
   }
   const clean = words.filter(w => w.length);
@@ -83,8 +83,8 @@ export function buildSurah(aq, qcVerses) {
     // (the tajweed edition does not), so drop the first 4 words when the counts differ by 4.
     if (a.numberInSurah === 1 && surahNo !== 1 && surahNo !== 9) {
       const w = ar.split(' ');
-      const tjCount = splitTajweedWords(parseTajweed(tjm)).length;
-      if (w.length - tjCount === 4) ar = w.slice(4).join(' ');
+      // first word of the basmala (bismi) — detection only, the text itself comes from the API
+      if (w.length > 4 && w[0] === '\u0628\u0650\u0633\u0652\u0645\u0650') ar = w.slice(4).join(' ');
     }
     const key = `${surahNo}:${a.numberInSurah}`;
     const v = qcVerses ? qcVerses.find(x => x.verse_key === key) : null;
