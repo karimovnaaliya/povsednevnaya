@@ -1,4 +1,4 @@
-import { h, icon, clear, md, shuffle } from '../core/dom.js';
+import { h, icon, clear, md, shuffle, plural } from '../core/dom.js';
 import { state, update } from '../core/store.js';
 import { todayKey } from '../core/time.js';
 import { loadJSON } from '../core/content.js';
@@ -175,7 +175,7 @@ export default async function hifzSurah(id) {
   const status = (state.hifz[s.id] || {}).status || 'new';
   const intro = h('details.card', { open: status === 'new' },
     h('summary', { style: { fontWeight: 800, minHeight: '44px', cursor: 'pointer' } }, 'О суре'),
-    h('p.small.muted', `${s.revelation === 'mecca' ? 'Мекканская' : 'Мединская'} · ${s.ayahs} ${s.ayahs === 1 ? 'аят' : 'аятов'}${s.range ? ` (аяты ${s.range.from}–${s.range.to} суры ${s.surah})` : ''}`),
+    h('p.small.muted', `${s.revelation === 'mecca' ? 'Мекканская' : 'Мединская'} · ${s.ayahs} ${plural(s.ayahs, 'аят', 'аята', 'аятов')}${s.range ? ` (аяты ${s.range.from}–${s.range.to} суры ${s.surah})` : ''}`),
     md(s.about),
     s.context ? h('div', h('strong', 'Когда и почему ниспослана'), md(s.context)) : null,
     s.virtues && s.virtues.length ? h('div', h('strong', 'Достоинства'), h('ul', s.virtues.map(v => h('li', md(v.md), h('a.small', { href: v.url, target: '_blank', rel: 'noopener' }, v.source))))) : null);

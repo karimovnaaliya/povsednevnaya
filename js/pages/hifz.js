@@ -1,4 +1,4 @@
-import { h, icon, clear } from '../core/dom.js';
+import { h, icon, clear, plural } from '../core/dom.js';
 import { state } from '../core/store.js';
 import { loadJSON } from '../core/content.js';
 import { isDue } from '../core/srs.js';
@@ -21,7 +21,7 @@ export default async function hifz() {
       if (filter !== 'all' && !(filter === st || (filter === 'learned' && st === 'review'))) continue;
       host.append(tile({
         href: `#/hifz/${s.id}`, iconText: String(s.order), title: s.nameRu,
-        sub: `${s.meaningRu} · ${s.ayahs} ${s.ayahs === 1 ? 'аят' : s.ayahs < 5 ? 'аята' : 'аятов'} · сложность ${'●'.repeat(s.difficulty)}${'○'.repeat(5 - s.difficulty)}`,
+        sub: `${s.meaningRu} · ${s.ayahs} ${plural(s.ayahs, 'аят', 'аята', 'аятов')} · сложность ${'●'.repeat(s.difficulty)}${'○'.repeat(5 - s.difficulty)}`,
         end: st !== 'new' ? h('span', { class: `badge ${STATUS_BADGE[st]}` }, STATUS[st]) : null,
       }));
     }

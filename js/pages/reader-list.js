@@ -1,4 +1,5 @@
 import { h, icon, clear } from '../core/dom.js';
+import { plural } from '../core/dom.js';
 import { surahList, BUNDLED, stripSurahWord } from '../core/quran.js';
 import { page } from '../ui/components.js';
 
@@ -13,7 +14,7 @@ export default async function readerList() {
       if (q && !(String(s.n) === q || s.ru.toLowerCase().includes(q) || s.meaning.toLowerCase().includes(q) || s.tr.toLowerCase().includes(q))) continue;
       host.append(h('a.tile', { href: `#/reader/${s.n}` },
         h('span.tile__icon', { style: { fontWeight: 800 } }, String(s.n)),
-        h('span.tile__body', h('span.tile__title', s.ru), h('span.tile__sub', `${s.meaning} · ${s.count} аятов · ${s.rev === 'mecca' ? 'мекканская' : 'мединская'}${BUNDLED.has(s.n) ? '' : ' · по интернету'}`)),
+        h('span.tile__body', h('span.tile__title', s.ru), h('span.tile__sub', `${s.meaning} · ${s.count} ${plural(s.count, 'аят', 'аята', 'аятов')} · ${s.rev === 'mecca' ? 'мекканская' : 'мединская'}${BUNDLED.has(s.n) ? '' : ' · по интернету'}`)),
         h('span.tile__end', h('span.ar-inline', { lang: 'ar' }, stripSurahWord(s.ar)))));
     }
     if (!host.children.length) host.append(h('p.muted', 'Ничего не найдено.'));

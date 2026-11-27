@@ -591,3 +591,5 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); bac
 p svg, span.badge svg, .callout__title svg, .card__eyebrow svg { vertical-align: -0.18em; flex: none; }
 .tile__title, .tile__sub { display: block; }
 .pool:not(:has(.ditem))::after { content: "Все карточки разложены"; color: var(--text-3); font-size: var(--fs-sm); margin: auto; }
+h1[tabindex="-1"]:focus { outline: none; }
+:root[data-theme="dark"] .btn--gold { color: #1b1405; }

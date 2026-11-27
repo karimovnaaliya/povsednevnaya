@@ -1,4 +1,4 @@
-import { h } from '../core/dom.js';
+import { h, plural } from '../core/dom.js';
 import { state } from '../core/store.js';
 import { todayKey } from '../core/time.js';
 import { tryJSON } from '../core/content.js';
@@ -17,6 +17,6 @@ export default async function adhkarList() {
       const p = state.adhkar[r.id];
       const doneToday = p && p.date === todayKey() && p.done;
       const key = Object.keys(ICON).find(k => r.id.includes(k));
-      return tile({ href: `#/adhkar/${r.id}`, iconName: ICON[key] || 'sun', gold: doneToday, title: r.title, sub: `${r.time || ''}${r.time ? ' · ' : ''}${r.items.length} поминаний${doneToday ? ' · ✓ сегодня' : ''}` });
+      return tile({ href: `#/adhkar/${r.id}`, iconName: ICON[key] || 'sun', gold: doneToday, title: r.title, sub: `${r.time || ''}${r.time ? ' · ' : ''}${r.items.length} ${plural(r.items.length, 'поминание', 'поминания', 'поминаний')}${doneToday ? ' · ✓ сегодня' : ''}` });
     })));
 }

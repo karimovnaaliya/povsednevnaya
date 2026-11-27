@@ -1,4 +1,5 @@
 import { h, icon, clear, $$ } from '../core/dom.js';
+import { plural } from '../core/dom.js';
 import { state, update } from '../core/store.js';
 import { getSurah, surahMeta, stripSurahWord } from '../core/quran.js';
 import * as audio from '../core/audio.js';
@@ -59,7 +60,7 @@ export default async function reader(n) {
   return page(meta.ru, h('div',
     h('header.center', { style: { marginBottom: 'var(--s3)' } },
       h('p.ar-inline', { lang: 'ar', style: { display: 'block', fontSize: '2.2rem', color: 'var(--primary)' } }, stripSurahWord(meta.ar)),
-      h('p.muted', { style: { margin: 0 } }, `${meta.meaning} · ${meta.count} аятов · ${meta.rev === 'mecca' ? 'мекканская' : 'мединская'}`)),
+      h('p.muted', { style: { margin: 0 } }, `${meta.meaning} · ${meta.count} ${plural(meta.count, 'аят', 'аята', 'аятов')} · ${meta.rev === 'mecca' ? 'мекканская' : 'мединская'}`)),
     h('div.row.row--wrap', { style: { justifyContent: 'center', marginBottom: 'var(--s3)' } },
       h('button.btn.btn--primary', { onclick: () => playFrom(1) }, icon('play'), 'Слушать всю'),
       h('button.btn.btn--ghost', { onclick: download }, icon('download'), 'Скачать аудио')),
