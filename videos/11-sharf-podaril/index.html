@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>My Warm Box — Тот самый красный шарф</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Caveat:wght@600;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1512; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  #stage { width: 1080px; height: 1920px; display: block; }
+  body.preview #stage { width: auto; height: 96vh; aspect-ratio: 9 / 16; }
+  .serif { font-family: 'Lora', serif; }
+  .hand { font-family: 'Caveat', cursive; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    
+    <filter id="sat" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix id="satM" type="saturate" values="0"/>
+    </filter>
+    <linearGradient id="street" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C9D6E3"/>
+      <stop offset="0.6" stop-color="#E8D9C6"/>
+      <stop offset="1" stop-color="#F4ECE2"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#FFD9A0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shadow">
+      <stop offset="0" stop-color="#5A3E2B" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5A3E2B" stop-opacity="0"/>
+    </radialGradient>
+    <!-- fluffy red fabric -->
+    <pattern id="fluff" width="22" height="20" patternUnits="userSpaceOnUse">
+      <rect width="22" height="20" fill="#D9262F"/>
+      <path d="M2 5 q5 -4 10 0 M11 14 q5 -4 10 0" stroke="#F0605F" stroke-width="2.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M4 17 q3 -2 6 0 M14 6 q3 -2 6 0" stroke="#B41C24" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="fluffBig" width="22" height="20" patternUnits="userSpaceOnUse" patternTransform="scale(3.2)">
+      <rect width="22" height="20" fill="#D9262F"/>
+      <path d="M2 5 q5 -4 10 0 M11 14 q5 -4 10 0" stroke="#F0605F" stroke-width="2.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M4 17 q3 -2 6 0 M14 6 q3 -2 6 0" stroke="#B41C24" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <!-- burgundy cable knit -->
+    <pattern id="cable" width="44" height="36" patternUnits="userSpaceOnUse">
+      <rect width="44" height="36" fill="#8E1B2A"/>
+      <path d="M3 0 V36 M41 0 V36" stroke="#6A1220" stroke-width="5"/>
+      <path d="M12 0 C12 9 32 9 32 18 C32 27 12 27 12 36" stroke="#A82C3D" stroke-width="7" fill="none"/>
+      <path d="M32 0 C32 9 12 9 12 18 C12 27 32 27 32 36" stroke="#76162A" stroke-width="7" fill="none"/>
+    </pattern>
+    <pattern id="cableBig" width="44" height="36" patternUnits="userSpaceOnUse" patternTransform="scale(3)">
+      <rect width="44" height="36" fill="#8E1B2A"/>
+      <path d="M3 0 V36 M41 0 V36" stroke="#6A1220" stroke-width="5"/>
+      <path d="M12 0 C12 9 32 9 32 18 C32 27 12 27 12 36" stroke="#A82C3D" stroke-width="7" fill="none"/>
+      <path d="M32 0 C32 9 12 9 12 18 C12 27 32 27 32 36" stroke="#76162A" stroke-width="7" fill="none"/>
+    </pattern>
+    <clipPath id="magClip"><circle r="105"/></clipPath>
+
+    <!-- worn scarf 1: fluffy red with fringe (local to character) -->
+    <g id="scarf1">
+      <g id="s1tailL">
+        <rect x="-112" y="-110" width="104" height="480" rx="26" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+        <g stroke="#D9262F" stroke-width="11" stroke-linecap="round">
+          <path d="M-100,365 v52 M-82,368 v58 M-64,366 v50 M-46,368 v56 M-28,366 v52"/>
+        </g>
+      </g>
+      <g id="s1tailR">
+        <rect x="0" y="-100" width="108" height="420" rx="26" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+        <g stroke="#D9262F" stroke-width="11" stroke-linecap="round">
+          <path d="M14,316 v52 M32,318 v58 M50,316 v50 M68,318 v56 M88,316 v52"/>
+        </g>
+      </g>
+      <rect x="-150" y="-185" width="300" height="104" rx="52" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+      <rect x="-132" y="-128" width="270" height="80" rx="40" fill="url(#fluff)" stroke="#A8161F" stroke-width="3" transform="rotate(4)"/>
+    </g>
+    <!-- worn scarf 2: burgundy cable knit -->
+    <g id="scarf2">
+      <g id="s2tailL">
+        <rect x="-112" y="-110" width="106" height="500" rx="18" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+        <rect x="-96" y="320" width="44" height="14" rx="3" fill="#C9A25B"/>
+      </g>
+      <g id="s2tailR"><rect x="0" y="-100" width="108" height="430" rx="18" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/></g>
+      <rect x="-155" y="-190" width="310" height="112" rx="50" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+      <rect x="-138" y="-130" width="280" height="84" rx="40" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3" transform="rotate(4)"/>
+    </g>
+    <!-- hanging scarves (showcase) -->
+    <g id="hang1">
+      <rect x="-90" y="0" width="84" height="640" rx="22" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+      <rect x="6" y="0" width="84" height="580" rx="22" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+      <g stroke="#D9262F" stroke-width="10" stroke-linecap="round">
+        <path d="M-78,630 v50 M-62,632 v56 M-46,630 v48 M-30,632 v54 M-16,630 v50"/>
+        <path d="M18,570 v50 M34,572 v56 M50,570 v48 M66,572 v54 M80,570 v50"/>
+      </g>
+      <rect x="-96" y="-30" width="192" height="60" rx="30" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+    </g>
+    <g id="hang2">
+      <rect x="-92" y="0" width="88" height="660" rx="16" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+      <rect x="4" y="0" width="88" height="600" rx="16" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+      <rect x="-76" y="590" width="40" height="13" rx="3" fill="#C9A25B"/>
+      <rect x="-100" y="-30" width="200" height="60" rx="26" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+    </g>
+    <path id="heart" d="M0,-12 C-14,-30 -40,-14 -22,6 L0,26 L22,6 C40,-14 14,-30 0,-12 Z"/>
+    <path id="star4" d="M0,-30 Q4,-4 30,0 Q4,4 0,30 Q-4,4 -30,0 Q-4,-4 0,-30 Z"/>
+    <path id="pin" d="M0,26 C-16,6 -22,-2 -22,-10 A22,22 0 1 1 22,-10 C22,-2 16,6 0,26 Z M0,-18 a8,8 0 1 0 0.01,0 Z" fill-rule="evenodd"/>
+    <g id="logoIcon" fill="none" stroke="#5A3E2B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="-62" y="-20" width="124" height="86" rx="4"/>
+      <rect x="-72" y="-46" width="144" height="28" rx="4"/>
+      <path d="M0,-46 V66"/>
+      <path d="M0,-46 C-22,-86 -62,-78 -48,-56 C-40,-46 -16,-46 0,-46 Z"/>
+      <path d="M0,-46 C22,-86 62,-78 48,-56 C40,-46 16,-46 0,-46 Z"/>
+      <path d="M-40,10 L40,10" stroke-width="5" opacity="0.6"/>
+      <path d="M-40,34 L40,34" stroke-width="5" opacity="0.6"/>
+    </g>
+  
+    <g id="gbox">
+      <rect x="-150" y="-90" width="300" height="190" rx="12" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+      <rect x="-20" y="-90" width="40" height="190" fill="#C2473D"/>
+      <g id="gLid">
+        <rect x="-162" y="-128" width="324" height="48" rx="10" fill="#FFFDF9" stroke="#E2D6C6" stroke-width="4"/>
+        <rect x="-20" y="-128" width="40" height="48" fill="#C2473D"/>
+        <path d="M0,-130 C-24,-180 -90,-172 -72,-140 C-60,-122 -24,-126 0,-130 Z" fill="#C9483D" stroke="#8E2E28" stroke-width="3"/>
+        <path d="M0,-130 C24,-180 90,-172 72,-140 C60,-122 24,-126 0,-130 Z" fill="#C9483D" stroke="#8E2E28" stroke-width="3"/>
+        <circle cx="0" cy="-130" r="14" fill="#C2473D" stroke="#8E2E28" stroke-width="3"/>
+      </g>
+    </g>
+    <path id="plane" d="M-70,10 L80,-60 L30,70 L5,25 Z M5,25 L80,-60" fill="#FFFDF9" stroke="#4A3426" stroke-width="8" stroke-linejoin="round"/>
+  </defs>
+
+  <!-- ===== desaturated world ===== -->
+  <g id="world" filter="url(#sat)">
+    <rect width="1080" height="1920" fill="url(#street)"/>
+    <g id="glows"></g>
+    <g fill="#B9A78F" opacity="0.5">
+      <rect x="0" y="560" width="170" height="860" rx="8"/><rect x="900" y="480" width="180" height="940" rx="8"/>
+      <g fill="#F6D58E"><rect x="40" y="640" width="46" height="64"/><rect x="104" y="640" width="46" height="64"/><rect x="940" y="560" width="46" height="64"/><rect x="1004" y="560" width="46" height="64"/><rect x="1004" y="700" width="46" height="64"/></g>
+    </g>
+    <!-- girl -->
+    <g id="girl">
+      <ellipse cx="0" cy="640" rx="260" ry="30" fill="url(#shadow)"/>
+      <rect x="-175" y="-120" width="350" height="760" rx="110" fill="#2B2A2E"/>
+      <rect x="-28" y="-165" width="56" height="50" fill="#E8C3A9"/>
+      <circle cx="0" cy="-260" r="108" fill="#F2D3BC"/>
+      <path d="M-118,-250 C-128,-380 128,-380 118,-250 L118,-150 C104,-140 100,-200 96,-240 C70,-300 -70,-300 -96,-240 C-100,-200 -104,-140 -118,-150 Z" fill="#1E1A19"/>
+      <path d="M-100,-270 C-80,-330 80,-330 100,-270 L100,-250 L-100,-250 Z" fill="#1E1A19"/>
+      <ellipse cx="18" cy="-352" rx="135" ry="46" fill="#1E1A19" transform="rotate(-8 18 -352)"/>
+      <circle cx="60" cy="-396" r="10" fill="#1E1A19"/>
+      <circle id="chL" cx="-64" cy="-205" r="19" fill="#C9B6B0"/><circle id="chR" cx="64" cy="-205" r="19" fill="#C9B6B0"/>
+      <g id="gEyes" fill="#2E2420"><ellipse cx="-38" cy="-238" rx="9" ry="12"/><ellipse cx="38" cy="-238" rx="9" ry="12"/></g>
+      <g id="gEyesHappy" stroke="#2E2420" stroke-width="7" fill="none" stroke-linecap="round" opacity="0">
+        <path d="M-54,-234 Q-38,-252 -22,-234"/><path d="M22,-234 Q38,-252 54,-234"/>
+      </g>
+      <path id="gMouthN" d="M-18,-182 Q0,-176 18,-182" stroke="#B0444A" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse id="gMouthO" cx="0" cy="-182" rx="13" ry="16" fill="#8E3A3E" opacity="0"/>
+      <path id="gMouthH" d="M-26,-190 Q0,-162 26,-190 Z" fill="#B0444A" opacity="0"/>
+    </g>
+    <!-- guy -->
+    <g id="guy">
+      <ellipse cx="0" cy="640" rx="260" ry="30" fill="url(#shadow)"/>
+      <rect x="-185" y="-120" width="370" height="760" rx="110" fill="#8A6A4E"/>
+      <path d="M-20,-110 L-80,200 M20,-110 L80,200" stroke="#6E523B" stroke-width="7"/>
+      <rect x="-30" y="-165" width="60" height="50" fill="#DDB596"/>
+      <circle cx="0" cy="-262" r="110" fill="#EBC6A8"/>
+      <path d="M-114,-250 C-124,-392 124,-392 114,-250 C104,-312 40,-334 -20,-318 C-60,-330 -104,-312 -114,-250 Z" fill="#2F2521"/>
+      <path d="M-62,-290 L-20,-296 M20,-296 L62,-290" stroke="#2F2521" stroke-width="8" stroke-linecap="round"/>
+      <g fill="#2E2420"><ellipse cx="-38" cy="-252" rx="9" ry="12"/><ellipse cx="38" cy="-252" rx="9" ry="12"/></g>
+      <circle cx="-66" cy="-214" r="16" fill="#E8A6A0" opacity="0.6"/><circle cx="66" cy="-214" r="16" fill="#E8A6A0" opacity="0.6"/>
+      <path d="M-30,-196 Q0,-170 30,-196" stroke="#5A3E2B" stroke-width="7" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="boxW"><use href="#gbox"/></g>
+    <g id="hands" fill="#EBC6A8"><circle id="hL" r="26"/><circle id="hR" r="26"/></g>
+    <g id="snow"></g>
+  </g>
+
+  <!-- coloured layer -->
+  <g id="wear1"><use href="#scarf1" transform="translate(0 42)"/></g>
+  <g id="wear2"><use href="#scarf2" transform="translate(0 42)"/></g>
+  <g id="hearts" fill="#D9262F"></g>
+  <use id="bigHeart" href="#heart" fill="#D9262F"/>
+
+  <!-- texts -->
+  <g id="tA" text-anchor="middle">
+    <text x="540" y="300" class="hand" font-size="120" font-weight="700" fill="#3A3A40">Представь…</text>
+  </g>
+  <g id="tB" text-anchor="middle" class="serif" font-weight="700">
+    <text x="540" y="430" font-size="70" fill="#3A3A40">он подарил тебе</text>
+    <text x="540" y="525" font-size="68" fill="#3A3A40">тот самый <tspan fill="#D9262F">красный шарф</tspan></text>
+  </g>
+  <g id="tC" text-anchor="middle"><text x="540" y="420" class="hand" font-size="120" font-weight="700" fill="#8E1B2A" stroke="#FFFDF9" stroke-width="6" paint-order="stroke">А может, бордо?</text></g>
+
+  <g id="label1">
+    <rect x="130" y="1600" width="820" height="160" rx="40" fill="#FFFDF9" opacity="0.96"/>
+    <text x="540" y="1670" text-anchor="middle" class="serif" font-size="52" font-weight="700" fill="#D9262F">Пушистый шарф с бахромой</text>
+    <text x="540" y="1732" text-anchor="middle" class="hand" font-size="52" fill="#5A3E2B">мягкий и очень тёплый</text>
+  </g>
+  <g id="label2">
+    <rect x="130" y="1600" width="820" height="160" rx="40" fill="#FFFDF9" opacity="0.96"/>
+    <text x="540" y="1670" text-anchor="middle" class="serif" font-size="52" font-weight="700" fill="#8E1B2A">Объёмный вязаный шарф</text>
+    <text x="540" y="1732" text-anchor="middle" class="hand" font-size="52" fill="#5A3E2B">цвет бордо, крупная вязка</text>
+  </g>
+
+  <!-- hint CTA -->
+  <g id="hint">
+    <rect width="1080" height="1920" fill="#1E1A19" opacity="0.55"/>
+    <rect x="110" y="520" width="860" height="700" rx="60" fill="#FFFDF9"/>
+    <text x="540" y="700" text-anchor="middle" class="hand" font-size="150" font-weight="700" fill="#D9262F">Намекни ему!</text>
+    <text x="540" y="820" text-anchor="middle" class="serif" font-size="58" font-weight="700" fill="#4A3426">отправь ему это видео</text>
+    <path id="trail" d="M260,1120 C380,1060 520,1100 640,1010 C720,950 760,960 820,920" stroke="#C9B6A0" stroke-width="7" stroke-dasharray="4 18" stroke-linecap="round" fill="none"/>
+    <use id="planeU" href="#plane"/>
+  </g>
+
+  <!-- outro -->
+  <rect id="outroBg" width="1080" height="1920" fill="#F4ECE2" opacity="0"/>
+  <g id="outro">
+    <g id="logo" transform="translate(540 560)">
+      <circle r="210" fill="#F7F0E6" stroke="#5A3E2B" stroke-width="5"/>
+      <use href="#logoIcon" transform="translate(0 -78) scale(0.78)"/>
+      <text x="0" y="58" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#5A3E2B">My Warm</text>
+      <text x="0" y="134" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#5A3E2B">Box</text>
+    </g>
+    <g id="newPill">
+      <rect x="330" y="830" width="420" height="96" rx="48" fill="#D9262F"/>
+      <text x="540" y="895" text-anchor="middle" class="serif" font-size="52" font-weight="700" fill="#FFFDF9">Новинка</text>
+    </g>
+    <g id="addr" class="serif" font-size="44" fill="#4A3426">
+      <text x="540" y="1030" text-anchor="middle" font-weight="700">Доставка по всему КР</text>
+      <use href="#pin" transform="translate(140 1110)" fill="#D9262F"/>
+      <text x="180" y="1122">Бишкек — ТЦ Caravan, 2 этаж, 87B</text>
+      <use href="#pin" transform="translate(140 1190)" fill="#D9262F"/>
+      <text x="180" y="1202">Ош — ТЦ Maxcom</text>
+    </g>
+    <g id="cta">
+      <rect x="190" y="1290" width="700" height="120" rx="60" fill="#A63A32"/>
+      <text x="540" y="1368" text-anchor="middle" class="serif" font-size="48" font-weight="700" fill="#FFFDF9">Заказ в Direct / WhatsApp</text>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const DURATION = 18;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const easeOutCubic = p => 1 - Math.pow(1 - p, 3);
+  const easeInCubic = p => p * p * p;
+  const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  const mixColor = (a, b, p) => {
+    const ha = a.match(/\w\w/g).map(h => parseInt(h, 16)), hb = b.match(/\w\w/g).map(h => parseInt(h, 16));
+    return '#' + ha.map((v, i) => Math.round(lerp(v, hb[i], p)).toString(16).padStart(2, '0')).join('');
+  };
+  let seed = 61;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const set = (el, tr, op) => {
+    if (tr !== undefined) el.setAttribute('transform', tr);
+    if (op !== undefined) el.setAttribute('opacity', clamp(op).toFixed(3));
+  };
+  const mk = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e); return e;
+  };
+
+  const S = 0.82;                         // character scale
+  const GIRL = { x: 330, y: 1330 }, GUY = { x: 760, y: 1330 };
+  const flakes = [...Array(80)].map(() => {
+    const r = 3 + rnd() * 8;
+    return { el: mk('circle', { r: r.toFixed(1), fill: '#FFFFFF', opacity: 0.85 }, $('snow')), x: rnd() * 1080, y0: rnd() * 1960, sp: 40 + r * 12, ph: rnd() * 6.28 };
+  });
+  for (let i = 0; i < 9; i++) mk('circle', { cx: rnd() * 1080, cy: 150 + rnd() * 1000, r: 50 + rnd() * 80, fill: 'url(#glow)', opacity: 0.7 }, $('glows'));
+  const hearts = [...Array(10)].map((_, k) => ({ el: mk('use', { href: '#heart' }, $('hearts')), a: -Math.PI / 2 + (k - 4.5) * 0.32, d: 220 + (k % 3) * 70 }));
+
+  function render(t) {
+    const sat = easeInOut(seg(t, 5.6, 6.5));
+    $('satM').setAttribute('values', sat.toFixed(3));
+    flakes.forEach(f => {
+      f.el.setAttribute('cx', (f.x + Math.sin(t + f.ph) * 22).toFixed(1));
+      f.el.setAttribute('cy', (((f.y0 + f.sp * t) % 2000) - 40).toFixed(1));
+    });
+
+    // guy walks in 0.3–2.3
+    const w = seg(t, 0.3, 2.3);
+    const gx = lerp(1350, GUY.x, easeOutCubic(w));
+    const walking = w > 0 && w < 0.95;
+    const gb = walking ? Math.abs(Math.sin(t * 9)) * 18 : 0;
+    const lean = -3 * easeInOut(seg(t, 6.4, 7.0));
+    set($('guy'), `translate(${gx.toFixed(1)} ${(GUY.y - gb).toFixed(1)}) rotate(${lean}) scale(${S})`);
+
+    // girl: tilt toward him after the scarf
+    const tilt = 6 * easeInOut(seg(t, 6.4, 7.0));
+    const breathe = Math.sin(t * 2) * 3 * sat;
+    const girlTr = `translate(${GIRL.x} ${(GIRL.y - breathe).toFixed(1)}) rotate(${tilt.toFixed(2)} 0 400) scale(${S})`;
+    set($('girl'), girlTr);
+    $('chL').setAttribute('fill', mixColor('C9B6B0', 'F0A2A0', sat));
+    $('chR').setAttribute('fill', mixColor('C9B6B0', 'F0A2A0', sat));
+    const surprised = t > 2.8 && t < 5.7;
+    const happy = t >= 5.7;
+    set($('gMouthN'), undefined, !surprised && !happy ? 1 : 0);
+    set($('gMouthO'), undefined, surprised ? 1 : 0);
+    set($('gMouthH'), undefined, happy ? 1 : 0);
+    set($('gEyes'), `translate(${surprised ? 8 : 0} 0)`, happy ? 0 : 1);
+    set($('gEyesHappy'), undefined, happy ? 1 : 0);
+
+    // box: held by guy, presented 2.6–3.3, opens 4.0, fades 6.0
+    const pr = easeInOut(seg(t, 2.6, 3.3));
+    const bx = lerp(gx - 150, 545, pr), by = lerp(1450 - gb, 1270, pr);
+    const bOut = seg(t, 6.0, 6.5);
+    set($('boxW'), `translate(${bx.toFixed(1)} ${(by + 120 * easeInCubic(bOut)).toFixed(1)}) scale(0.62)`, 1 - bOut);
+    $('hL').setAttribute('cx', (bx - 100).toFixed(1)); $('hL').setAttribute('cy', (by + 20).toFixed(1));
+    $('hR').setAttribute('cx', (bx + 100).toFixed(1)); $('hR').setAttribute('cy', (by + 20).toFixed(1));
+    set($('hands'), undefined, 1 - bOut);
+    const lo = easeInCubic(seg(t, 4.0, 4.5));
+    set($('gLid'), `translate(${120 * lo} ${-500 * lo}) rotate(${35 * lo})`, 1 - seg(t, 4.35, 4.5));
+
+    // big heart pop at 3.1
+    const bh = seg(t, 3.1, 3.5), bho = seg(t, 3.9, 4.2);
+    set($('bigHeart'), `translate(545 ${(1000 - 40 * bho).toFixed(1)}) scale(${(2.6 * easeOutBack(bh)).toFixed(3)})`, bh > 0 ? 1 - bho : 0);
+
+    // scarf rises from box 4.1–4.8, then flies to her neck 5.0–5.8
+    const rise = easeOutCubic(seg(t, 4.1, 4.8));
+    const fly = seg(t, 5.0, 5.8), fe = easeInOut(fly);
+    const swap = t >= 9.0;
+    const sway = Math.sin(t * 2.2) * 2.5;
+    ['s1tailL', 's2tailL'].forEach(id => $(id).setAttribute('transform', `rotate(${sway.toFixed(2)} -60 -110)`));
+    ['s1tailR', 's2tailR'].forEach(id => $(id).setAttribute('transform', `rotate(${(-sway * 0.8).toFixed(2)} 54 -100)`));
+    let scarfTr;
+    if (fly < 1) {
+      const x = lerp(bx, GIRL.x, fe), y = lerp(by - 110 - 160 * rise, GIRL.y - breathe, fe) - 180 * Math.sin(Math.PI * fly);
+      const sc = lerp(lerp(0.2, 0.34, rise), S, fe), rot = lerp(Math.sin(t * 3) * 6, tilt, fe);
+      scarfTr = `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(2)}) scale(${sc.toFixed(3)})`;
+    } else scarfTr = girlTr;
+    set($('wear1'), scarfTr, t > 4.1 && !swap ? 1 : 0);
+    set($('wear2'), girlTr, swap ? 1 : 0);
+
+    // hearts burst 5.8 and 9.0
+    hearts.forEach((h, k) => {
+      const b1 = seg(t, 5.8, 7.2), b2 = seg(t, 9.0, 10.3);
+      const p = b2 > 0 ? b2 : b1;
+      const on = (b1 > 0 && b1 < 1) || (b2 > 0 && b2 < 1);
+      h.el.setAttribute('fill', b2 > 0 ? '#8E1B2A' : '#D9262F');
+      const r = h.d * easeOutCubic(p);
+      set(h.el, `translate(${(545 + Math.cos(h.a) * r * 1.6).toFixed(1)} ${(1080 + Math.sin(h.a) * r).toFixed(1)}) scale(${(1.3 * Math.sin(Math.PI * p)).toFixed(3)})`, on ? 1 : 0);
+    });
+
+    // texts
+    const a = easeOutCubic(seg(t, 0.2, 0.8)), b = easeOutCubic(seg(t, 1.0, 1.6)), ab = seg(t, 8.7, 9.0);
+    set($('tA'), `translate(0 ${lerp(40, 0, a)})`, a * (1 - ab));
+    set($('tB'), `translate(0 ${lerp(40, 0, b)})`, b * (1 - ab));
+    const c = seg(t, 9.0, 9.4), co = seg(t, 11.7, 11.9);
+    set($('tC'), `translate(540 390) rotate(-3) scale(${(0.001 + easeOutBack(c)).toFixed(3)}) translate(-540 -390)`, c > 0 ? 1 - co : 0);
+    const l1 = easeOutCubic(seg(t, 6.6, 7.0)), l1o = seg(t, 8.7, 8.95);
+    set($('label1'), `translate(0 ${lerp(80, 0, l1)})`, l1 * (1 - l1o));
+    const l2 = easeOutCubic(seg(t, 9.4, 9.8)), l2o = seg(t, 11.7, 11.9);
+    set($('label2'), `translate(0 ${lerp(80, 0, l2)})`, l2 * (1 - l2o));
+
+    // hint 12.0–14.4
+    const hi = seg(t, 12.0, 12.35), ho = seg(t, 14.3, 14.5);
+    set($('hint'), undefined, hi * (1 - ho));
+    const pp = easeInOut(seg(t, 12.5, 13.6));
+    const path = $('trail'), L = path.getTotalLength();
+    const pt = path.getPointAtLength(L * pp), pt2 = path.getPointAtLength(Math.min(L, L * pp + 2));
+    const ang = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI + 25;
+    set($('planeU'), `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${ang.toFixed(1)}) scale(${(0.9 + 0.1 * Math.sin(t * 8)).toFixed(3)})`, 1);
+    path.setAttribute('stroke-dashoffset', 0);
+    path.setAttribute('opacity', pp > 0 ? 1 : 0);
+
+    // outro 14.4+
+    set($('outroBg'), undefined, easeInOut(seg(t, 14.4, 14.8)));
+    const lg = seg(t, 14.6, 15.3);
+    set($('logo'), `translate(540 560) scale(${(0.001 + easeOutBack(lg)).toFixed(3)})`, lg > 0 ? 1 : 0);
+    const np = seg(t, 15.1, 15.4);
+    set($('newPill'), `translate(540 878) rotate(-3) scale(${(0.001 + easeOutBack(np)).toFixed(3)}) translate(-540 -878)`, np > 0 ? 1 : 0);
+    const ad = easeOutCubic(seg(t, 15.4, 15.9));
+    set($('addr'), `translate(0 ${lerp(30, 0, ad)})`, ad);
+    const cta = seg(t, 15.9, 16.4);
+    const pulse = t > 16.4 ? 1 + 0.03 * Math.sin((t - 16.4) * 5) : 1;
+    set($('cta'), `translate(540 1350) scale(${(0.001 + easeOutBack(cta) * pulse).toFixed(3)}) translate(-540 -1350)`, cta > 0 ? 1 : 0);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = render;
+  const params = new URLSearchParams(location.search);
+  if (params.has('render')) return;
+  document.body.classList.add('preview');
+  document.fonts.ready.then(() => {
+    if (params.has('t')) { render(parseFloat(params.get('t'))); return; }
+    let start = null;
+    const loop = ts => { if (start === null) start = ts; render(((ts - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+</body>
+</html>
