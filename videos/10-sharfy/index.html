@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>My Warm Box — Красные шарфы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Caveat:wght@600;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1512; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  #stage { width: 1080px; height: 1920px; display: block; }
+  body.preview #stage { width: auto; height: 96vh; aspect-ratio: 9 / 16; }
+  .serif { font-family: 'Lora', serif; }
+  .hand { font-family: 'Caveat', cursive; }
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sat" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix id="satM" type="saturate" values="0"/>
+    </filter>
+    <linearGradient id="street" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C9D6E3"/>
+      <stop offset="0.6" stop-color="#E8D9C6"/>
+      <stop offset="1" stop-color="#F4ECE2"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#FFD9A0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shadow">
+      <stop offset="0" stop-color="#5A3E2B" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5A3E2B" stop-opacity="0"/>
+    </radialGradient>
+    <!-- fluffy red fabric -->
+    <pattern id="fluff" width="22" height="20" patternUnits="userSpaceOnUse">
+      <rect width="22" height="20" fill="#D9262F"/>
+      <path d="M2 5 q5 -4 10 0 M11 14 q5 -4 10 0" stroke="#F0605F" stroke-width="2.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M4 17 q3 -2 6 0 M14 6 q3 -2 6 0" stroke="#B41C24" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="fluffBig" width="22" height="20" patternUnits="userSpaceOnUse" patternTransform="scale(3.2)">
+      <rect width="22" height="20" fill="#D9262F"/>
+      <path d="M2 5 q5 -4 10 0 M11 14 q5 -4 10 0" stroke="#F0605F" stroke-width="2.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M4 17 q3 -2 6 0 M14 6 q3 -2 6 0" stroke="#B41C24" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </pattern>
+    <!-- burgundy cable knit -->
+    <pattern id="cable" width="44" height="36" patternUnits="userSpaceOnUse">
+      <rect width="44" height="36" fill="#8E1B2A"/>
+      <path d="M3 0 V36 M41 0 V36" stroke="#6A1220" stroke-width="5"/>
+      <path d="M12 0 C12 9 32 9 32 18 C32 27 12 27 12 36" stroke="#A82C3D" stroke-width="7" fill="none"/>
+      <path d="M32 0 C32 9 12 9 12 18 C12 27 32 27 32 36" stroke="#76162A" stroke-width="7" fill="none"/>
+    </pattern>
+    <pattern id="cableBig" width="44" height="36" patternUnits="userSpaceOnUse" patternTransform="scale(3)">
+      <rect width="44" height="36" fill="#8E1B2A"/>
+      <path d="M3 0 V36 M41 0 V36" stroke="#6A1220" stroke-width="5"/>
+      <path d="M12 0 C12 9 32 9 32 18 C32 27 12 27 12 36" stroke="#A82C3D" stroke-width="7" fill="none"/>
+      <path d="M32 0 C32 9 12 9 12 18 C12 27 32 27 32 36" stroke="#76162A" stroke-width="7" fill="none"/>
+    </pattern>
+    <clipPath id="magClip"><circle r="105"/></clipPath>
+
+    <!-- worn scarf 1: fluffy red with fringe (local to character) -->
+    <g id="scarf1">
+      <g id="s1tailL">
+        <rect x="-112" y="-110" width="104" height="480" rx="26" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+        <g stroke="#D9262F" stroke-width="11" stroke-linecap="round">
+          <path d="M-100,365 v52 M-82,368 v58 M-64,366 v50 M-46,368 v56 M-28,366 v52"/>
+        </g>
+      </g>
+      <g id="s1tailR">
+        <rect x="0" y="-100" width="108" height="420" rx="26" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+        <g stroke="#D9262F" stroke-width="11" stroke-linecap="round">
+          <path d="M14,316 v52 M32,318 v58 M50,316 v50 M68,318 v56 M88,316 v52"/>
+        </g>
+      </g>
+      <rect x="-150" y="-185" width="300" height="104" rx="52" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+      <rect x="-132" y="-128" width="270" height="80" rx="40" fill="url(#fluff)" stroke="#A8161F" stroke-width="3" transform="rotate(4)"/>
+    </g>
+    <!-- worn scarf 2: burgundy cable knit -->
+    <g id="scarf2">
+      <g id="s2tailL">
+        <rect x="-112" y="-110" width="106" height="500" rx="18" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+        <rect x="-96" y="320" width="44" height="14" rx="3" fill="#C9A25B"/>
+      </g>
+      <g id="s2tailR"><rect x="0" y="-100" width="108" height="430" rx="18" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/></g>
+      <rect x="-155" y="-190" width="310" height="112" rx="50" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+      <rect x="-138" y="-130" width="280" height="84" rx="40" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3" transform="rotate(4)"/>
+    </g>
+    <!-- hanging scarves (showcase) -->
+    <g id="hang1">
+      <rect x="-90" y="0" width="84" height="640" rx="22" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+      <rect x="6" y="0" width="84" height="580" rx="22" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+      <g stroke="#D9262F" stroke-width="10" stroke-linecap="round">
+        <path d="M-78,630 v50 M-62,632 v56 M-46,630 v48 M-30,632 v54 M-16,630 v50"/>
+        <path d="M18,570 v50 M34,572 v56 M50,570 v48 M66,572 v54 M80,570 v50"/>
+      </g>
+      <rect x="-96" y="-30" width="192" height="60" rx="30" fill="url(#fluff)" stroke="#A8161F" stroke-width="3"/>
+    </g>
+    <g id="hang2">
+      <rect x="-92" y="0" width="88" height="660" rx="16" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+      <rect x="4" y="0" width="88" height="600" rx="16" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+      <rect x="-76" y="590" width="40" height="13" rx="3" fill="#C9A25B"/>
+      <rect x="-100" y="-30" width="200" height="60" rx="26" fill="url(#cable)" stroke="#5E0F1B" stroke-width="3"/>
+    </g>
+    <path id="heart" d="M0,-12 C-14,-30 -40,-14 -22,6 L0,26 L22,6 C40,-14 14,-30 0,-12 Z"/>
+    <path id="star4" d="M0,-30 Q4,-4 30,0 Q4,4 0,30 Q-4,4 -30,0 Q-4,-4 0,-30 Z"/>
+    <path id="pin" d="M0,26 C-16,6 -22,-2 -22,-10 A22,22 0 1 1 22,-10 C22,-2 16,6 0,26 Z M0,-18 a8,8 0 1 0 0.01,0 Z" fill-rule="evenodd"/>
+    <g id="logoIcon" fill="none" stroke="#5A3E2B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="-62" y="-20" width="124" height="86" rx="4"/>
+      <rect x="-72" y="-46" width="144" height="28" rx="4"/>
+      <path d="M0,-46 V66"/>
+      <path d="M0,-46 C-22,-86 -62,-78 -48,-56 C-40,-46 -16,-46 0,-46 Z"/>
+      <path d="M0,-46 C22,-86 62,-78 48,-56 C40,-46 16,-46 0,-46 Z"/>
+      <path d="M-40,10 L40,10" stroke-width="5" opacity="0.6"/>
+      <path d="M-40,34 L40,34" stroke-width="5" opacity="0.6"/>
+    </g>
+  </defs>
+
+  <!-- ===== street scene (desaturated until the scarf lands) ===== -->
+  <g id="world" filter="url(#sat)">
+    <rect width="1080" height="1920" fill="url(#street)"/>
+    <g id="glows"></g>
+    <g fill="#B9A78F" opacity="0.55">
+      <rect x="40" y="520" width="200" height="900" rx="8"/><rect x="840" y="440" width="220" height="980" rx="8"/>
+      <g fill="#F6D58E"><rect x="80" y="600" width="50" height="70"/><rect x="160" y="600" width="50" height="70"/><rect x="80" y="720" width="50" height="70"/><rect x="880" y="520" width="50" height="70"/><rect x="960" y="520" width="50" height="70"/><rect x="960" y="660" width="50" height="70"/></g>
+    </g>
+    <g id="girl">
+      <ellipse cx="0" cy="640" rx="260" ry="30" fill="url(#shadow)"/>
+      <rect x="-175" y="-120" width="350" height="760" rx="110" fill="#2B2A2E"/>
+      <path d="M-10,-100 L-60,240 M10,-100 L60,240" stroke="#1C1B1E" stroke-width="6"/>
+      <rect x="-28" y="-165" width="56" height="50" fill="#E8C3A9"/>
+      <circle cx="0" cy="-260" r="108" fill="#F2D3BC"/>
+      <path d="M-118,-250 C-128,-380 128,-380 118,-250 L118,-150 C104,-140 100,-200 96,-240 C70,-300 -70,-300 -96,-240 C-100,-200 -104,-140 -118,-150 Z" fill="#1E1A19"/>
+      <path d="M-100,-270 C-80,-330 80,-330 100,-270 L100,-250 L-100,-250 Z" fill="#1E1A19"/>
+      <ellipse cx="18" cy="-352" rx="135" ry="46" fill="#1E1A19" transform="rotate(-8 18 -352)"/>
+      <circle cx="60" cy="-396" r="10" fill="#1E1A19"/>
+      <circle id="chL" cx="-64" cy="-205" r="19" fill="#9FB8D6"/><circle id="chR" cx="64" cy="-205" r="19" fill="#9FB8D6"/>
+      <g id="eyesOpen" fill="#2E2420"><ellipse cx="-38" cy="-238" rx="9" ry="12"/><ellipse cx="38" cy="-238" rx="9" ry="12"/></g>
+      <g id="eyesHappy" stroke="#2E2420" stroke-width="7" fill="none" stroke-linecap="round" opacity="0">
+        <path d="M-54,-234 Q-38,-252 -22,-234"/><path d="M22,-234 Q38,-252 54,-234"/>
+      </g>
+      <path id="mouthSad" d="M-22,-178 Q0,-192 22,-178" stroke="#B0444A" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path id="mouthHappy" d="M-26,-188 Q0,-160 26,-188 Z" fill="#B0444A" opacity="0"/>
+    </g>
+    <g id="snow"></g>
+  </g>
+
+  <!-- worn scarves (always in colour) -->
+  <g id="wear1"><use href="#scarf1" transform="translate(0 42)"/></g>
+  <g id="wear2"><use href="#scarf2" transform="translate(0 42)"/></g>
+  <g id="hearts" fill="#D9262F"></g>
+
+  <g id="t1" text-anchor="middle"><text x="540" y="390" class="serif" font-size="112" font-weight="700" fill="#3A3A40">Серая зима?</text></g>
+  <g id="t2" text-anchor="middle"><text x="540" y="400" class="hand" font-size="130" font-weight="700" fill="#D9262F" stroke="#FFFDF9" stroke-width="6" paint-order="stroke">Добавь красного!</text></g>
+  <g id="t3" text-anchor="middle"><text x="540" y="400" class="hand" font-size="120" font-weight="700" fill="#8E1B2A" stroke="#FFFDF9" stroke-width="6" paint-order="stroke">Или уютный бордо?</text></g>
+
+  <g id="label1">
+    <rect x="130" y="1530" width="820" height="170" rx="40" fill="#FFFDF9" opacity="0.96"/>
+    <text x="540" y="1605" text-anchor="middle" class="serif" font-size="54" font-weight="700" fill="#D9262F">Пушистый шарф с бахромой</text>
+    <text x="540" y="1670" text-anchor="middle" class="hand" font-size="54" fill="#5A3E2B">мягкий и очень тёплый</text>
+  </g>
+  <g id="label2">
+    <rect x="130" y="1530" width="820" height="170" rx="40" fill="#FFFDF9" opacity="0.96"/>
+    <text x="540" y="1605" text-anchor="middle" class="serif" font-size="54" font-weight="700" fill="#8E1B2A">Объёмный вязаный шарф</text>
+    <text x="540" y="1670" text-anchor="middle" class="hand" font-size="54" fill="#5A3E2B">цвет бордо, крупная вязка</text>
+  </g>
+
+  <!-- ===== showcase ===== -->
+  <g id="show">
+    <rect width="1080" height="1920" fill="#F4ECE2"/>
+    <text x="540" y="380" text-anchor="middle" class="serif" font-size="100" font-weight="700" fill="#4A3426">Какой выберешь?</text>
+    <text x="540" y="480" text-anchor="middle" class="hand" font-size="68" fill="#A63A32">пиши 1 или 2 в комментариях</text>
+    <path d="M120,640 H960" stroke="#8A6A4E" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="120" cy="640" r="16" fill="#6B4A35"/><circle cx="960" cy="640" r="16" fill="#6B4A35"/>
+    <g id="hg1"><use href="#hang1"/></g>
+    <g id="hg2"><use href="#hang2"/></g>
+    <g id="num1"><circle r="56" fill="#D9262F"/><text y="22" text-anchor="middle" class="serif" font-size="64" font-weight="700" fill="#FFFDF9">1</text></g>
+    <g id="num2"><circle r="56" fill="#8E1B2A"/><text y="22" text-anchor="middle" class="serif" font-size="64" font-weight="700" fill="#FFFDF9">2</text></g>
+    <g id="mag1">
+      <path d="M70,70 L140,140" stroke="#4A3426" stroke-width="26" stroke-linecap="round"/>
+      <g clip-path="url(#magClip)"><rect x="-110" y="-110" width="220" height="220" fill="url(#fluffBig)"/></g>
+      <circle r="105" fill="none" stroke="#4A3426" stroke-width="14"/>
+    </g>
+    <g id="mag2">
+      <path d="M-70,70 L-140,140" stroke="#4A3426" stroke-width="26" stroke-linecap="round"/>
+      <g clip-path="url(#magClip)"><rect x="-110" y="-110" width="220" height="220" fill="url(#cableBig)"/></g>
+      <circle r="105" fill="none" stroke="#4A3426" stroke-width="14"/>
+    </g>
+    <text id="lab1" x="330" y="1520" text-anchor="middle" class="hand" font-size="60" font-weight="700" fill="#D9262F">пушистый</text>
+    <text id="lab2" x="750" y="1520" text-anchor="middle" class="hand" font-size="60" font-weight="700" fill="#8E1B2A">вязаный бордо</text>
+  </g>
+
+  <!-- ===== outro ===== -->
+  <rect id="outroBg" width="1080" height="1920" fill="#F4ECE2" opacity="0"/>
+  <g id="outro">
+    <g id="logo" transform="translate(540 560)">
+      <circle r="210" fill="#F7F0E6" stroke="#5A3E2B" stroke-width="5"/>
+      <use href="#logoIcon" transform="translate(0 -78) scale(0.78)"/>
+      <text x="0" y="58" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#5A3E2B">My Warm</text>
+      <text x="0" y="134" text-anchor="middle" class="serif" font-size="74" font-weight="700" fill="#5A3E2B">Box</text>
+    </g>
+    <g id="newPill">
+      <rect x="330" y="830" width="420" height="96" rx="48" fill="#D9262F"/>
+      <text x="540" y="895" text-anchor="middle" class="serif" font-size="52" font-weight="700" fill="#FFFDF9">Новинка</text>
+    </g>
+    <g id="addr" class="serif" font-size="44" fill="#4A3426">
+      <text x="540" y="1030" text-anchor="middle" font-weight="700">Доставка по всему КР</text>
+      <use href="#pin" transform="translate(140 1110)" fill="#D9262F"/>
+      <text x="180" y="1122">Бишкек — ТЦ Caravan, 2 этаж, 87B</text>
+      <use href="#pin" transform="translate(140 1190)" fill="#D9262F"/>
+      <text x="180" y="1202">Ош — ТЦ Maxcom</text>
+    </g>
+    <g id="cta">
+      <rect x="190" y="1290" width="700" height="120" rx="60" fill="#A63A32"/>
+      <text x="540" y="1368" text-anchor="middle" class="serif" font-size="48" font-weight="700" fill="#FFFDF9">Заказ в Direct / WhatsApp</text>
+    </g>
+  </g>
+</svg>
+
+<script>
+(() => {
+  const DURATION = 17;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const easeOutCubic = p => 1 - Math.pow(1 - p, 3);
+  const easeInCubic = p => p * p * p;
+  const easeInOut = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const easeOutBack = p => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  const mixColor = (a, b, p) => {
+    const ha = a.match(/\w\w/g).map(h => parseInt(h, 16)), hb = b.match(/\w\w/g).map(h => parseInt(h, 16));
+    return '#' + ha.map((v, i) => Math.round(lerp(v, hb[i], p)).toString(16).padStart(2, '0')).join('');
+  };
+  let seed = 41;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const set = (el, tr, op) => {
+    if (tr !== undefined) el.setAttribute('transform', tr);
+    if (op !== undefined) el.setAttribute('opacity', clamp(op).toFixed(3));
+  };
+  const mk = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    parent.appendChild(e); return e;
+  };
+
+  const G = { x: 540, y: 1240 };
+  const flakes = [...Array(90)].map(() => {
+    const r = 3 + rnd() * 8;
+    return { el: mk('circle', { r: r.toFixed(1), fill: '#FFFFFF', opacity: 0.85 }, $('snow')), x: rnd() * 1080, y0: rnd() * 1960, sp: 50 + r * 14, ph: rnd() * 6.28 };
+  });
+  for (let i = 0; i < 8; i++) mk('circle', { cx: rnd() * 1080, cy: 200 + rnd() * 900, r: 50 + rnd() * 70, fill: 'url(#glow)', opacity: 0.6 }, $('glows'));
+  const hearts = [...Array(9)].map((_, k) => ({ el: mk('use', { href: '#heart' }, $('hearts')), a: k / 9 * Math.PI * 2, d: 260 + (k % 3) * 60 }));
+
+  function render(t) {
+    // saturation: grey until the red scarf lands
+    const sat = easeInOut(seg(t, 3.3, 4.1));
+    $('satM').setAttribute('values', sat.toFixed(3));
+
+    flakes.forEach(f => {
+      const y = ((f.y0 + f.sp * t) % 2000) - 40;
+      f.el.setAttribute('cx', (f.x + Math.sin(t + f.ph) * 22).toFixed(1));
+      f.el.setAttribute('cy', y.toFixed(1));
+    });
+
+    // girl: shiver before scarf, spin 7.0–7.6
+    const cold = 1 - sat;
+    const jx = Math.sin(t * 55) * 6 * cold;
+    const sp = seg(t, 7.0, 7.6);
+    const flip = Math.cos(Math.PI * 2 * sp);          // 1 -> -1 -> 1
+    const sx = sp > 0 && sp < 1 ? Math.max(0.04, Math.abs(flip)) : 1;
+    const breathe = Math.sin(t * 2) * 4 * sat;
+    const gTr = `translate(${(G.x + jx).toFixed(1)} ${(G.y - breathe).toFixed(1)}) scale(${sx.toFixed(3)} 1)`;
+    set($('girl'), gTr);
+    $('chL').setAttribute('fill', mixColor('9FB8D6', 'F0A2A0', sat));
+    $('chR').setAttribute('fill', mixColor('9FB8D6', 'F0A2A0', sat));
+    set($('eyesOpen'), undefined, 1 - seg(t, 3.5, 3.7));
+    set($('eyesHappy'), undefined, seg(t, 3.5, 3.7));
+    set($('mouthSad'), undefined, 1 - seg(t, 3.4, 3.6));
+    set($('mouthHappy'), undefined, seg(t, 3.4, 3.6));
+
+    // scarf 1 flies in 2.3–3.3
+    const f1 = seg(t, 2.3, 3.3), fe = easeOutCubic(f1);
+    const swap = t >= 7.3;
+    const sway = Math.sin(t * 2.2) * 2.5;
+    $('s1tailL').setAttribute('transform', `rotate(${sway.toFixed(2)} -60 -110)`);
+    $('s1tailR').setAttribute('transform', `rotate(${(-sway * 0.8).toFixed(2)} 54 -100)`);
+    $('s2tailL').setAttribute('transform', `rotate(${(sway * 0.6).toFixed(2)} -60 -110)`);
+    $('s2tailR').setAttribute('transform', `rotate(${(-sway * 0.5).toFixed(2)} 54 -100)`);
+    const flyTr = `translate(${lerp(1100, G.x + jx, fe).toFixed(1)} ${lerp(-300, G.y - breathe, fe).toFixed(1)}) rotate(${lerp(260, 0, fe).toFixed(1)}) scale(${(lerp(0.3, 1, easeOutBack(f1)) * sx).toFixed(3)} ${lerp(0.3, 1, easeOutBack(f1)).toFixed(3)})`;
+    const showStart = seg(t, 10.4, 10.9);
+    set($('wear1'), f1 < 1 ? flyTr : gTr, f1 > 0 && !swap ? 1 : 0);
+    set($('wear2'), gTr, swap ? 1 : 0);
+
+    // hearts burst at 3.3 and 7.6
+    hearts.forEach((h, k) => {
+      const b1 = seg(t, 3.3, 4.6), b2 = seg(t, 7.6, 8.8);
+      const p = b2 > 0 ? b2 : b1;
+      const on = (b1 > 0 && b1 < 1) || (b2 > 0 && b2 < 1);
+      h.el.setAttribute('fill', b2 > 0 ? '#8E1B2A' : '#D9262F');
+      const r = h.d * easeOutCubic(p);
+      set(h.el, `translate(${(G.x + Math.cos(h.a) * r).toFixed(1)} ${(G.y - 260 + Math.sin(h.a) * r * 0.8).toFixed(1)}) scale(${(1.4 * Math.sin(Math.PI * p)).toFixed(3)})`, on ? 1 : 0);
+    });
+
+    // titles
+    const a1 = easeOutCubic(seg(t, 0.2, 0.8)), o1 = seg(t, 2.9, 3.2);
+    set($('t1'), `translate(0 ${lerp(40, 0, a1)})`, a1 * (1 - o1));
+    const a2 = seg(t, 3.4, 3.8), o2 = seg(t, 6.9, 7.1);
+    set($('t2'), `translate(540 370) rotate(-4) scale(${(0.001 + easeOutBack(a2)).toFixed(3)}) translate(-540 -370)`, a2 > 0 ? 1 - o2 : 0);
+    const a3 = seg(t, 7.6, 8.0), o3 = seg(t, 10.2, 10.4);
+    set($('t3'), `translate(540 370) rotate(-3) scale(${(0.001 + easeOutBack(a3)).toFixed(3)}) translate(-540 -370)`, a3 > 0 ? 1 - o3 : 0);
+    const l1 = easeOutCubic(seg(t, 4.2, 4.6)), lo1 = seg(t, 6.8, 7.0);
+    set($('label1'), `translate(0 ${lerp(80, 0, l1)})`, l1 * (1 - lo1));
+    const l2 = easeOutCubic(seg(t, 8.0, 8.4)), lo2 = seg(t, 10.2, 10.4);
+    set($('label2'), `translate(0 ${lerp(80, 0, l2)})`, l2 * (1 - lo2));
+
+    // showcase 10.4–13.4
+    const sh = easeInOut(showStart), sho = seg(t, 13.3, 13.5);
+    set($('show'), `translate(${(1080 * (1 - sh)).toFixed(1)} 0)`, showStart > 0 ? 1 - sho : 0);
+    const hs = Math.sin(t * 1.8) * 1.5;
+    set($('hg1'), `translate(330 640) rotate(${hs.toFixed(2)})`);
+    set($('hg2'), `translate(750 640) rotate(${(-hs).toFixed(2)})`);
+    const n1 = seg(t, 11.0, 11.3), n2 = seg(t, 11.3, 11.6);
+    set($('num1'), `translate(330 560) scale(${(0.001 + easeOutBack(n1)).toFixed(3)})`, n1 > 0 ? 1 : 0);
+    set($('num2'), `translate(750 560) scale(${(0.001 + easeOutBack(n2)).toFixed(3)})`, n2 > 0 ? 1 : 0);
+    const m1 = seg(t, 11.7, 12.0), m2 = seg(t, 12.1, 12.4);
+    set($('mag1'), `translate(200 1080) scale(${(0.001 + easeOutBack(m1)).toFixed(3)})`, m1 > 0 ? 1 : 0);
+    set($('mag2'), `translate(880 1080) scale(${(0.001 + easeOutBack(m2)).toFixed(3)})`, m2 > 0 ? 1 : 0);
+    set($('lab1'), undefined, seg(t, 11.0, 11.3));
+    set($('lab2'), undefined, seg(t, 11.3, 11.6));
+
+    // outro 13.4+
+    set($('outroBg'), undefined, easeInOut(seg(t, 13.4, 13.8)));
+    const lg = seg(t, 13.6, 14.3);
+    set($('logo'), `translate(540 560) scale(${(0.001 + easeOutBack(lg)).toFixed(3)})`, lg > 0 ? 1 : 0);
+    const np = seg(t, 14.1, 14.4);
+    set($('newPill'), `translate(540 878) rotate(-3) scale(${(0.001 + easeOutBack(np)).toFixed(3)}) translate(-540 -878)`, np > 0 ? 1 : 0);
+    const ad = easeOutCubic(seg(t, 14.4, 14.9));
+    set($('addr'), `translate(0 ${lerp(30, 0, ad)})`, ad);
+    const cta = seg(t, 14.9, 15.4);
+    const pulse = t > 15.4 ? 1 + 0.03 * Math.sin((t - 15.4) * 5) : 1;
+    set($('cta'), `translate(540 1350) scale(${(0.001 + easeOutBack(cta) * pulse).toFixed(3)}) translate(-540 -1350)`, cta > 0 ? 1 : 0);
+  }
+
+  window.DURATION = DURATION;
+  window.renderAt = render;
+  const params = new URLSearchParams(location.search);
+  if (params.has('render')) return;
+  document.body.classList.add('preview');
+  document.fonts.ready.then(() => {
+    if (params.has('t')) { render(parseFloat(params.get('t'))); return; }
+    let start = null;
+    const loop = ts => { if (start === null) start = ts; render(((ts - start) / 1000) % DURATION); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+</body>
+</html>
